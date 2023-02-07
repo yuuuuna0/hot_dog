@@ -4,6 +4,16 @@ public class Categories {
 	private int ct_no;
 	private String ct_name;
 	private String ct_img;
+	
+	public Categories() {
+    }
+	public Categories(int ct_no, String ct_name, String ct_img) {
+      super();
+      this.ct_no = ct_no;
+      this.ct_name = ct_name;
+      this.ct_img = ct_img;
+    }
+	
 	public int getCt_no() {
 		return ct_no;
 	}
@@ -22,12 +32,7 @@ public class Categories {
 	public void setCt_img(String ct_img) {
 		this.ct_img = ct_img;
 	}
-	public Categories(int ct_no, String ct_name, String ct_img) {
-		super();
-		this.ct_no = ct_no;
-		this.ct_name = ct_name;
-		this.ct_img = ct_img;
-	}
+	
 	@Override
 	public String toString() {
 		return "Categories [ct_no=" + ct_no + ", ct_name=" + ct_name + ", ct_img=" + ct_img + "]";
