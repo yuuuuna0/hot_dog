@@ -3,7 +3,7 @@
   <display-name>web-project-team3-hotdog</display-name>
   <filter>
     <filter-name>Encoding Filter</filter-name>
-    <filter-class>com.itwill.filter.EncodingFilter</filter-class>
+    <filter-class>com.itwill.hotdog.filter.EncodingFilter</filter-class>
     <init-param>
       <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>
