@@ -7,9 +7,9 @@ public class OrdersSQL {
 	public final static String ORDERS_DELETE_BY_O_NO="delete from orders where o_no=?";
 	public final static String ORDERITEM_DELETE_BY_OI_NO="delete from orderItem where oi_no=?";
 	public final static String ORDERS_SELECT_ALL="select * from orders";
-	public final static String ORDERITEM_SELECT_ALL="select * from orderItem";
+	public final static String ORDERITEM_SELECT_WITH_PRODUCT_BY_O_NO="select * from orderItem oi join product p on oi.p_no=p.p_no where oi.o_no=?";
 	public final static String ORDERS_SELECT_BY_U_ID="select * from orders where u_id=?";
-	public final static String ORDERS_SELECT_WITH_PAYMENT_BY_U_ID="select * from orders o "
+	public final static String ORDERS_SELECT_WITH_PAYMENT_WITH_USERINFO_BY_U_ID="select * from orders o "
 																			+ "join payment pm on o.pm_no=pm.pm_no "
 																			+ "join userinfo u on o.u_id=u.u_id "
 																			+ "where o.u_id=?";

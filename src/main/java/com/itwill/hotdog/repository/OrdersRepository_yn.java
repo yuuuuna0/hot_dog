@@ -13,6 +13,7 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.domain.Payment;
+import com.itwill.hotdog.domain.Product;
 import com.itwill.hotdog.domain.UserInfo;
 import com.itwill.hotdog.sql.OrdersSQL;
 
@@ -120,7 +121,7 @@ public class OrdersRepository_yn {
 		ResultSet rs=null;
 		List<Orders> ordersList=null;
 		try {
-			pstmt=con.prepareStatement(OrdersSQL.ORDERS_SELECT_BY_U_ID);
+			pstmt=con.prepareStatement(OrdersSQL.ORDERS_SELECT_WITH_PAYMENT_WITH_USERINFO_BY_U_ID);
 			pstmt.setString(1, sUserId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -134,29 +135,57 @@ public class OrdersRepository_yn {
 												  	   rs.getString("u_password"),
 												  	   rs.getString("u_name"),
 												  	   rs.getString("u_phone"),
-												  	   rs.getInt("u_point")));
+												  	   rs.getInt("u_point"))));
 			}
-			
+			con.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			con.rollback();
 			throw e;
 		} finally {
 			if(con!=null) {
-				con.close();
 				rs.close();
+				con.close();
 			}
 		}
-		
 		return ordersList;
 	}
 	
-	
-	//5. 주문번호로 해당 주문리스트 보기
-	
-	
-	
-	
-	
+	//5. 주문번호로 해당 주문아이템리스트 보기
+	public List<OrderItem> findOrderIteByOrderNo(int o_no) throws Exception{
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<OrderItem> orderItemList=null;
+		try {
+			pstmt=con.prepareStatement(OrdersSQL.ORDERITEM_SELECT_WITH_PRODUCT_BY_O_NO);
+			pstmt.setInt(1,o_no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				orderItemList.add(new OrderItem(rs.getInt("oi_no"),
+												rs.getInt("oi_qty"),
+												rs.getString("o_no"),
+												new Product(rs.getInt("p_no"),
+															rs.getString("p_name"),
+															rs.getInt("p_price"),
+															rs.getInt("p_discount"),
+															rs.getString("p_desc"),
+															rs.getString("p_img"),
+															rs.getInt("p_click"),
+															rs.getInt("ct_no"))));
+			}
+			con.commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+			con.rollback();
+			throw e;
+		} finally {
+			if(con!=null) {
+				rs.close();
+				con.close();
+			}
+		}
+		return orderItemList;
+	}
 	
 }
