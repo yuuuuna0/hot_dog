@@ -1,5 +1,5 @@
 package com.itwill.hotdog.domain;
 
-public class Cart {
-
+public class Cart{
+	
 }
