@@ -1,5 +1,5 @@
 package com.itwill.hotdog.repository;
 
-public class OrderRepository {
+public class ReviewRepository {
 
 }
