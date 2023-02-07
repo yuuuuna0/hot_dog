@@ -5,11 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
-
 import javax.sql.DataSource;
-
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
 import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.domain.Payment;
@@ -34,7 +31,7 @@ public class OrdersRepository_yn {
 	}
 	
 	//1. 주문 생성
-	public int create(Orders orders) throws Exception {
+	public int insertOrder(Orders orders) throws Exception {
 		Connection con=null;
 		PreparedStatement pstmt1=null;
 		PreparedStatement pstmt2=null;
