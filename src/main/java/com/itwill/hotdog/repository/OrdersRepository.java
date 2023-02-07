@@ -13,6 +13,9 @@ import com.itwill.hotdog.sql.OrdersSQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -85,6 +88,7 @@ public class OrdersRepository {
 		Connection con = null;
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
+		int rowCount = 0;
 		try {
 			con = dataSource.getConnection();
 			con.setAutoCommit(false);//트랜잭션 시작
@@ -93,7 +97,7 @@ public class OrdersRepository {
 			pstmt1.setInt(2, orders.getO_usedPoint());
 			pstmt1.setInt(3, orders.getPayment().getPm_no());
 			pstmt1.setString(4, orders.getUserInfo().getU_id());
-			pstmt1.executeUpdate();
+			rowCount = pstmt1.executeUpdate();
 			pstmt2 = con.prepareStatement(OrdersSQL.ORDERITEM_INSERT);
 			for(OrderItem orderItem : orders.getOrderItemList()) {
 				pstmt2.setInt(1, orderItem.getOi_qty());
@@ -102,26 +106,52 @@ public class OrdersRepository {
 			}
 			con.commit();//트랜잭션 종료
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			con.rollback();//트랜잭션 종료
+			//throw e;
 		} finally {
-			
+			if(pstmt1!=null) pstmt1.close();
+			if(pstmt2!=null) pstmt2.close();
+			if(con!=null) con.close();
 		}
 		
-		
-		
-		
-		return 0;
+		return rowCount;
 	}
 	
 	/*
 	 * 주문 전체검색 (특정 사용자)
 	 */
+	public List<Orders> findAll(String sUserId) throws Exception {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Orders> orderList = new ArrayList<Orders>();
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(null);
+		} finally {
+			// TODO: handle finally clause
+		}
+		
+		return null;
+	}
 	
 	/*
 	 * 주문 상세보기 전체검색 (특정 사용자) - orders, order_item, product, payment 테이블 JOIN
 	 */
+	public List<Orders> findDetailAll(String sUserId) throws Exception {
+		
+		
+		return null;
+	}
 	
 	/*
 	 * 주문 상세보기 1개 검색 (특정 사용자) - orders, order_item, product, payment 테이블 JOIN
 	 */
+
+	public Orders findDetail(int o_no) throws Exception {
+		
+		
+		return null;
+	}
 }
