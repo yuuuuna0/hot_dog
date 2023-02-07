@@ -2,6 +2,17 @@ package com.itwill.hotdog.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
+import com.itwill.hotdog.domain.Orders;
+import com.itwill.hotdog.sql.OrdersSQL;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,6 +148,7 @@ public class OrdersRepository {
 	/*
 	 * 주문 상세보기 1개 검색 (특정 사용자) - orders, order_item, product, payment 테이블 JOIN
 	 */
+
 	public Orders findDetail(int o_no) throws Exception {
 		
 		
