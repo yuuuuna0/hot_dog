@@ -1,5 +1,5 @@
 package com.itwill.hotdog.sql;
 
-public class OrderSQL {
+public class OrdersSQL {
 
 }
