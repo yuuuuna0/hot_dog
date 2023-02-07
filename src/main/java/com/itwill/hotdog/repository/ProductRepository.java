@@ -48,7 +48,7 @@ public class ProductRepository {
 							rs.getInt("p_price"), 
 							rs.getInt("p_discount"), 
 							rs.getString("p_desc"), 
-							rs.getString("p_image"), 
+							rs.getString("p_img"), 
 							rs.getInt("p_click"),
 							rs.getInt("ct_no"));
 		}
@@ -70,7 +70,7 @@ public class ProductRepository {
 							rs.getInt("p_price"), 
 							rs.getInt("p_discount"), 
 							rs.getString("p_desc"), 
-							rs.getString("p_image"), 
+							rs.getString("p_img"), 
 							rs.getInt("p_click"),
 							rs.getInt("ct_no"));
 			productList.add(product);
