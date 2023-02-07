@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.itwill.hotdog.common.util.PageMaker;
 import com.itwill.hotdog.domain.Review;
-import com.itwill.hotdog.repository.ReviewListPageMakerDto;
+import com.itwill.hotdog.domain.ReviewListPageMakerDto;
 import com.itwill.hotdog.repository.ReviewRepository;
 
 

@@ -1,9 +1,8 @@
-package com.itwill.hotdog.repository;
+package com.itwill.hotdog.domain;
 
 import java.util.List;
 
 import com.itwill.hotdog.common.util.PageMaker;
-import com.itwill.hotdog.domain.Review;
 
 
 public class ReviewListPageMakerDto {
