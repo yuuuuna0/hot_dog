@@ -9,6 +9,7 @@ public class OrdersSQL {
 	public final static String ORDERS_SELECT_ALL="select * from orders";
 	public final static String ORDERITEM_SELECT_ALL="select * from orderItem";
 	public final static String ORDERS_SELECT_BY_U_ID="select * from orders where u_id=?";
+	public final static String ORDERS_SELECT_WITH_PAYMENT_BY_U_ID="select * from orders o join payment pm on o.pm_no=pm.pm_no where u_id=?";
 	public final static String ORDERS_SELECT_WITH_ORDERITEM_BY_OI_NO="select * from orders o join orderItem oi on o.o_no=oi.o_no where oi.oi_no=?";
 	public final static String ORDERS_SELECT_WITH_ORDERITEM_BY_U_ID="select * from orders o join orderItem oi on o.o_no=oi.o_no where o.u_id=?";
 	
