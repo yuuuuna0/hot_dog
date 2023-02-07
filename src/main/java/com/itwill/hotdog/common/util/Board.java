@@ -1,4 +1,4 @@
-﻿package com.itwill.hotdog.common;
+﻿package com.itwill.hotdog.common.util;
 
 import java.sql.Date;
 import java.util.ArrayList;

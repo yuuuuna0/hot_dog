@@ -1,4 +1,4 @@
-package com.itwill.hotdog.common;
+package com.itwill.hotdog.common.util;
 public class PageMaker {
     // 페이지당 게시물 수
     public static final int PAGE_SCALE = 10;
