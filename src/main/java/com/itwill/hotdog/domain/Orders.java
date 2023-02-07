@@ -14,7 +14,6 @@ public class Orders {
 	private List<OrderItem> orderItemList;
 	
 	public Orders() {
-		orderItemList = new ArrayList<OrderItem>();
 	}
 
 	public Orders(int o_no, Date o_date, int o_totalPrice, int o_usedPoint, Payment payment, UserInfo userInfo) {
