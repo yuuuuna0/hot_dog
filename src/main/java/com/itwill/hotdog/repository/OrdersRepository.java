@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
+import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.sql.OrdersSQL;
 
@@ -75,12 +76,20 @@ public class OrdersRepository {
 		PreparedStatement pstmt2 = null;
 		try {
 			con = dataSource.getConnection();
-			con.setAutoCommit(false);//트랜잭션 시작.
+			con.setAutoCommit(false);//트랜잭션 시작
 			pstmt1 = con.prepareStatement(OrdersSQL.ORDERS_INSERT);
 			pstmt1.setInt(1, orders.getO_totalPrice());
 			pstmt1.setInt(2, orders.getO_usedPoint());
 			pstmt1.setInt(3, orders.getPayment().getPm_no());
-			//pstmt1.setString(4, orders.getUserInfo().get);
+			pstmt1.setString(4, orders.getUserInfo().getU_id());
+			pstmt1.executeUpdate();
+			pstmt2 = con.prepareStatement(OrdersSQL.ORDERITEM_INSERT);
+			for(OrderItem orderItem : orders.getOrderItemList()) {
+				pstmt2.setInt(1, orderItem.getOi_qty());
+				pstmt2.setInt(2, orderItem.getProduct().getP_no());
+				pstmt2.executeUpdate();
+			}
+			con.commit();//트랜잭션 종료
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
