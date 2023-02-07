@@ -10,5 +10,5 @@ public class OrdersSQL {
 	public final static String ORDERS_SELECT_WITH_ORDERITEM_BY_OI_NO="select * from orders o join orderItem oi on o.o_no=oi.o_no where oi.oi_no=?";
 	public final static String ORDERS_SELECT_WITH_ORDERITEM_BY_U_ID="select * from orders o join orderItem oi on o.o_no=oi.o_no where o.u_id=?";
 	
-	
+
 }
