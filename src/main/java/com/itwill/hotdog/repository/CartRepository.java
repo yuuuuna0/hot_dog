@@ -181,10 +181,9 @@ public class CartRepository {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		
 		con=dataSource.getConnection();
 		
-		  
+		try {  
 		pstmt=con.prepareStatement(CartSQL.CART_SELECT_BY_USERID);
 		pstmt.setString(1, userId);
 		rs=pstmt.executeQuery();
@@ -200,10 +199,17 @@ public class CartRepository {
 							    		       rs.getString("p_img"),
 							    		       rs.getInt("p_click"),
 							    		       rs.getInt("ct_no"))		
-							       )
-					);
+							       ));
+		}
+		}finally {
+			if(con!=null) {
+				rs.close();
+				pstmt.close();
+				con.close();
+			}
 		}
 		return cartList;
+		
 	}
 	/*
 	 * 5. List- 카트 일부 목록보기 [선택주문]
@@ -217,10 +223,12 @@ public class CartRepository {
 		ResultSet rs = null;
 
 		con = dataSource.getConnection();
+		
+		try {
 		pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_CART_NO);
 		pstmt.setInt(1, cart_no);
 		rs = pstmt.executeQuery();
-		if (rs.next()) {
+		while (rs.next()) {
 			cart = new Cart( rs.getInt("c_no"), 
 					         rs.getInt("c_qty"), 
 					         rs.getString("u_id"),
@@ -231,9 +239,15 @@ public class CartRepository {
 					    		       rs.getString("p_desc"),
 					    		       rs.getString("p_img"),
 					    		       rs.getInt("p_click"),
-					    		       rs.getInt("ct_no"))	
-			     
-			);
+					    		       rs.getInt("ct_no")
+			));
+		}
+		}finally {
+			if(con!=null) {
+				rs.close();
+				pstmt.close();
+				con.close();
+			}
 		}
 		return cart;
 	}

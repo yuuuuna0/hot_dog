@@ -17,12 +17,14 @@ insert into categories(ct_no, ct_name, ct_img) values(CATEGORIES_CT_NO_SEQ.nextv
 insert into categories(ct_no, ct_name, ct_img) values(CATEGORIES_CT_NO_SEQ.nextval, '간식', 'default.jpg');
 
 /**********************product insert************************/
-insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지사료1', 10000, 10, '강아지사료1입니다.', 'default.jpg', 0, 1);
-insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지사료2', 10000, 20, '강아지사료2입니다.', 'default.jpg', 0, 1);
-insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지사료3', 10000, 30, '강아지사료3입니다.', 'default.jpg', 0, 1);
-insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식1', 10000, 15, '강아지간식1입니다.', 'default.jpg', 0, 2);
-insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식2', 10000, 25, '강아지간식2입니다.', 'default.jpg', 0, 2);
-insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식3', 10000, 35, '강아지간식3입니다.', 'default.jpg', 0, 2);
+insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지사료1', 10000, 10, '강아지사료1입니다.', '1.jpg', 0, 1);
+insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지사료2', 10000, 20, '강아지사료2입니다.', '2.jpg', 0, 1);
+insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지사료3', 10000, 30, '강아지사료3입니다.', '3.jpg', 0, 1);
+insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식1', 10000, 15, '강아지간식1입니다.', '4.jpg', 0, 2);
+insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식2', 10000, 25, '강아지간식2입니다.', '5.jpg', 0, 2);
+insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식3', 10000, 35, '강아지간식3입니다.', '6.jpg', 0, 2);
+
+
 
 /**********************cart insert************************/
 --sy0님이 1번제품 1개, 3번제품 3개, 5번제품 5개 담기
