@@ -6,12 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
 import com.itwill.hotdog.domain.UserInfo;
 import com.itwill.hotdog.sql.UserInfoSQL;
 /*
@@ -30,6 +26,7 @@ public class UserInfoRepository {
 		/*
 		 * jdbc.properties 파일을 Properties객체로생성
 		 */
+	  /*
 		BasicDataSource basicDataSource=new BasicDataSource();
 		Properties properties=new Properties();
 		properties.load(UserInfoRepository.class.getResourceAsStream("/jdbc.properties"));
@@ -38,6 +35,9 @@ public class UserInfoRepository {
 		basicDataSource.setUsername(properties.getProperty("username"));
 		basicDataSource.setPassword(properties.getProperty("password"));
 		dataSource=basicDataSource;
+		*/
+	  InitialContext ic = new InitialContext();
+      dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
 	}
 
 	/*
