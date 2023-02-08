@@ -5,9 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.InitialContext;
+import java.util.Properties;
+
 import javax.sql.DataSource;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
 import com.itwill.hotdog.domain.Product;
+import com.itwill.hotdog.domain.Categories;
 import com.itwill.hotdog.sql.ProductSQL;
 
 /*
@@ -17,8 +22,15 @@ PRODUCT 테이블에 제품 검색 등의 작업을한다.
 public class ProductRepository {
 	private DataSource dataSource;
 	public ProductRepository() throws Exception{
-	  InitialContext ic = new InitialContext();
-      dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
+		Properties properties = new Properties();
+		properties.load(this.getClass().getResourceAsStream("/jdbc.properties"));
+		/*** Apache DataSource ***/
+		BasicDataSource basicDataSource = new BasicDataSource();
+		basicDataSource.setDriverClassName(properties.getProperty("driverClassName"));
+		basicDataSource.setUrl(properties.getProperty("url"));
+		basicDataSource.setUsername(properties.getProperty("username"));
+		basicDataSource.setPassword(properties.getProperty("password"));
+		dataSource = basicDataSource;
 	}
 	/*
 	 * selelctByPK : 상품번호로 검색
@@ -43,7 +55,11 @@ public class ProductRepository {
 							rs.getString("p_desc"), 
 							rs.getString("p_img"), 
 							rs.getInt("p_click"),
-							rs.getInt("ct_no"));
+							new Categories(
+									rs.getInt("ct_no"),
+									rs.getString("ct_name"),
+									rs.getString("ct_img"))
+							);
 		}
 		} finally {
 			if (con != null) {
@@ -74,16 +90,57 @@ public class ProductRepository {
 							rs.getString("p_desc"), 
 							rs.getString("p_img"), 
 							rs.getInt("p_click"),
-							rs.getInt("ct_no")));
+							
+			new Categories(
+					rs.getInt("ct_no"),
+					rs.getString("ct_name"),
+					rs.getString("ct_img"))
+			));
 			}
-			}finally {
-			if (con != null) {
-			con.close();
-			}
+		}finally {
+		if (con != null) {
+		con.close();
 		}
-		return productList;
-
 	}
+	return productList;
+
 }
 
+	public Product findByCategory(int c_no) throws Exception{
+		
+		Product product=null;
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+		con=dataSource.getConnection();
+		pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_BY_NO);
+		pstmt.setInt(1, c_no);
+		rs=pstmt.executeQuery();
+		if(rs.next()) {
+			product=
+					new Product(
+							rs.getInt("p_no"),
+							rs.getString("p_name"), 
+							rs.getInt("p_price"), 
+							rs.getInt("p_discount"), 
+							rs.getString("p_desc"), 
+							rs.getString("p_img"), 
+							rs.getInt("p_click"),
+							new Categories(
+									rs.getInt("ct_no"),
+									rs.getString("ct_name"),
+									rs.getString("ct_img"))
+							);
+		}
+		}finally {
+			if(con!=null) {
+				rs.close();
+				con.close();
+			}
+		}
+		
+		return product;
+	}
+}
 
