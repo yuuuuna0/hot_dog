@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 import com.itwill.hotdog.common.DataSourceFactory;
+import com.itwill.hotdog.domain.Categories;
 import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.domain.Payment;
@@ -198,7 +199,10 @@ public class OrdersRepository_yn {
 																							rs2.getString("p_desc"),
 																							rs2.getString("p_img"),
 																							rs2.getInt("p_click"),
-																							rs2.getInt("ct_no")
+																							new Categories(rs2.getInt("ct_no"),
+																				   			   		  	   rs2.getString("ct_name"),
+																				   			   		  	   rs2.getString("ct_img")
+																				   			   		  	   )
 																							)
 																				)
 																);
