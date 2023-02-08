@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.itwill.hotdog.domain.UserInfo;
+
 import com.itwill.hotdog.sql.UserInfoSQL;
 /*
  사용자관리에서 데이타베이스와의 작업을 전담하는 클래스
@@ -204,23 +205,22 @@ public class UserInfoRepository {
 	/*
 	 * 인자로 전달되는 아이디를 가지는 사용자가 존재하는지의 여부를판별
 	 */
-	public int countByUserId(String u_id) throws Exception {
+	public boolean existedUser(String userId) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		boolean isExist = false;
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(UserInfoSQL.USER_SELECT_BY_ID_COUNT);
-			pstmt.setString(1, u_id);
+			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
 			rs.next();
 			int count = rs.getInt("cnt");
-			return count;
+			if (count == 1) {
+				isExist = true;
+			}
 		} finally {
-			/*
-			 * 예외발생과 관계없이 반듯시 실행되는 코드
-			 */
 			if (rs != null)
 				rs.close();
 			if (pstmt != null)
@@ -228,6 +228,7 @@ public class UserInfoRepository {
 			if (con != null)
 				con.close();
 		}
+		return isExist;
 	}
 
 }
