@@ -36,11 +36,15 @@ public class ProductRepository {
 	 */
 	public Product findByPrimaryKey(int p_no) throws Exception{
 		Product product=null;
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_BY_NO);
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+		con=dataSource.getConnection();
+		pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_BY_NO);
 		pstmt.setInt(1, p_no);
-		ResultSet rs=pstmt.executeQuery();
-		if(rs.next()) {
+		rs=pstmt.executeQuery();
+		if (rs.next()) {
 			product=
 					new Product(
 							rs.getInt("p_no"),
@@ -52,6 +56,11 @@ public class ProductRepository {
 							rs.getInt("p_click"),
 							rs.getInt("ct_no"));
 		}
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
 		return product;
 	}
 	/*
@@ -59,12 +68,16 @@ public class ProductRepository {
 	 */
 	public List<Product> findAll() throws Exception{
 		List<Product> productList=new ArrayList<Product>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
 		
-		Connection con=dataSource.getConnection();
-		PreparedStatement pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_ALL);
-		ResultSet rs=pstmt.executeQuery();
-		while(rs.next()) {
-			Product product=new Product(
+		try {
+			con=dataSource.getConnection();
+			pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_ALL);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				productList.add(new Product(
 							rs.getInt("p_no"),
 							rs.getString("p_name"), 
 							rs.getInt("p_price"), 
@@ -72,9 +85,16 @@ public class ProductRepository {
 							rs.getString("p_desc"), 
 							rs.getString("p_img"), 
 							rs.getInt("p_click"),
-							rs.getInt("ct_no"));
-			productList.add(product);
+							rs.getInt("ct_no")));
+			}
+			}finally {
+			if (con != null) {
+			con.close();
+			}
 		}
 		return productList;
+
 	}
 }
+
+

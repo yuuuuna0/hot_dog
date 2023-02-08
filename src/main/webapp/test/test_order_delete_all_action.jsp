@@ -2,6 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-int rowCount = OrdersService.getInstance().deleteAll("sy0");
+int rowCount = new OrdersService().deleteAll("sy0");
 %>
 <%=rowCount%>
