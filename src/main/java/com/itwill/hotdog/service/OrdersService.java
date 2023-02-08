@@ -9,22 +9,14 @@ import com.itwill.hotdog.repository.ProductRepository;
 
 public class OrdersService {
 	
-	private static OrdersService _instance;
-	
 	private OrdersRepository ordersRepository;
 	private ProductRepository productRepository;
 	private CartRepository cartRepository;
 	
-	private OrdersService() throws Exception {
+	public OrdersService() throws Exception {
 		ordersRepository = new OrdersRepository();
 		productRepository = new ProductRepository();
 		cartRepository = new CartRepository();
-	}
-	
-	//싱글톤 패턴 적용 - 서비스객체는 한 번만 생성된다. (이후에는 재사용)
-	public static OrdersService getInstance() throws Exception {
-		if(_instance==null) _instance = new OrdersService();
-		return _instance;
 	}
 	
 	/*
@@ -67,11 +59,15 @@ public class OrdersService {
 	 * 주문 생성 - 상품에서 직접주문
 	 */
 	
+	
 	/*
 	 * 주문 생성 - 장바구니의 품목 전체주문
 	 */
 	
+	
 	/*
 	 * 주문 생성 - 장바구니의 품목에서 선택주문
 	 */
+	
+	
 }
