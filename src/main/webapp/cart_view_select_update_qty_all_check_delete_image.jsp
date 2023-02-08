@@ -4,8 +4,8 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="login_check.jspf"%>
 <%
-	String sUserId="sy0";
 	CartService cartService=new CartService();
 	List<Cart> cartList=cartService.getCartListByUserId(sUserId);
 %>
