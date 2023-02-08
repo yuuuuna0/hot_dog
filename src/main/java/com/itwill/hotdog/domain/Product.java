@@ -72,7 +72,7 @@ public class Product {
 		this.categories = categories;
 	}
 	public Product(int p_no, String p_name, int p_price, int p_discount, String p_desc, String p_img, int p_click,
-			Categories categories,List<Review> reviewList) {
+			Categories categories) {
 		super();
 		this.p_no = p_no;
 		this.p_name = p_name;
