@@ -106,7 +106,7 @@ public class ProductRepository {
 
 }
 
-	public Product findByCategory(int c_no) throws Exception{
+	public Product findByCategoryNumber(int c_no) throws Exception{
 		
 		Product product=null;
 		Connection con=null;
@@ -114,7 +114,7 @@ public class ProductRepository {
 		ResultSet rs=null;
 		try {
 		con=dataSource.getConnection();
-		pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_BY_NO);
+		pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_BY_CNO);
 		pstmt.setInt(1, c_no);
 		rs=pstmt.executeQuery();
 		if(rs.next()) {
@@ -137,6 +137,7 @@ public class ProductRepository {
 			if(con!=null) {
 				rs.close();
 				con.close();
+				pstmt.close();
 			}
 		}
 		
