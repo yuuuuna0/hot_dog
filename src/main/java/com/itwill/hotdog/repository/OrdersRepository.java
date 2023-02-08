@@ -2,14 +2,12 @@ package com.itwill.hotdog.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.Properties;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
-
-import com.itwill.hotdog.domain.Categories;
 import com.itwill.hotdog.common.DataSourceFactory;
+import com.itwill.hotdog.domain.Categories;
 import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.domain.Payment;
@@ -266,11 +264,7 @@ public class OrdersRepository {
 																	   	   rs.getString("p_desc"),
 																	   	   rs.getString("p_img"),
 																	   	   rs.getInt("p_click"),
-																	   	   new Categories(rs.getInt("ct_no"),
-																	   			   		  rs.getString("ct_name"),
-																	   			   		  rs.getString("ct_img")
-																	   			   		  )
-																	   	   )
+																	   	   null)
 															   )
 												);
 				} while(rs.next());

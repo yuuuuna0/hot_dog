@@ -187,8 +187,7 @@ public class CartRepository {
 							    		       rs.getString("p_desc"),
 							    		       rs.getString("p_img"),
 							    		       rs.getInt("p_click"),
-							    		       rs.getInt("ct_no"))		
-							       )
+							    		       null))
 					);
 		}
 		return cartList;
@@ -219,7 +218,7 @@ public class CartRepository {
 					    		       rs.getString("p_desc"),
 					    		       rs.getString("p_img"),
 					    		       rs.getInt("p_click"),
-					    		       rs.getInt("ct_no"))	
+					    		       null)	
 			     
 			);
 		}
