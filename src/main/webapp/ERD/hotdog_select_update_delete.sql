@@ -51,7 +51,7 @@ select * from orders o join payment pm on o.pm_no=pm.pm_no join userinfo u on o.
 
 select * from orders o join payment pm on o.pm_no=pm.pm_no join userinfo u on o.u_id=u.u_id join order_item oi on o.o_no=oi.o_no join product p on oi.p_no=p.p_no where u.u_id='sy0';
 
-select * from orders o join payment pm on o.pm_no=pm.pm_no join userinfo u on o.u_id=u.u_id join order_item oi on o.o_no=oi.o_no join product p on oi.p_no=p.p_no where o.o_no=2;
+select * from orders o join payment pm on o.pm_no=pm.pm_no join userinfo u on o.u_id=u.u_id join order_item oi on o.o_no=oi.o_no join product p on oi.p_no=p.p_no where o.o_no=5;
 
 
 --5-2. orders, payment, userinfo JOIN

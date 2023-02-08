@@ -86,7 +86,7 @@ public class OrdersRepository {
 	}
 	
 	/*
-	 * 주문 생성
+	 * 주문 생성 - 트랜잭션 처리 필요.
 	 */
 	public int insert(Orders orders) throws Exception {
 		Connection con = null;
