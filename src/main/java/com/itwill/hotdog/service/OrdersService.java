@@ -80,6 +80,8 @@ public class OrdersService {
 		return ordersRepository.insert(newOrder);
 	}
 	
+	
+	
 	/*
 	 * 주문 생성 - 장바구니의 품목 전체주문
 	 */
