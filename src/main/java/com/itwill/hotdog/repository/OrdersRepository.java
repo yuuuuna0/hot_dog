@@ -203,11 +203,7 @@ public class OrdersRepository {
 																							rs2.getString("p_desc"),
 																							rs2.getString("p_img"),
 																							rs2.getInt("p_click"),
-																							new Categories(rs2.getInt("ct_no"),
-																										   rs2.getString("ct_name"),
-																										   rs2.getString("ct_img")
-																										   )
-																							)
+																							null)
 																				)
 																);
 					} while(rs2.next());

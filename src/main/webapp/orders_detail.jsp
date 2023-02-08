@@ -8,7 +8,7 @@
 <%
 	String o_noStr=request.getParameter("o_no");
 	if(o_noStr==null || o_noStr.equals("")){
-		response.sendRedirect("orders_list.orderitem.jsp");
+		response.sendRedirect("orders_list_orderitem.jsp");
 		return;
 	}
 	OrdersService ordersService=new OrdersService();
