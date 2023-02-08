@@ -111,7 +111,8 @@
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1>
 											<form action="cart_delete_item_action.jsp" method="post">
 												<input type="hidden" name="cart_no" value="<%=cart.getC_no()%>">
-												<input type="submit" value="삭제">
+												<button onclick="Location.href='cart_delete_item_action.jsp?p_no=<%=cart.getC_no() %>'">삭제</button>
+												<!-- input type="submit" value="삭제" -->
 											</form>
 										</td>
 									</tr>
