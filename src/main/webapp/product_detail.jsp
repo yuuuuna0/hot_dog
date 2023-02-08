@@ -11,13 +11,7 @@ if (p_noStr == null || p_noStr.equals("")) {
 
 ProductService productService = new ProductService();
 Product product = productService.productDetail(Integer.parseInt(p_noStr));
-if (product == null) {
-	out.println("<script>");
-	out.println("alert('매진된상품입니다.');");
-	out.println("location.href='product_list.jsp';");
-	out.println("</script>");
-	return;
-}
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -110,7 +104,7 @@ if (product == null) {
 										src='image/'<%=product.getP_img()%> width=120 height=200></td>
 									<td width=30% height=200 class=t1>
 										<ol type="disc">
-											<li><b>견종 : <%=product.getP_name()%>&nbsp;&nbsp;&nbsp;
+											<li><b>상품 이름 : <%=product.getP_name()%>&nbsp;&nbsp;&nbsp;
 											</b></li>
 											<li><font color=#FF0000>가격 : <%=product.getP_price()%>&nbsp;&nbsp;&nbsp;
 											</font></li>
