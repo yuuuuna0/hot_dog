@@ -2,47 +2,25 @@ package com.itwill.hotdog.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.Properties;
-
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
+import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.domain.Payment;
 import com.itwill.hotdog.domain.Product;
 import com.itwill.hotdog.domain.UserInfo;
-import com.itwill.hotdog.sql.OrdersSQL;
 import com.itwill.hotdog.sql.OrdersSQL_sy;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
-import com.itwill.hotdog.domain.OrderItem;
-import com.itwill.hotdog.domain.Orders;
-import com.itwill.hotdog.sql.OrdersSQL;
 
 public class OrdersRepository {
 	
 	private DataSource dataSource;
 	
 	public OrdersRepository() throws Exception {
-		Properties properties = new Properties();
-		properties.load(getClass().getResourceAsStream("/jdbc.properties"));
-		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setDriverClassName(properties.getProperty("driverClass"));
-		basicDataSource.setUrl(properties.getProperty("url"));
-		basicDataSource.setUsername(properties.getProperty("username"));
-		basicDataSource.setPassword(properties.getProperty("password"));
-		dataSource = basicDataSource;
+	  InitialContext ic = new InitialContext();
+      dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
 	}
 	
 	/*

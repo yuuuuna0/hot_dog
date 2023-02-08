@@ -1,5 +1,8 @@
 package com.itwill.hotdog.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product {
 	private int p_no;
 	private String p_name;
@@ -8,8 +11,18 @@ public class Product {
 	private String p_desc;
 	private String p_img;
 	private int p_click;
-	/********FK********/
-	private int ct_no;
+	private Categories categories;
+	private List<Review> reviewList;
+	
+	public Product() {
+		this.reviewList=new ArrayList<Review>();
+	}
+	public List<Review> getReviewList() {
+		return reviewList;
+	}
+	public void setReviewList(List<Review> reviewList) {
+		this.reviewList = reviewList;
+	}
 	public int getP_no() {
 		return p_no;
 	}
@@ -52,16 +65,14 @@ public class Product {
 	public void setP_click(int p_click) {
 		this.p_click = p_click;
 	}
-	public int getCt_no() {
-		return ct_no;
+	public Categories getCategories() {
+		return categories;
 	}
-	public void setCt_no(int ct_no) {
-		this.ct_no = ct_no;
-	}
-	public Product() {
+	public void setCategories(Categories categories) {
+		this.categories = categories;
 	}
 	public Product(int p_no, String p_name, int p_price, int p_discount, String p_desc, String p_img, int p_click,
-			int ct_no) {
+			Categories categories) {
 		super();
 		this.p_no = p_no;
 		this.p_name = p_name;
@@ -70,12 +81,16 @@ public class Product {
 		this.p_desc = p_desc;
 		this.p_img = p_img;
 		this.p_click = p_click;
-		this.ct_no = ct_no;
+		this.categories = categories;
+		
 	}
 	@Override
 	public String toString() {
 		return "Product [p_no=" + p_no + ", p_name=" + p_name + ", p_price=" + p_price + ", p_discount=" + p_discount
-				+ ", p_desc=" + p_desc + ", p_img=" + p_img + ", p_click=" + p_click + ", ct_no=" + ct_no + "]";
+				+ ", p_desc=" + p_desc + ", p_img=" + p_img + ", p_click=" + p_click + ", categories=" + categories
+				+ ", reviewList=" + reviewList + "]";
 	}
 	
+	
+
 }
