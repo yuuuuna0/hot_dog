@@ -5,14 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
-import com.itwill.hotdog.domain.Product;
 import com.itwill.hotdog.domain.Categories;
+import com.itwill.hotdog.domain.Product;
 import com.itwill.hotdog.sql.ProductSQL;
 
 /*
@@ -22,15 +18,8 @@ PRODUCT 테이블에 제품 검색 등의 작업을한다.
 public class ProductRepository {
 	private DataSource dataSource;
 	public ProductRepository() throws Exception{
-		Properties properties = new Properties();
-		properties.load(this.getClass().getResourceAsStream("/jdbc.properties"));
-		/*** Apache DataSource ***/
-		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setDriverClassName(properties.getProperty("driverClassName"));
-		basicDataSource.setUrl(properties.getProperty("url"));
-		basicDataSource.setUsername(properties.getProperty("username"));
-		basicDataSource.setPassword(properties.getProperty("password"));
-		dataSource = basicDataSource;
+	  InitialContext ic = new InitialContext();
+	  dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
 	}
 	/*
 	 * selelctByPK : 상품번호로 검색
