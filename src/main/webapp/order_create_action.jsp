@@ -1,3 +1,4 @@
+<%@page import="com.itwill.hotdog.domain.Cart"%>
 <%@page import="com.itwill.hotdog.service.PaymentService"%>
 <%@page import="com.itwill.hotdog.service.ProductService"%>
 <%@page import="java.util.ArrayList"%>
@@ -29,7 +30,7 @@
 	ProductService productService=new ProductService();
 	PaymentService paymentService=new PaymentService();
 	List<OrderItem> orderItemList=new ArrayList<OrderItem>();
-	orderItemList.add(new OrderItem(0,(Integer.parseInt(p_qtyStr)*Integer.parseInt(p_priceStr)),0,productService.productDetail(Integer.parseInt(p_noStr))));
+	List<Cart> cartList=new ArrayList<Cart>();
 	Orders orders=null;
 	
 	
@@ -38,7 +39,12 @@
 		orders=new Orders(0,null,(Integer.parseInt(p_qtyStr)*Integer.parseInt(p_priceStr)),Integer.parseInt(o_usedPointStr),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
 		ordersService.create(orders);
 	}else if(buyType.equals("cart_all")){
-		orders=new Orders();
+		cartList=cartService.getCartListByUserId(sUserId);
+		for(int i=0; i<cartList.size();i++){
+			orderItemList.add(i,new OrderItem(0,cartList.get(i).getC_qty(),orders.getO_no(),cartList.get(i).getProduct()));
+		}
+	
+		orders=new Orders();		//order=new Orders(); 선언 위치,,?
 		
 	}else if(buyType.equals("cart_select")){
 		
