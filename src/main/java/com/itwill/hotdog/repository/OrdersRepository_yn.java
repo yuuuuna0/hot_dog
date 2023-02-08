@@ -3,6 +3,7 @@ package com.itwill.hotdog.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import javax.sql.DataSource;
@@ -116,7 +117,7 @@ public class OrdersRepository_yn {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Orders> ordersList=null;
+		List<Orders> ordersList=new ArrayList<Orders>();
 		try {
 			pstmt=con.prepareStatement(OrdersSQL.ORDERS_SELECT_WITH_PAYMENT_WITH_USERINFO_BY_U_ID);
 			pstmt.setString(1, sUserId);
@@ -153,7 +154,7 @@ public class OrdersRepository_yn {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<OrderItem> orderItemList=null;
+		List<OrderItem> orderItemList=new ArrayList<OrderItem>();
 		try {
 			pstmt=con.prepareStatement(OrdersSQL.ORDERITEM_SELECT_WITH_PRODUCT_BY_O_NO);
 			pstmt.setInt(1,o_no);
