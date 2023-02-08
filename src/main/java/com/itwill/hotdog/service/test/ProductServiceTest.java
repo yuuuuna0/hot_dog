@@ -2,7 +2,7 @@ package com.itwill.hotdog.service.test;
 
 import com.itwill.hotdog.service.ProductService;
 
-public class ProductServiceTestMain {
+public class ProductServiceTest {
 
 	public static void main(String[] args) throws Exception {
 		ProductService productService=new ProductService();

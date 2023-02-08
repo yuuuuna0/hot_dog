@@ -4,7 +4,7 @@ import com.itwill.hotdog.domain.Cart;
 import com.itwill.hotdog.domain.Product;
 import com.itwill.hotdog.repository.CartRepository;
 import com.itwill.hotdog.repository.ProductRepository;
-public class CartRepositoryTest {
+public class CartRepositoryTestMain {
 	public static void main(String[] args) throws Exception{
 		CartRepository cartRepository = new CartRepository();
 		ProductRepository productRepository = new ProductRepository();
