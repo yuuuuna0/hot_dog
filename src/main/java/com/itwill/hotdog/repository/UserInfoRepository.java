@@ -6,10 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.UserInfo;
-
 import com.itwill.hotdog.sql.UserInfoSQL;
 /*
  사용자관리에서 데이타베이스와의 작업을 전담하는 클래스
@@ -37,8 +36,7 @@ public class UserInfoRepository {
 		basicDataSource.setPassword(properties.getProperty("password"));
 		dataSource=basicDataSource;
 		*/
-	  InitialContext ic = new InitialContext();
-      dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
+	  dataSource=DataSourceFactory.getDataSource();
 	}
 
 	/*

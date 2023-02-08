@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.Review;
 import com.itwill.hotdog.sql.ReviewSQL;
 
@@ -15,8 +15,7 @@ public class ReviewRepository {
 	
 	
 public ReviewRepository() throws Exception{
-  InitialContext ic = new InitialContext();
-  dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
+  dataSource=DataSourceFactory.getDataSource();
 }
 
 

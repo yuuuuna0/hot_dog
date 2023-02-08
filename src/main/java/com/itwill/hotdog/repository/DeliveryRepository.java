@@ -11,7 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.Delivery;
 import com.itwill.hotdog.sql.DeliverySQL;
 
@@ -19,8 +19,7 @@ public class DeliveryRepository {
 	private DataSource dataSource;
 	
 	public DeliveryRepository() throws Exception{
-		   InitialContext ic = new InitialContext();
-		   dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
+	  dataSource=DataSourceFactory.getDataSource();
 	}
 	
 	//1. 배송지입력
