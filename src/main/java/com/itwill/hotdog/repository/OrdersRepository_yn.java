@@ -3,10 +3,10 @@ package com.itwill.hotdog.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import javax.sql.DataSource;
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.domain.Payment;
@@ -19,15 +19,7 @@ public class OrdersRepository_yn {
 	private DataSource dataSource;
 	
 	public OrdersRepository_yn() throws Exception{
-		Properties properties=new Properties();
-		properties.load(this.getClass().getResourceAsStream("/jdbc.properties"));
-		
-		BasicDataSource basicDataSource=new BasicDataSource();
-		basicDataSource.setDriverClassName(properties.getProperty("driverClassName"));
-		basicDataSource.setUrl(properties.getProperty("url"));
-		basicDataSource.setUsername(properties.getProperty("username"));
-		basicDataSource.setPassword(properties.getProperty("password"));
-		dataSource=basicDataSource;
+	  dataSource=DataSourceFactory.getDataSource();
 	}
 	
 	//1. 주문 생성
@@ -116,7 +108,7 @@ public class OrdersRepository_yn {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Orders> ordersList=null;
+		List<Orders> ordersList=new ArrayList<Orders>();
 		try {
 			pstmt=con.prepareStatement(OrdersSQL.ORDERS_SELECT_WITH_PAYMENT_WITH_USERINFO_BY_U_ID);
 			pstmt.setString(1, sUserId);
@@ -149,40 +141,80 @@ public class OrdersRepository_yn {
 	}
 	
 	//5. 주문번호로 해당 주문아이템리스트 보기
-	public List<OrderItem> findOrderIteByOrderNo(int o_no) throws Exception{
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<OrderItem> orderItemList=null;
-		try {
-			pstmt=con.prepareStatement(OrdersSQL.ORDERITEM_SELECT_WITH_PRODUCT_BY_O_NO);
-			pstmt.setInt(1,o_no);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				orderItemList.add(new OrderItem(rs.getInt("oi_no"),
-												rs.getInt("oi_qty"),
-												rs.getInt("o_no"),
-												new Product(rs.getInt("p_no"),
-															rs.getString("p_name"),
-															rs.getInt("p_price"),
-															rs.getInt("p_discount"),
-															rs.getString("p_desc"),
-															rs.getString("p_img"),
-															rs.getInt("p_click"),
-															rs.getInt("ct_no"))));
-			}
-			con.commit();
-		} catch(Exception e) {
-			e.printStackTrace();
-			con.rollback();
-			throw e;
-		} finally {
-			if(con!=null) {
-				rs.close();
-				con.close();
-			}
-		}
-		return orderItemList;
-	}
+//	public List<Orders> findOrderWithOrderItemByOrderNo(String sUserId) throws Exception{
+//		Connection con = null;
+//		PreparedStatement pstmt1 = null;
+//		PreparedStatement pstmt2 = null;
+//		ResultSet rs1 = null;
+//		ResultSet rs2 = null;
+//		List<Orders> ordersList = new ArrayList<Orders>();
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt1 = con.prepareStatement(OrdersSQL.ORDERS_SELECT_WITH_PAYMENT_WITH_USERINFO_BY_U_ID);
+//			pstmt1.setString(1, sUserId);
+//			rs1 = pstmt1.executeQuery();
+//			while(rs1.next()) {
+//				ordersList.add(new Orders(rs1.getInt("o_no"),
+//										 rs1.getDate("o_date"),
+//										 rs1.getInt("o_totalPrice"),
+//										 rs1.getInt("o_usedPoint"),
+//										 new Payment(rs1.getInt("pm_no"),
+//												 	 rs1.getString("pm_name")),
+//										 new UserInfo(rs1.getString("u_id"),
+//												 	  rs1.getString("u_password"),
+//												 	  rs1.getString("u_name"),
+//												 	  rs1.getString("u_phone"),
+//												 	  rs1.getInt("u_point"))));
+//			}
+//			pstmt2 = con.prepareStatement(OrdersSQL.ORDERS_SELECT_WITH_ORDERITEM_WITH_PRODUCT_BY_O_NO);
+//			for(int i=0; i<ordersList.size(); i++) {
+//				Orders tempOrder = ordersList.get(i);
+//				pstmt2.setInt(1, tempOrder.getO_no());
+//				rs2 = pstmt2.executeQuery();
+//				Orders ordersWithOrderItem = null;
+//				if(rs2.next()) {
+//					ordersWithOrderItem = new Orders(rs2.getInt("o_no"),
+//													rs2.getDate("o_date"),
+//													rs2.getInt("o_totalPrice"),
+//													rs2.getInt("o_usedPoint"),
+//													new Payment(rs2.getInt("pm_no"),
+//																rs2.getString("pm_name")
+//																),
+//													new UserInfo(rs2.getString("u_id"),
+//																 rs2.getString("u_password"),
+//																 rs2.getString("u_name"),
+//																 rs2.getString("u_phone"),
+//																 rs2.getInt("u_point")
+//																 )
+//													);
+//					do {
+//						ordersWithOrderItem.getOrderItemList().add(new OrderItem(rs2.getInt("oi_no"),
+//																				rs2.getInt("oi_qty"),
+//																				rs2.getInt("o_no"),
+//																				new Product(rs2.getInt("p_no"),
+//																							rs2.getString("p_name"),
+//																							rs2.getInt("p_price"),
+//																							rs2.getInt("p_discount"),
+//																							rs2.getString("p_desc"),
+//																							rs2.getString("p_img"),
+//																							rs2.getInt("p_click"),
+//																							rs2.getInt("ct_no")
+//																							)
+//																				)
+//																);
+//					} while(rs2.next());
+//				}
+//				ordersList.set(i, ordersWithOrderItem);
+//			}
+//		} finally {
+//			if(rs1!=null) rs1.close();
+//			if(rs2!=null) rs2.close();
+//			if(pstmt1!=null) pstmt1.close();
+//			if(pstmt2!=null) pstmt2.close();
+//			if(con!=null) con.close();
+//		}
+//		
+//		return ordersList;
+//	}
 	
 }

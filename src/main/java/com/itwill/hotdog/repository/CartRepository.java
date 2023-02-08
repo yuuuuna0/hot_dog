@@ -5,12 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
 import javax.sql.DataSource;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.Cart;
 import com.itwill.hotdog.domain.Categories;
 import com.itwill.hotdog.domain.Product;
@@ -20,15 +16,7 @@ public class CartRepository {
 
 		private DataSource dataSource;
 		public CartRepository() throws Exception{
-			Properties properties = new Properties();
-			properties.load(this.getClass().getResourceAsStream("/jdbc.properties"));
-			/*** Apache DataSource ***/
-			BasicDataSource basicDataSource = new BasicDataSource();
-			basicDataSource.setDriverClassName(properties.getProperty("driverClassName"));
-			basicDataSource.setUrl(properties.getProperty("url"));
-			basicDataSource.setUsername(properties.getProperty("username"));
-			basicDataSource.setPassword(properties.getProperty("password"));
-			dataSource = basicDataSource;
+		  dataSource=DataSourceFactory.getDataSource();
 	}
 
 	/*
@@ -212,32 +200,32 @@ public class CartRepository {
 	 * 5. List- 카트 일부 목록보기 [선택주문]
 	 */
 
-	public Cart findByCartNo(int cart_no) throws Exception {
-
-		Cart cart = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		con = dataSource.getConnection();
-		pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_CART_NO);
-		pstmt.setInt(1, cart_no);
-		rs = pstmt.executeQuery();
-		if (rs.next()) {
-			cart = new Cart( rs.getInt("c_no"), 
-					         rs.getInt("c_qty"), 
-					         rs.getString("u_id"),
-					         new Product(rs.getInt("p_no"),
-					    		       rs.getString("p_name"),
-					    		       rs.getInt("p_price"),
-					    		       rs.getInt("p_discount"),
-					    		       rs.getString("p_desc"),
-					    		       rs.getString("p_img"),
-					    		       rs.getInt("p_click"),
-					    		       rs.getInt("ct_no"))	
-			     
-			);
-		}
-		return cart;
-	}
+//	public Cart findByCartNo(int cart_no) throws Exception {
+//
+//		Cart cart = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//
+//		con = dataSource.getConnection();
+//		pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_CART_NO);
+//		pstmt.setInt(1, cart_no);
+//		rs = pstmt.executeQuery();
+//		if (rs.next()) {
+//			cart = new Cart( rs.getInt("c_no"), 
+//					         rs.getInt("c_qty"), 
+//					         rs.getString("u_id"),
+//					         new Product(rs.getInt("p_no"),
+//					    		       rs.getString("p_name"),
+//					    		       rs.getInt("p_price"),
+//					    		       rs.getInt("p_discount"),
+//					    		       rs.getString("p_desc"),
+//					    		       rs.getString("p_img"),
+//					    		       rs.getInt("p_click"),
+//					    		       rs.getInt("ct_no"))	
+//			     
+//			);
+//		}
+//		return cart;
+//	}
 }

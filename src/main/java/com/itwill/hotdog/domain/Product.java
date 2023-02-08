@@ -82,8 +82,13 @@ public class Product {
 		this.p_img = p_img;
 		this.p_click = p_click;
 		this.categories = categories;
-		
+
+		this.reviewList=new ArrayList<Review>();
+
 	}
+		
+		
+		
 	@Override
 	public String toString() {
 		return "Product [p_no=" + p_no + ", p_name=" + p_name + ", p_price=" + p_price + ", p_discount=" + p_discount
@@ -91,6 +96,6 @@ public class Product {
 				+ ", reviewList=" + reviewList + "]";
 	}
 	
-	
 
 }
+
