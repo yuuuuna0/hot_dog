@@ -162,7 +162,7 @@ public class OrdersRepository_yn {
 			while(rs.next()) {
 				orderItemList.add(new OrderItem(rs.getInt("oi_no"),
 												rs.getInt("oi_qty"),
-												rs.getString("o_no"),
+												rs.getInt("o_no"),
 												new Product(rs.getInt("p_no"),
 															rs.getString("p_name"),
 															rs.getInt("p_price"),
