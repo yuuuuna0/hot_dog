@@ -101,8 +101,12 @@ Product product = productService.productDetail(Integer.parseInt(p_noStr));
 										</form>
 									</td>
 									<td width=40% height=200 align=center><img border=0
+<<<<<<< HEAD
 										src='image/<%=product.getP_img()%>' 
 										width=120 height=200></td>
+=======
+										src='image/'<%=product.getP_img()%> width=120 height=200></td>
+>>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 									<td width=30% height=200 class=t1>
 										<ol type="disc">
 											<li><b>상품 이름 : <%=product.getP_name()%>&nbsp;&nbsp;&nbsp;

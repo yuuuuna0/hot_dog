@@ -5,8 +5,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%
 	String sUserId="sy0";
+=======
+<%@ include file="login_check.jspf"%>
+<%
+>>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 	CartService cartService=new CartService();
 	List<Cart> cartList=cartService.getCartListByUserId(sUserId);
 %>    

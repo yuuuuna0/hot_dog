@@ -2,11 +2,15 @@
 /*
 <@page import="com.itwill.shop.user.User">
 */
+<%@page import="com.itwill.hotdog.service.UserInfoService"%>
+<%@page import="com.itwill.hotdog.domain.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String sUserId=(String)session.getAttribute("sUserId");
-	//User sUser=(User)session.getAttribute("sUser");
+	//String sUserId=(String)session.getAttribute("sUserId");
+	String sUserId="sy0";
+	//UserInfo sUser=(User)session.getAttribute("sUser");
+	UserInfo sUser=new UserInfo("sys0","0000","김세영","010-0000-0000",1000);
 	if(sUserId==null){
 		response.sendRedirect("shop_main.jsp");
 		return;

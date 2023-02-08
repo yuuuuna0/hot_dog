@@ -3,14 +3,14 @@ package com.itwill.hotdog.domain;
 public class OrderItem {
 	private int oi_no;
 	private int oi_qty;
-	private String o_no;
+	private int o_no;
 	private Product product;
 	
 	public OrderItem() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderItem(int oi_no, int oi_qty, String o_no, Product product) {
+	public OrderItem(int oi_no, int oi_qty, int o_no, Product product) {
 		super();
 		this.oi_no = oi_no;
 		this.oi_qty = oi_qty;
@@ -34,11 +34,11 @@ public class OrderItem {
 		this.oi_qty = oi_qty;
 	}
 
-	public String getO_no() {
+	public int getO_no() {
 		return o_no;
 	}
 
-	public void setO_no(String o_no) {
+	public void setO_no(int o_no) {
 		this.o_no = o_no;
 	}
 

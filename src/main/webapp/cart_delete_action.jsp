@@ -1,13 +1,19 @@
+<%@page import="com.itwill.hotdog.service.CartService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="login_check.jspf"%>
+<%
 
-</head>
-<body>
+if(request.getMethod().equalsIgnoreCase("GET")){
+	response.sendRedirect("product_list.jsp");
+	return;
+}
 
-</body>
-</html>
+CartService cartService=new CartService();
+cartService.deleteCartItemByUserId(sUserId);
+response.sendRedirect("cart_view.jsp");
+
+
+
+
+%>
