@@ -25,6 +25,8 @@ insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, c
 insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식3', 10000, 35, '강아지간식3입니다.', '6.jpg', 0, 2);
 
 
+
+
 /**********************cart insert************************/
 --sy0님이 1번제품 1개, 3번제품 3개, 5번제품 5개 담기
 insert into cart(c_no, c_qty, u_id, p_no) values(CART_C_NO_SEQ.nextval, 1, 'sy0', 1);
