@@ -82,15 +82,11 @@ public class Product {
 		this.p_img = p_img;
 		this.p_click = p_click;
 		this.categories = categories;
-<<<<<<< HEAD
 		this.reviewList=new ArrayList<Review>();
-		
-		
-		
-=======
-		this.reviewList = new ArrayList<Review>();
->>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 	}
+		
+		
+		
 	@Override
 	public String toString() {
 		return "Product [p_no=" + p_no + ", p_name=" + p_name + ", p_price=" + p_price + ", p_discount=" + p_discount
