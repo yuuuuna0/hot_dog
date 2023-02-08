@@ -6,10 +6,10 @@ import java.util.Properties;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.itwill.hotdog.domain.Categories;
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.domain.Payment;
@@ -22,22 +22,8 @@ public class OrdersRepository {
 	private DataSource dataSource;
 	
 	public OrdersRepository() throws Exception {
-		InitialContext ic = new InitialContext();
-		dataSource = (DataSource)ic.lookup("java:/comp/env/jdbc/OracleDB");
+	  dataSource=DataSourceFactory.getDataSource();
 	}
-	
-	/*
-	public OrdersRepository() throws Exception {
-		Properties properties = new Properties();
-		properties.load(getClass().getResourceAsStream("/jdbc.properties"));
-		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setDriverClassName(properties.getProperty("driverClass"));
-		basicDataSource.setUrl(properties.getProperty("url"));
-		basicDataSource.setUsername(properties.getProperty("username"));
-		basicDataSource.setPassword(properties.getProperty("password"));
-		dataSource = basicDataSource;
-	}
-	*/
 	
 	/*
 	 * 주문 전체삭제

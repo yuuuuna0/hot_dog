@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.UserInfo;
 import com.itwill.hotdog.sql.UserInfoSQL;
 /*
@@ -23,8 +24,7 @@ public class UserInfoRepository {
 	private DataSource dataSource;
 	
 	public UserInfoRepository() throws Exception {
-		InitialContext ic = new InitialContext();
-		dataSource = (DataSource)ic.lookup("java:/comp/env/jdbc/OracleDB");
+	  dataSource=DataSourceFactory.getDataSource();
 	}
 	
 	/*

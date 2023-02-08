@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.domain.Payment;
@@ -19,8 +19,7 @@ public class OrdersRepository_yn {
 	private DataSource dataSource;
 	
 	public OrdersRepository_yn() throws Exception{
-	  InitialContext ic = new InitialContext();
-      dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
+	  dataSource=DataSourceFactory.getDataSource();
 	}
 	
 	//1. 주문 생성
