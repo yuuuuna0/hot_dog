@@ -10,7 +10,7 @@ public class UserInfoService {
 		userInfo=new UserInfoRepository();
 	}
 	/*
-	 * 회원가입
+	 * 회원가입.
 	 */
 	public int create(UserInfo user)throws Exception{
 		// 1.아이디중복체크
