@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Properties;
 
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
@@ -35,6 +36,12 @@ public class OrdersRepository {
 	private DataSource dataSource;
 	
 	public OrdersRepository() throws Exception {
+		InitialContext ic = new InitialContext();
+		dataSource = (DataSource)ic.lookup("java:/comp/env/jdbc/OracleDB");
+	}
+	
+	/*
+	public OrdersRepository() throws Exception {
 		Properties properties = new Properties();
 		properties.load(getClass().getResourceAsStream("/jdbc.properties"));
 		BasicDataSource basicDataSource = new BasicDataSource();
@@ -44,6 +51,7 @@ public class OrdersRepository {
 		basicDataSource.setPassword(properties.getProperty("password"));
 		dataSource = basicDataSource;
 	}
+	*/
 	
 	/*
 	 * 주문 전체삭제

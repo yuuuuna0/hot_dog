@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
@@ -24,12 +25,15 @@ public class UserInfoRepository {
 	 * - 톰캣에서제공하는 DataSource 객체사용
 	 */
 	private DataSource dataSource;
+	
+	public UserInfoRepository() throws Exception{
+		InitialContext ic = new InitialContext();
+		dataSource = (DataSource)ic.lookup("java:/comp/env/jdbc/OracleDB");
 
+	}
+	
+	/*
 	public UserInfoRepository() throws Exception {
-		/******Apache BasicDataSource*****/
-		/*
-		 * jdbc.properties 파일을 Properties객체로생성
-		 */
 		BasicDataSource basicDataSource=new BasicDataSource();
 		Properties properties=new Properties();
 		properties.load(UserInfoRepository.class.getResourceAsStream("/jdbc.properties"));
@@ -39,6 +43,7 @@ public class UserInfoRepository {
 		basicDataSource.setPassword(properties.getProperty("password"));
 		dataSource=basicDataSource;
 	}
+	*/
 
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
