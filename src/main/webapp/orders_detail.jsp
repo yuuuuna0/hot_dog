@@ -12,7 +12,7 @@
 		return;
 	}
 	OrdersService ordersService=new OrdersService();
-	Orders orders=ordersService.findDetail(Integer.parseInt("o_noStr"));
+	Orders orders=ordersService.findDetail(Integer.parseInt(o_noStr));
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
