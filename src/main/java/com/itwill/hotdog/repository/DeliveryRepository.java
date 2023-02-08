@@ -141,9 +141,12 @@ public class DeliveryRepository {
 		Delivery finddelivery=null;
 		try {
 			pstmt=con.prepareStatement(DeliverySQL.DELIVERY_UPDATE_BY_D_NO);
-			pstmt.
+			pstmt.setString(1,"d_name");
+			pstmt.setString(2, "d_address");
+			pstmt.setInt(3, d_no);
+			pstmt.executeUpdate();
 		} catch(Exception e) {
-			
+			e.printStackTrace();
 		} finally {
 			if(pstmt!=null) pstmt.close();
 			if(con!=null) con.close();
