@@ -1,9 +1,7 @@
-package com.itwill.shop.common;
+package com.itwill.hotdog.common;
 
 import java.util.Properties;
-
 import javax.sql.DataSource;
-
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 public class DataSourceFactory {
