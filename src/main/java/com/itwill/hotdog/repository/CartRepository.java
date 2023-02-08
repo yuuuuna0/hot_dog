@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.itwill.hotdog.domain.Cart;
+import com.itwill.hotdog.domain.Categories;
 import com.itwill.hotdog.domain.Product;
 import com.itwill.hotdog.sql.CartSQL;
 
@@ -199,8 +200,10 @@ public class CartRepository {
 							    		       rs.getString("p_desc"),
 							    		       rs.getString("p_img"),
 							    		       rs.getInt("p_click"),
-							    		       rs.getInt("ct_no"))		
-							       )
+							    		       new Categories(rs.getInt("ct_no"),
+							    		    		   		  rs.getString("ct_name"),
+							    		    		   		  rs.getString("ct_img"))		
+							       ))
 					);
 		}
 		return cartList;
