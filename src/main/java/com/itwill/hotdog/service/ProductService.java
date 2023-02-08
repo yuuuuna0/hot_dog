@@ -27,5 +27,5 @@ public class ProductService {
 	public Product productDetail(int p_no) throws Exception{
 		return productRepository.findByPrimaryKey(p_no);
 	}
-	
+
 }
