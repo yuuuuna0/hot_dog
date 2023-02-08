@@ -72,7 +72,7 @@ public class Product {
 		this.categories = categories;
 	}
 	public Product(int p_no, String p_name, int p_price, int p_discount, String p_desc, String p_img, int p_click,
-			Categories categories) {
+			Categories categories,List<Review> reviewList) {
 		super();
 		this.p_no = p_no;
 		this.p_name = p_name;
@@ -82,7 +82,7 @@ public class Product {
 		this.p_img = p_img;
 		this.p_click = p_click;
 		this.categories = categories;
-		
+		this.reviewList = new ArrayList<Review>();
 	}
 	@Override
 	public String toString() {
