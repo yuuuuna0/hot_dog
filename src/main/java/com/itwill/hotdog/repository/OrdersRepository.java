@@ -3,33 +3,19 @@ package com.itwill.hotdog.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Properties;
-
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
+import com.itwill.hotdog.domain.Categories;
+import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
 import com.itwill.hotdog.domain.Payment;
 import com.itwill.hotdog.domain.Product;
 import com.itwill.hotdog.domain.UserInfo;
-import com.itwill.hotdog.sql.OrdersSQL;
 import com.itwill.hotdog.sql.OrdersSQL_sy;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
-import com.itwill.hotdog.domain.OrderItem;
-import com.itwill.hotdog.domain.Orders;
-import com.itwill.hotdog.sql.OrdersSQL;
 
 public class OrdersRepository {
 	
@@ -233,7 +219,10 @@ public class OrdersRepository {
 																							rs2.getString("p_desc"),
 																							rs2.getString("p_img"),
 																							rs2.getInt("p_click"),
-																							rs2.getInt("ct_no")
+																							new Categories(rs2.getInt("ct_no"),
+																										   rs2.getString("ct_name"),
+																										   rs2.getString("ct_img")
+																										   )
 																							)
 																				)
 																);
@@ -291,7 +280,10 @@ public class OrdersRepository {
 																	   	   rs.getString("p_desc"),
 																	   	   rs.getString("p_img"),
 																	   	   rs.getInt("p_click"),
-																	   	   rs.getInt("ct_no")
+																	   	   new Categories(rs.getInt("ct_no"),
+																	   			   		  rs.getString("ct_name"),
+																	   			   		  rs.getString("ct_img")
+																	   			   		  )
 																	   	   )
 															   )
 												);

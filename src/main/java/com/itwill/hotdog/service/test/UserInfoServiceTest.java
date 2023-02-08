@@ -18,6 +18,4 @@ public class UserInfoServiceTest {
 		//System.out.println("회원탈퇴");
 		//System.out.println(userService.remove("ks1"));
 	 }
-	
-
 }

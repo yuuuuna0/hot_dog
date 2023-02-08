@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="com.itwill.hotdog.domain.Categories"%>
+=======
+>>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 <%@page import="com.itwill.hotdog.domain.Product"%>
 <%@page import="com.itwill.hotdog.service.ProductService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -61,6 +66,39 @@ List<Product> productList = productService.productList();
 											상품리스트</b></td>
 								</tr>
 							</table>
+<<<<<<< HEAD
+							<table style="padding-left: 10px" border=0 cellpadding=0
+								cellspacing=0>
+								<tr>
+					
+								<td bgcolor="ffffff" height="15">&nbsp;&nbsp;<b>카테고리 사료/간식</b></td>
+								</tr>
+								</table>
+							<div id="f">
+								<table width="100%" align="center" border="0" cellpadding="10"
+									cellspacing="1" bgcolor="BBBBBB">
+									<%
+									int product_size=productList.size();
+									int product_column_size=4;
+									int product_line_count = 1;
+									
+									
+									for (int i=0;i<productList.size();i++) {
+											Product product=productList.get(i);
+									%>
+									<!--상품시작 -->
+									<%
+									 if(i%product_column_size==0){
+									%>
+									<tr>
+									<%} %>
+										<td align="center" width="25%"  bgcolor="ffffff"><a
+											href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="88px"
+												src="image/<%=product.getP_img()%>" border="0"></a><br />
+												
+											<br /> <b>상품명:<%=product.getP_name()%></b>
+											<br /> <b></b>
+=======
 
 							<div id="f">
 								<table width="100%" align="center" border="0" cellpadding="10"
@@ -85,6 +123,7 @@ List<Product> productList = productService.productList();
 												src="image/<%=product.getP_img()%>" border="0"></a><br />
 												
 											<br /> <b>상품명:<%=product.getP_name()%></b>
+>>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 											<form style="display: inline;">
 												<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
 												<input type="hidden" name="cart_qty" value="1">

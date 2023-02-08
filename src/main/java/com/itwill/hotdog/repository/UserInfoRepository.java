@@ -7,12 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
 import com.itwill.hotdog.domain.UserInfo;
 import com.itwill.hotdog.sql.UserInfoSQL;
 /*
@@ -26,25 +22,11 @@ public class UserInfoRepository {
 	 */
 	private DataSource dataSource;
 	
-	public UserInfoRepository() throws Exception{
+	public UserInfoRepository() throws Exception {
 		InitialContext ic = new InitialContext();
 		dataSource = (DataSource)ic.lookup("java:/comp/env/jdbc/OracleDB");
-
 	}
 	
-	/*
-	public UserInfoRepository() throws Exception {
-		BasicDataSource basicDataSource=new BasicDataSource();
-		Properties properties=new Properties();
-		properties.load(UserInfoRepository.class.getResourceAsStream("/jdbc.properties"));
-		basicDataSource.setDriverClassName(properties.getProperty("driverClass"));
-		basicDataSource.setUrl(properties.getProperty("url"));
-		basicDataSource.setUsername(properties.getProperty("username"));
-		basicDataSource.setPassword(properties.getProperty("password"));
-		dataSource=basicDataSource;
-	}
-	*/
-
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
 	 */
@@ -209,23 +191,22 @@ public class UserInfoRepository {
 	/*
 	 * 인자로 전달되는 아이디를 가지는 사용자가 존재하는지의 여부를판별
 	 */
-	public int countByUserId(String u_id) throws Exception {
+	public boolean existedUser(String userId) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		boolean isExist = false;
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(UserInfoSQL.USER_SELECT_BY_ID_COUNT);
-			pstmt.setString(1, u_id);
+			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
 			rs.next();
 			int count = rs.getInt("cnt");
-			return count;
+			if (count == 1) {
+				isExist = true;
+			}
 		} finally {
-			/*
-			 * 예외발생과 관계없이 반듯시 실행되는 코드
-			 */
 			if (rs != null)
 				rs.close();
 			if (pstmt != null)
@@ -233,6 +214,7 @@ public class UserInfoRepository {
 			if (con != null)
 				con.close();
 		}
+		return isExist;
 	}
 
 }
