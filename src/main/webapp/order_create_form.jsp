@@ -14,10 +14,21 @@
 		response.sendRedirect("product_list.jsp");
 		return;
 	}
-	String buyType=request.getParameter("buyType");
-	String p_noStr=request.getParameter("p_no");
-	String p_qtyStr=request.getParameter("p_qty");
-	String[] ct_noStr_array=request.getParameterValues("ct_no");
+	String buyType = request.getParameter("buyType");
+	String p_noStr = request.getParameter("p_no");
+	String p_qtyStr = request.getParameter("p_qty");
+	String p_priceStr = request.getParameter("p_price");
+	String o_usedPointStr = request.getParameter("o_usedPoint");
+	String pm_noStr = request.getParameter("pm_no");
+	String[] cart_item_noStr_array = request.getParameterValues("cart_item_no");
+	
+	if(buyType==null) buyType="";
+	if(p_noStr==null) p_noStr="";
+	if(p_qtyStr==null) p_qtyStr="";
+	if(p_priceStr==null) p_priceStr="";
+	if(o_usedPointStr==null) o_usedPointStr="";
+	if(pm_noStr==null) pm_noStr="";
+	if(cart_item_noStr_array==null) cart_item_noStr_array=new String[]{};
 	
 	CartService cartService=new CartService();
 	UserInfoService userInfoService=new UserInfoService();
