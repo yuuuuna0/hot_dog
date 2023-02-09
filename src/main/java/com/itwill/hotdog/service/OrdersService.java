@@ -64,6 +64,7 @@ public class OrdersService {
 	/*
 	 * 주문 생성 - 상품에서 직접주문
 	 */
+	
 	public int create(Orders order) throws Exception {
 		Product product = productRepository.findByPrimaryKey(order.getOrderItemList().get(0).getProduct().getP_no());
 		OrderItem orderItem = new OrderItem(0, order.getOrderItemList().get(0).getOi_qty(), 0, product);
@@ -79,8 +80,6 @@ public class OrdersService {
 		
 		return ordersRepository.insert(newOrder);
 	}
-	
-	
 	
 	/*
 	 * 주문 생성 - 장바구니의 품목 전체주문

@@ -4,6 +4,7 @@ public class PageMaker {
     public static final int PAGE_SCALE = 10;
     // 화면당 페이지 수
     public static final int BLOCK_SCALE = 10;
+    private int totCount;	//전체 게시물 
     private int curPage;    // 현재 페이지
     private int prevPage;   // 이전 페이지
     private int nextPage;   // 다음 페이지
@@ -24,7 +25,8 @@ public class PageMaker {
     // 생성자
     // PageMaker(게시물 갯수, 현재 페이지 번호)
     public PageMaker(int count, int curPage){
-        curBlock = 1;     // 현재 페이지 블록 번호
+    	curBlock = 1;     // 현재 페이지 블록 번호
+        this.totCount = count;    
         setTotPage(count);// 전체 페이지 갯수 계산
         if(curPage > totPage ) {
         	//현재페이지가 전체페이지보다크면 전체페이지를현재페이지로설정  
@@ -37,12 +39,12 @@ public class PageMaker {
         }
        
         setPageRange(); 
-        setTotBlock(count);             // 전체 페이지 블록 갯수 계산
+        setTotBlock(this.totPage);             // 전체 페이지 블록 갯수 계산
         setBlockRange();                // 페이지 블록의 시작, 끝 번호 계산
     }
     public void setTotPage(int count) {
         // Math.ceil(실수) 올림 처리
-        totPage = (int) Math.ceil(count*1.0 / PAGE_SCALE);
+        totPage = (int) Math.ceil(this.totCount*1.0 / PAGE_SCALE);
     } 
     public void setPageRange(){
         	// WHERE rn BETWEEN #{start} AND #{end}
@@ -50,6 +52,9 @@ public class PageMaker {
             pageBegin = (curPage-1)*PAGE_SCALE+1;
             // 끝번호 = 시작번호+페이지당 게시물수 -1
             pageEnd = pageBegin+PAGE_SCALE-1;
+            if(pageEnd>totCount) {
+            	pageEnd=totCount;
+            }
     }
     // 페이지 블록의 갯수 계산(총 91페이지이고 화면당 페이지 수10개이면 10개의 블록)
     public void setTotBlock(int count) {
@@ -187,4 +192,15 @@ public class PageMaker {
     public void setBlockEnd(int blockEnd) {
         this.blockEnd = blockEnd;
     }
+	public PageMaker(int totCount) {
+		this.totCount = totCount;
+	}
+	public int getTotCount() {
+		return totCount;
+	}
+	public void setTotCount(int totCount) {
+		this.totCount = totCount;
+	}
+    
+    
 }

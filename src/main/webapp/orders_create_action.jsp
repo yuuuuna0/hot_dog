@@ -1,3 +1,4 @@
+<%@page import="com.itwill.hotdog.domain.Payment"%>
 <%@page import="com.itwill.hotdog.domain.Cart"%>
 <%@page import="com.itwill.hotdog.service.PaymentService"%>
 <%@page import="com.itwill.hotdog.service.ProductService"%>
@@ -12,11 +13,12 @@
 <%@include file='login_check.jspf' %>
 <%
 	//주문 클릭 시 주문생성
+	
 	if(request.getMethod().equalsIgnoreCase("GET")){
   		response.sendRedirect("product_list.jsp");
   		return;
   	}
-
+	
 	String buyType = request.getParameter("buyType");
 	String p_noStr = request.getParameter("p_no");
 	String p_qtyStr = request.getParameter("p_qty");
@@ -54,17 +56,8 @@
 		ordersService.createFromCartAll(newOrders);
 	
 	}else if(buyType.equals("cart_select")){
-		int o_tot_price=0;
-		int oi_tot_count=0;
-		for(int i=0;i<cart_item_noStr_array.length;i++){
-			cartItem=cartService.getCartItemByCartNo(Integer.parseInt(cart_item_noStr_array[i]));
-			orderItem=new OrderItem(0,cartItem.getC_qty(),0,cartItem.getProduct());
-			orderItemList.add(orderItem);
-			o_tot_price+=orderItem.getOi_qty()*orderItem.getProduct().getP_price();
-		}
-		//newOrders=new Orders(0,null,o_tot_price,Integer.parseInt(o_usedPointStr),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
-		newOrders=new Orders(0,null,o_tot_price,0,paymentService.findByPaymentNo(1),sUser);
-		newOrders.setOrderItemList(orderItemList);
+		//newOrders=new Orders(0, null, 0, o_usedPointStr, new Payment(Integer.parseInt(pm_noStr), null), sUser);
+		newOrders=new Orders(0, null, 0, 1000, new Payment(1, null), sUser);
 		ordersService.createFromCartSelect(newOrders, cart_item_noStr_array);
 		
 		for(int i=0;i<cart_item_noStr_array.length;i++){
