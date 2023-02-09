@@ -46,7 +46,7 @@
 
 		if (f.recomment.value == "") {
 			alert("내용을 입력하세요.");
-			f.comment.focus();
+			f.recomment.focus();
 			return false;
 		}
 
