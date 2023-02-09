@@ -31,22 +31,44 @@
 	PaymentService paymentService=new PaymentService();
 	List<OrderItem> orderItemList=new ArrayList<OrderItem>();
 	List<Cart> cartList=new ArrayList<Cart>();
-	Orders orders=null;
+	Cart cartItem=null;
+	OrderItem orderItem=null;
+	Orders newOrders=null;
 	
 	
 	//ordersService.create(orders);
 	if(buyType.equals("direct")){
-		orders=new Orders(0,null,(Integer.parseInt(p_qtyStr)*Integer.parseInt(p_priceStr)),Integer.parseInt(o_usedPointStr),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
-		ordersService.create(orders);
+		newOrders=new Orders(0,null,(Integer.parseInt(p_qtyStr)*Integer.parseInt(p_priceStr)),Integer.parseInt(o_usedPointStr),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
+		ordersService.create(newOrders);
+
 	}else if(buyType.equals("cart_all")){
 		cartList=cartService.getCartListByUserId(sUserId);
-		for(int i=0; i<cartList.size();i++){
-			orderItemList.add(i,new OrderItem(0,cartList.get(i).getC_qty(),orders.getO_no(),cartList.get(i).getProduct()));
+		int o_tot_price=0;
+		int oi_tot_count=0;
+		for(Cart cart: cartList){
+			orderItem=new OrderItem(0,cart.getC_qty(),0,cart.getProduct());
+			orderItemList.add(orderItem);
+			o_tot_price+=orderItem.getOi_qty()*orderItem.getProduct().getP_price();
 		}
+		newOrders=new Orders(0,null,o_tot_price,Integer.parseInt(o_usedPointStr),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
+		ordersService.create(newOrders);
 	
-		orders=new Orders();		//order=new Orders(); 선언 위치,,?
-		
 	}else if(buyType.equals("cart_select")){
+		int o_tot_price=0;
+		int oi_tot_count=0;
+		for(int i=0;i<cart_item_noStr_array.length;i++){
+			cartItem=cartService.getCartItemByCartNo(Integer.parseInt(cart_item_noStr_array[i]));
+			orderItem=new OrderItem(0,cartItem.getC_qty(),0,cartItem.getProduct());
+			orderItemList.add(orderItem);
+			o_tot_price+=orderItem.getOi_qty()*orderItem.getProduct().getP_price();
+		}
+		newOrders=new Orders(0,null,o_tot_price,Integer.parseInt(o_usedPointStr),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
+		newOrders.setOrderItemList(orderItemList);
+		ordersService.create(newOrders);
+		
+		for(int i=0;i<cart_item_noStr_array.length;i++){
+			cartService.deleteCartItemByCartNo(Integer.parseInt(cart_item_noStr_array[i]));
+		}
 		
 	}
 	
