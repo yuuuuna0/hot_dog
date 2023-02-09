@@ -93,6 +93,12 @@ form > table tr td{
 		u_point-=v_point;
 		document.getElementById("result_price").innerHTML=tot_price-v_point;
 	}
+	//배송지 선택하기 띄우기
+	function orders_choose_delivery(){
+		var left = Math.ceil(( window.screen.width)/5);
+		var top = Math.ceil(( window.screen.height)/5);
+		window.open("orders_choose_delivery.jsp","checkForm","width=600,height=400,top="+top+",left="+left+",resizable = no,location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
+	}
 	
 </script>
 </head>
@@ -161,7 +167,7 @@ form > table tr td{
 										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_phone()%></td>
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_point() %></td>
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
-											<input type="button" value="선택하기" onclick="orders_choose_delivery.jsp"/>
+											<input type="button" value="선택하기" onclick="orders_choose_delivery();"/>
 										</td>
 									</tr>
 								</table>
