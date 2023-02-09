@@ -173,9 +173,9 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 										<td width=60 height=25 align="center" bgcolor="E6ECDE"
 											class=t1><input type="checkbox" id="all_select_checkbox" checked="checked" onchange="cart_item_all_select(event);cart_item_select_count();"></td>
 										<td width=40 height=25 align="center" bgcolor="E6ECDE"
-											class=t1><font>이미지</font></td>
+											class=t1><font></font></td>
 										<td width=210 height=25 align="center" bgcolor="E6ECDE"
-											class=t1><font>강아지 이름</font></td>
+											class=t1><font>상품명</font></td>
 										<td width=112 height=25 align="center" bgcolor="E6ECDE"
 											class=t1><font>수 량</font></td>
 										<td width=146 height=25 align="center" bgcolor="E6ECDE"

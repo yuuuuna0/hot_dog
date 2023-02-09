@@ -19,8 +19,6 @@
     		cartService.updateCart(cart);
     	}
     	
-    	response.sendRedirect("cart_view_select_update_qty.jsp");
-    	/*
     	response.sendRedirect("cart_view_select_update_qyt_all_check_delete_image.jsp");
-    	*/
+    	
     %>
