@@ -50,7 +50,8 @@
 			orderItemList.add(orderItem);
 			o_tot_price+=orderItem.getOi_qty()*orderItem.getProduct().getP_price();
 		}
-		newOrders=new Orders(0,null,o_tot_price,(Integer.parseInt(o_usedPointStr)),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
+		//newOrders=new Orders(0,null,o_tot_price,(Integer.parseInt(o_usedPointStr)),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
+		newOrders=new Orders(0,null,o_tot_price,0,paymentService.findByPaymentNo(1),sUser);
 		ordersService.createFromCartAll(newOrders);
 	
 	}else if(buyType.equals("cart_select")){
