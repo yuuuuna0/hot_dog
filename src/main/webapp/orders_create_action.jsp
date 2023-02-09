@@ -51,7 +51,7 @@
 			o_tot_price+=orderItem.getOi_qty()*orderItem.getProduct().getP_price();
 		}
 		newOrders=new Orders(0,null,o_tot_price,(Integer.parseInt(o_usedPointStr)),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
-		ordersService.create(newOrders);
+		ordersService.createFromCartAll(newOrders);
 	
 	}else if(buyType.equals("cart_select")){
 		int o_tot_price=0;
