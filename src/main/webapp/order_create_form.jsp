@@ -1,3 +1,4 @@
+<%@page import="com.itwill.hotdog.domain.Cart"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.itwill.hotdog.domain.OrderItem"%>
@@ -35,15 +36,17 @@
 	ProductService productService=new ProductService();
 	DeliveryService deliveryService=new DeliveryService();
 	
-	List<OrderItem> orderItemList=new ArrayList<OrderItem>();
+	List<Cart> cartItemList=new ArrayList<Cart>();
 	
 	if(buyType.equals("direct")){
 		Product product=productService.productDetail(Integer.parseInt(p_noStr));
-		orderItemList.add(new OrderItem(0,Integer.parseInt(p_qtyStr),0,product));
+		cartItemList.add(new Cart(0,Integer.parseInt(p_qtyStr),sUserId,product));
 	}else if(buyType.equals("cart_all")){
-		
+		cartItemList=cartService.getCartListByUserId(sUserId);
 	}else if(buyType.equals("cart_select")){
-		
+		for(String cart_item_noStr : cart_item_noStr_array){
+			cartItemList.add(cartService.getCartItemByCartNo(Integer.parseInt(cart_item_noStr)));
+		}
 	}
 %>
     
