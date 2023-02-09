@@ -7,6 +7,7 @@ package com.itwill.hotdog.service;
 
 import java.util.List;
 
+import com.itwill.hotdog.domain.Categories;
 import com.itwill.hotdog.domain.Product;
 import com.itwill.hotdog.repository.ProductRepository;
 
@@ -27,5 +28,7 @@ public class ProductService {
 	public Product productDetail(int p_no) throws Exception{
 		return productRepository.findByPrimaryKey(p_no);
 	}
-
+	public Categories categoryDetail(int c_no) throws Exception{
+		return productRepository.findByCategoryNumber(c_no);
+	}
 }
