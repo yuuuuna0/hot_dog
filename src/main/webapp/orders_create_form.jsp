@@ -21,7 +21,7 @@
 	String p_noStr = request.getParameter("p_no");
 	String p_qtyStr = request.getParameter("p_qty");
 	String p_priceStr = request.getParameter("p_price");
-	String o_usedPointStr = request.getParameter("o_usedPoint");
+	int o_usedPoint = 0;
 	String pm_noStr = request.getParameter("pm_no");
 	String[] cart_item_noStr_array = request.getParameterValues("cart_item_no");
 	
@@ -30,7 +30,6 @@
 	if(p_noStr==null) p_noStr="";
 	if(p_qtyStr==null) p_qtyStr="";
 	if(p_priceStr==null) p_priceStr="";
-	if(o_usedPointStr==null) o_usedPointStr="";
 	if(pm_noStr==null) pm_noStr="";
 	if(cart_item_noStr_array==null) cart_item_noStr_array=new String[]{};
 	
@@ -82,6 +81,7 @@ form > table tr td{
 		<input type="hidden" name="buyType" value="<%=buyType%>"> 
 		<input type="hidden" name="p_no" value="<%=p_noStr%>"> 
 		<input type="hidden" name="p_qty" value="<%=p_qtyStr%>">
+		<input type="hidden" name="o_usedPoint" value="<%=o_usedPoint%>">
 		<%
 		for (String cart_item_noStr : cart_item_noStr_array) {
 		%>
@@ -199,7 +199,7 @@ form > table tr td{
 											</p>
 										</td>
 										<td width=100 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<%=new DecimalFormat("#,###").format(tot_price)%>원
+											<%=new DecimalFormat("#,###").format(tot_price-o_usedPoint) %>원
 										</td>
 									</tr>
 								</table>
