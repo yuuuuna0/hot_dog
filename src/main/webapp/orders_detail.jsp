@@ -68,7 +68,7 @@ form > table tr td{
 											주문상세조회</b></td>
 								</tr>
 							</table> <!--form-->
-							<form name="f" method="post" action="order_delete_action.jsp">
+							<form name="f" method="post" action="orders_delete_action.jsp">
 								<input type="hidden" name="o_no" value="<%=orders.getO_no()%>">
 								<table align="center" width="80%"  border="0" cellpadding="0" cellspacing="1"  bgcolor="BBBBBB" >
 									<caption style="text-align: left;">주문상세정보</caption>
