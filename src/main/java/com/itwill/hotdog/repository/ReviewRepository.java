@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.Review;
 import com.itwill.hotdog.sql.ReviewSQL;
 
@@ -19,18 +19,9 @@ public class ReviewRepository {
 	private DataSource dataSource;
 	
 	
-public ReviewRepository() throws Exception{
-	Properties properties = new Properties();
-	properties.load(this.getClass().getResourceAsStream("/jdbc.properties"));
-	/*** Apache DataSource 	***/
-	BasicDataSource basicDataSource = new BasicDataSource();
-	basicDataSource.setDriverClassName(properties.getProperty("driverClassName"));
-	basicDataSource.setUrl(properties.getProperty("url"));
-	basicDataSource.setUsername(properties.getProperty("username"));
-	basicDataSource.setPassword(properties.getProperty("password"));
-	dataSource = basicDataSource;
-
-}
+	public ReviewRepository() throws Exception {
+		  dataSource=DataSourceFactory.getDataSource();
+	}
 
 
 /*새로운 리뷰 작성*/
