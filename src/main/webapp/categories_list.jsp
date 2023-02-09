@@ -7,8 +7,8 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%
-ProductService productService = new ProductService();
-List<Product> productList = productService.productList();
+ProductService categoriesService = new ProductService();
+List<Categories> categoriesList = categoriesService.categoriesList();
 %>
 <%
 boolean isLogin = false;
@@ -84,33 +84,32 @@ function add_cart_popup_window(f){
 								<table width="100%" align="center" border="0" cellpadding="10"
 									cellspacing="1" bgcolor="BBBBBB">
 									<%
-									int product_size=productList.size();
-									int product_column_size=4;
-									int product_line_count = 1;
+									int categories_size=categoriesList.size();
+									int categories_column_size=4;
+									int categories_line_count = 1;
 									
 									
-									for (int i=0;i<productList.size();i++) {
-											Product product=productList.get(i);
+									for (int i=0;i<categoriesList.size();i++) {
+											Categories categories=categoriesList.get(i);
 									%>
 									<!--상품시작 -->
 									<%
-									 if(i%product_column_size==0){
+									 if(i%categories_column_size==0){
 									%>
 									<tr>
 									<%} %>
 										<td align="center" width="25%"  bgcolor="ffffff"><a
-											href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="65px"
-												src="image/<%=product.getP_img()%>" border="0"></a><br />
+											href="categories_detail.jsp?p_no=<%=categories.getCt_no()%>"><img width="88px" height="65px"
+												src="image/<%=categories.getCt_img()%>" border="0"></a><br />
 												
-											<br /> <b>상품명:<%=product.getP_name()%></b>
+											<br /> <b>견종:<%=categories.getCt_name()%></b>
 											<form style="display: inline;">
-												<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
+												<input type="hidden" name="p_no" value="<%=categories.getCt_no()%>">
 												<input type="hidden" name="cart_qty" value="1">
 												<img src='image/cart20.png' style="cursor:pointer;" onclick="add_cart_popup_window(this.parentElement);" align="top"/>
-											</form><br> <font
-											color="#FF0000">가격:<%=new DecimalFormat("#,##0").format(product.getP_price())%>원
-										</font></td>
-									<%if(i%product_column_size==3){%>
+											</form><br>
+										</td>
+									<%if(i%categories_column_size==3){%>
 									</tr>
 									<%} %>	
 									
@@ -119,29 +118,7 @@ function add_cart_popup_window(f){
 								</table>
 							</div> <br /></td>
 					</tr>
-				
-										<!-- wrapper start -->
-		<div id="wrapper">
-			<!-- content start -->
-			<!-- include_content.jsp start-->
-			<div id="content">
-				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-					codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
-					width="540px" height="350px">
-					<param name="movie" value="image/FI_main.swf">
-					<param name="play" value="true">
-					<param name="loop" value="true">
-					<param name="quality" value="high">
-					<embed src="image/enter.png" scale="exactfit" play="true"
-						loop="true" quality="high" style="margin: 10px;"
-						pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
-						width="540px" height="350px"></embed>
-				</object>
-			</div>
-			<!-- include_content.jsp end-->
-			<!-- content end -->
-		</div>
-		<!--wrapper end-->
+				</table>
 			</div>
 			<!-- include_content.jsp end-->
 			<!-- content end -->

@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.itwill.hotdog.domain.Categories"%>
 <%@page import="com.itwill.hotdog.domain.Product"%>
 <%@page import="com.itwill.hotdog.service.ProductService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,7 +13,6 @@ if (p_noStr == null || p_noStr.equals("")) {
 
 ProductService productService = new ProductService();
 Product product = productService.productDetail(Integer.parseInt(p_noStr));
-
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -96,17 +97,13 @@ Product product = productService.productDetail(Integer.parseInt(p_noStr));
 												<option value="10">10
 											</select> 개<br><br> 
 												<input width=40px height=40px type=image src='image/cart.png' value="장바구니담기[장바구니보여주기]" title="장바구니담기[장바구니보여주기]" style="font-size: 6pt;"/> 
-												<a href="javascript:add_cart_popup_window(this.parentElement);" title="장바구니담기[계속쇼핑팝업]"><img src='image/cart25.png' style="margin-bottom: 5px "></a>
+												<a href="javascript:add_cart_popup_window(this.parentElement);" title="장바구니담기[계속쇼핑팝업]"><img src='image/cart20.png' style="margin-bottom: 5px "></a>
 												<input type="hidden" name=p_no value="<%=product.getP_no()%>">
 										</form>
 									</td>
 									<td width=40% height=200 align=center><img border=0
-<<<<<<< HEAD
 										src='image/<%=product.getP_img()%>' 
 										width=120 height=200></td>
-=======
-										src='image/'<%=product.getP_img()%> width=120 height=200></td>
->>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 									<td width=30% height=200 class=t1>
 										<ol type="disc">
 											<li><b>상품 이름 : <%=product.getP_name()%>&nbsp;&nbsp;&nbsp;

@@ -8,6 +8,8 @@
 <%@page import="java.util.ArrayList"%>
 <%
 ProductService productService = new ProductService();
+String ct_noStr = request.getParameter("ct_no");
+Categories categories = productService.categoriesDetail(Integer.parseInt(ct_noStr));
 List<Product> productList = productService.productList();
 %>
 <%
@@ -87,12 +89,17 @@ function add_cart_popup_window(f){
 									int product_size=productList.size();
 									int product_column_size=4;
 									int product_line_count = 1;
+									%>
 									
-									
+									<table>
+									<br /><b>카테고리<%=categories.getCt_name() %></b>
+									</table>
+									<% 
 									for (int i=0;i<productList.size();i++) {
 											Product product=productList.get(i);
 									%>
 									<!--상품시작 -->
+									
 									<%
 									 if(i%product_column_size==0){
 									%>
@@ -116,6 +123,7 @@ function add_cart_popup_window(f){
 									
 								   <!--상품 끝 -->
 								   <%}%>	
+								   	
 								</table>
 							</div> <br /></td>
 					</tr>

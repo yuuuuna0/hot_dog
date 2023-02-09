@@ -82,9 +82,7 @@ public class Product {
 		this.p_img = p_img;
 		this.p_click = p_click;
 		this.categories = categories;
-
 		this.reviewList=new ArrayList<Review>();
-
 	}
 		
 		
@@ -96,6 +94,6 @@ public class Product {
 				+ ", reviewList=" + reviewList + "]";
 	}
 	
+	
 
 }
-

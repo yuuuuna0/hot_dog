@@ -9,8 +9,11 @@ public class ProductServiceTestMain {
     System.out.println("1.productList");
     System.out.println(productService.productList());
     System.out.println("2.productDetail");
-    System.out.println(productService.productDetail(20));
-    System.out.println(productService.productDetail(2));
+    System.out.println(productService.productDetail(3));
+    System.out.println("3.categoryDetail");
+    System.out.println(productService.categoryDetail(1));
+    System.out.println("4.categoriesList");
+    System.out.println(productService.categoriesList());
 	}
 
 }

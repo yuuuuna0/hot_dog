@@ -92,9 +92,8 @@ public class ProductRepository {
 
 }
 
-	public List<Categories> findByCategoryNumber(int c_no) throws Exception{
-		
-		List<Categories> categoryList=new ArrayList<Categories>();
+	public Categories findByCategoryNumber(int c_no) throws Exception{
+		Categories categories=null;
 		Connection con=null;
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
@@ -104,20 +103,12 @@ public class ProductRepository {
 		pstmt.setInt(1, c_no);
 		rs=pstmt.executeQuery();
 		while(rs.next()) {
-			categoryList.add(new Categories(
+			categories=new Categories(
 							rs.getInt("ct_no"),
 							rs.getString("ct_name"),
 							rs.getString("ct_img"),
-								new Product(
-										rs.getInt("p_no"),
-										rs.getString("p_name"), 
-										rs.getInt("p_price"), 
-										rs.getInt("p_discount"), 
-										rs.getString("p_desc"), 
-										rs.getString("p_img"), 
-										rs.getInt("p_click"),
-										null)
-							));
+								new ArrayList<Product>()
+							);
 		}
 		}finally {
 			if(con!=null) {
@@ -125,10 +116,35 @@ public class ProductRepository {
 			}
 		}
 		
-		return categoryList;
+		return categories;
 	}
+
+
+public List<Categories> findAllCat() throws Exception{
+	List<Categories> categoriesList=new ArrayList<Categories>();
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs= null;
+	
+	try {
+		con=dataSource.getConnection();
+		pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_ALL);
+		rs=pstmt.executeQuery();
+		while(rs.next()) {
+			categoriesList.add(new Categories(
+						rs.getInt("ct_no"),
+						rs.getString("ct_name"),
+						rs.getString("ct_img"),
+						new ArrayList<Product>()
+		));
+		}
+	}finally {
+	if (con != null) {
+	con.close();
+	}
+}
+return categoriesList;
 
 }
 
-
-
+}
