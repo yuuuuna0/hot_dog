@@ -61,7 +61,7 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 	function cart_view_form_submit() {
 		document.cart_view_form.method = 'POST';
 		document.cart_view_form.buyType.value = 'cart_all';
-		document.cart_view_form.action = 'order_create_form.jsp';
+		document.cart_view_form.action = 'orders_create_form.jsp';
 		document.cart_view_form.submit();
 	}
 	
@@ -82,7 +82,7 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 		}
 		document.cart_view_form.buyType.value = 'cart_select';
 		document.cart_view_form.method = 'POST';
-		document.cart_view_form.action = 'order_create_form.jsp';
+		document.cart_view_form.action = 'orders_create_form.jsp';
 		document.cart_view_form.submit();
 	}
 	function cart_item_all_select_checkbox_deselect(){
