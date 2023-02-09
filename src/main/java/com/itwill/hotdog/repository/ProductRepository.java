@@ -92,9 +92,9 @@ public class ProductRepository {
 
 }
 
-	public List<Categories> findByCategoryNumber(int c_no) throws Exception{
+	public Categories findByCategoryNumber(int c_no) throws Exception{
 		
-		List<Categories> categoryList=new ArrayList<Categories>();
+		Categories categories=null;
 		Connection con=null;
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
@@ -104,7 +104,7 @@ public class ProductRepository {
 		pstmt.setInt(1, c_no);
 		rs=pstmt.executeQuery();
 		while(rs.next()) {
-			categoryList.add(new Categories(
+			categories=new Categories(
 							rs.getInt("ct_no"),
 							rs.getString("ct_name"),
 							rs.getString("ct_img"),
@@ -117,7 +117,7 @@ public class ProductRepository {
 										rs.getString("p_img"), 
 										rs.getInt("p_click"),
 										null)
-							));
+							);
 		}
 		}finally {
 			if(con!=null) {
@@ -125,7 +125,7 @@ public class ProductRepository {
 			}
 		}
 		
-		return categoryList;
+		return categories;
 	}
 
 }
