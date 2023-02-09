@@ -73,5 +73,5 @@
 	}
 	
 	
-	response.sendRedirect("order_list.jsp");
+	response.sendRedirect("orders_list_orderitem.jsp");
 %>

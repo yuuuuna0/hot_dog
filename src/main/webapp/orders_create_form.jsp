@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.itwill.hotdog.domain.Cart"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -68,7 +69,7 @@ form > table tr td{
 <script type="text/javascript">
 	function order_create_form_submit() {
 		document.order_create_form.method = 'POST';
-		document.order_create_form.action = 'order_create_action.jsp';
+		document.order_create_form.action = 'orders_create_action.jsp';
 		document.order_create_form.submit();
 	}
 </script>
@@ -126,14 +127,13 @@ form > table tr td{
 									<tr>
 										<td width=290 height=25 align=center bgcolor="E6ECDE" class=t1>아이디</td>
 										<td width=112 height=25 align=center bgcolor="E6ECDE" class=t1>이름</td>
-										<td width=166 height=25 align=center bgcolor="E6ECDE" class=t1>이메일</td>
-										<td width=50 height=25 align=center bgcolor="E6ECDE" class=t1>비
-											고</td>
+										<td width=166 height=25 align=center bgcolor="E6ECDE" class=t1>전화번</td>
+										<td width=50 height=25 align=center bgcolor="E6ECDE" class=t1>비고</td>
 									</tr>
 									<tr>
-										<td width=290 height=26 align=center bgcolor="ffffff" class=t1><%=user.getUserId()%></td>
-										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=user.getName()%></td>
-										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=user.getEmail()%></td>
+										<td width=290 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_id()%></td>
+										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_name()%></td>
+										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_phone()%></td>
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1></td>
 									</tr>
 								</table>
@@ -156,7 +156,7 @@ form > table tr td{
 									<%
 									int tot_price = 0;
 									for (Cart cart : cartItemList) {
-										tot_price += cart.getCart_qty() * cart.getProduct().getP_price();
+										tot_price += cart.getC_qty() * cart.getProduct().getP_price();
 									%>
 									<!-- cart item start -->
 									<tr>
@@ -164,9 +164,9 @@ form > table tr td{
 											<a
 											href='product_detail.jsp?p_no=<%=cart.getProduct().getP_no()%>'><%=cart.getProduct().getP_name()%></a>
 										</td>
-										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=cart.getCart_qty()%></td>
+										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=cart.getC_qty()%></td>
 										<td width=166 height=26 align=center bgcolor="ffffff" class=t1>
-											<%=new DecimalFormat("#,###").format(cart.getCart_qty() * cart.getProduct().getP_price())%>
+											<%=new DecimalFormat("#,###").format(cart.getC_qty() * cart.getProduct().getP_price())%>
 										</td>
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1></td>
 									</tr>
