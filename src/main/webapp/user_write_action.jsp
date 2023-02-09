@@ -20,7 +20,7 @@
       UserInfoService userService = new UserInfoService();
       int result = userService.create(newUser);
       if(result == 1){
-         // 회원가입 성공
+         // 회원가입 성공.
          response.sendRedirect("user_login_form.jsp");
       } 
    } catch (Exception e) {
