@@ -17,8 +17,8 @@ public class UserInfoRepositoryTsetMain {
 		//모든 회원 리스트
 		System.out.println("5.findUserList"+userDao.findUserList());
 		//회원 가입 여부
-		System.out.println("6.existedUser"+userDao.countByUserId("sy0"));
-		System.out.println("6.existedUser"+userDao.countByUserId("sy1"));
-		System.out.println("6.existedUser"+userDao.countByUserId("sy2"));
+		System.out.println("6.existedUser"+userDao.existedUser("sy0"));
+		System.out.println("6.existedUser"+userDao.existedUser("sy1"));
+		System.out.println("6.existedUser"+userDao.existedUser("sy2"));
 	}
 }
