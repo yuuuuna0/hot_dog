@@ -60,7 +60,7 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 	}
 	function cart_view_form_submit() {
 		document.cart_view_form.method = 'POST';
-		document.cart_view_form.buyType.value = 'cart';
+		document.cart_view_form.buyType.value = 'cart_all';
 		document.cart_view_form.action = 'order_create_form.jsp';
 		document.cart_view_form.submit();
 	}

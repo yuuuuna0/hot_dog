@@ -69,25 +69,23 @@ form > table tr td{
 </style>
 <script type="text/javascript">
 	function order_create_form_submit() {
-		document.order_create_form.method = 'POST';
-		document.order_create_form.action = 'orders_create_action.jsp';
-		document.order_create_form.submit();
+		document.orders_create_form.method = 'POST';
+		document.orders_create_form.action = 'orders_create_action.jsp';
+		document.orders_create_form.submit();
 	}
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>
-	<form name="order_create_form" method="post">
-		<input type="hidden" name="buyType" value="<%=buyType%>"> <input
-			type="hidden" name="p_no" value="<%=p_noStr%>"> <input
-			type="hidden" name="p_qty" value="<%=p_qtyStr%>">
+	<form name="orders_create_form" method="post">
+		<input type="hidden" name="buyType" value="<%=buyType%>"> 
+		<input type="hidden" name="p_no" value="<%=p_noStr%>"> 
+		<input type="hidden" name="p_qty" value="<%=p_qtyStr%>">
 		<%
 		for (String cart_item_noStr : cart_item_noStr_array) {
 		%>
 		<input type="hidden" name="cart_item_no" value="<%=cart_item_noStr%>">
-		<%
-		}
-		%>
+	  <%}%>
 	</form>
 	<!-- container start-->
 	<div id="container">
@@ -145,14 +143,10 @@ form > table tr td{
 									cellspacing="1" bgcolor="BBBBBB">
 									<caption style="text-align: left;">주문제품목록</caption>
 									<tr style="border: 0.1px solid">
-										<td width=290 height=25 bgcolor="E6ECDE" align=center class=t1>강아지
-											이름</td>
-										<td width=112 height=25 bgcolor="E6ECDE" align=center class=t1>수
-											량</td>
-										<td width=166 height=25 bgcolor="E6ECDE" align=center class=t1>가
-											격</td>
-										<td width=50 height=25 bgcolor="E6ECDE" align=center class=t1>비
-											고</td>
+										<td width=290 height=25 bgcolor="E6ECDE" align=center class=t1>강아지이름</td>
+										<td width=112 height=25 bgcolor="E6ECDE" align=center class=t1>수량</td>
+										<td width=166 height=25 bgcolor="E6ECDE" align=center class=t1>가격</td>
+										<td width=50 height=25 bgcolor="E6ECDE" align=center class=t1>비고</td>
 									</tr>
 									<%
 									int tot_price = 0;
@@ -176,8 +170,7 @@ form > table tr td{
 									<tr>
 										<td width=640 colspan=4 height=26 bgcolor="ffffff" class=t1>
 											<p align=right style="padding-top: 10px">
-												<font color=#FF0000>총 주문 금액 : <%=new DecimalFormat("#,###").format(tot_price)%>
-													원
+												<font color=#FF0000>총 주문 금액 : <%=new DecimalFormat("#,###").format(tot_price)%>원
 												</font>
 											</p>
 										</td>
