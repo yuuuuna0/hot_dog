@@ -1,30 +1,28 @@
 package com.itwill.hotdog.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.itwill.hotdog.domain.Cart;
+import com.itwill.hotdog.domain.OrderItem;
 import com.itwill.hotdog.domain.Orders;
+import com.itwill.hotdog.domain.Payment;
+import com.itwill.hotdog.domain.Product;
+import com.itwill.hotdog.domain.UserInfo;
 import com.itwill.hotdog.repository.CartRepository;
 import com.itwill.hotdog.repository.OrdersRepository;
 import com.itwill.hotdog.repository.ProductRepository;
 
 public class OrdersService {
 	
-	private static OrdersService _instance;
-	
 	private OrdersRepository ordersRepository;
 	private ProductRepository productRepository;
 	private CartRepository cartRepository;
 	
-	private OrdersService() throws Exception {
+	public OrdersService() throws Exception {
 		ordersRepository = new OrdersRepository();
 		productRepository = new ProductRepository();
 		cartRepository = new CartRepository();
-	}
-	
-	//싱글톤 패턴 적용 - 서비스객체는 한 번만 생성된다. (이후에는 재사용)
-	public static OrdersService getInstance() throws Exception {
-		if(_instance==null) _instance = new OrdersService();
-		return _instance;
 	}
 	
 	/*
@@ -67,11 +65,74 @@ public class OrdersService {
 	 * 주문 생성 - 상품에서 직접주문
 	 */
 	
+	public int create(Orders order) throws Exception {
+		Product product = productRepository.findByPrimaryKey(order.getOrderItemList().get(0).getProduct().getP_no());
+		OrderItem orderItem = new OrderItem(0, order.getOrderItemList().get(0).getOi_qty(), 0, product);
+		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
+		orderItemList.add(orderItem);
+		Orders newOrder = new Orders(0,
+									 null,
+									 orderItem.getOi_qty() * orderItem.getProduct().getP_price(),
+									 order.getO_usedPoint(),
+									 new Payment(order.getPayment().getPm_no(), order.getPayment().getPm_name()),
+									 new UserInfo(order.getUserInfo().getU_id(), order.getUserInfo().getU_password(), order.getUserInfo().getU_name(), order.getUserInfo().getU_phone(), order.getUserInfo().getU_point()));
+		newOrder.setOrderItemList(orderItemList);
+		
+		return ordersRepository.insert(newOrder);
+	}
+	
 	/*
 	 * 주문 생성 - 장바구니의 품목 전체주문
 	 */
+	public int createFromCartAll(Orders order) throws Exception {
+		List<Cart> cartList = cartRepository.findByUserId(order.getUserInfo().getU_id());
+		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
+		int o_totalPrice = 0;
+		for(Cart cart : cartList) {
+			OrderItem orderItem = new OrderItem(0, cart.getC_qty(), 0, cart.getProduct());
+			orderItemList.add(orderItem);
+			o_totalPrice += orderItem.getOi_qty() * orderItem.getProduct().getP_price();
+		}
+		Orders newOrder = new Orders(0,
+				 					 null,
+				 					 o_totalPrice,
+				 					 order.getO_usedPoint(),
+				 					 new Payment(order.getPayment().getPm_no(), null),
+				 					 new UserInfo(order.getUserInfo().getU_id(), null, null, null, 0));
+		newOrder.setOrderItemList(orderItemList);
+		int rowCount = ordersRepository.insert(newOrder);
+		cartRepository.deleteByUserId(order.getUserInfo().getU_id());
+		
+		return rowCount;
+	}
+	
 	
 	/*
 	 * 주문 생성 - 장바구니의 품목에서 선택주문
 	 */
+	public int createFromCartSelect(Orders order, String[] cart_noStr_array) throws Exception {
+		
+		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
+		int o_totalPrice = 0;
+		for(int i=0; i<cart_noStr_array.length; i++) {
+			Cart cartItem = cartRepository.findByCartNo(Integer.parseInt(cart_noStr_array[i]));
+			OrderItem orderItem = new OrderItem(0, cartItem.getC_qty(), 0, cartItem.getProduct());
+			orderItemList.add(orderItem);
+			o_totalPrice += orderItem.getOi_qty() * orderItem.getProduct().getP_price();
+		}
+		Orders newOrder = new Orders(0,
+									 null,
+									 o_totalPrice,
+									 order.getO_usedPoint(),
+									 new Payment(order.getPayment().getPm_no(), null),
+									 new UserInfo(order.getUserInfo().getU_id(), null, null, null, 0));
+		newOrder.setOrderItemList(orderItemList);
+		int rowCount = ordersRepository.insert(newOrder);
+		for(int i=0; i<cart_noStr_array.length; i++) {
+			cartRepository.deleteByCartNo(Integer.parseInt(cart_noStr_array[i]));
+		}
+		
+		return rowCount;
+	}
+	
 }

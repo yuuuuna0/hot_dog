@@ -5,12 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
 import javax.sql.DataSource;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
+import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.Cart;
 import com.itwill.hotdog.domain.Product;
 import com.itwill.hotdog.sql.CartSQL;
@@ -19,15 +15,7 @@ public class CartRepository {
 
 		private DataSource dataSource;
 		public CartRepository() throws Exception{
-			Properties properties = new Properties();
-			properties.load(this.getClass().getResourceAsStream("/jdbc.properties"));
-			/*** Apache DataSource ***/
-			BasicDataSource basicDataSource = new BasicDataSource();
-			basicDataSource.setDriverClassName(properties.getProperty("driverClassName"));
-			basicDataSource.setUrl(properties.getProperty("url"));
-			basicDataSource.setUsername(properties.getProperty("username"));
-			basicDataSource.setPassword(properties.getProperty("password"));
-			dataSource = basicDataSource;
+		  dataSource=DataSourceFactory.getDataSource();
 	}
 
 	/*
@@ -184,7 +172,7 @@ public class CartRepository {
 		
 		con=dataSource.getConnection();
 		
-		  
+		try {  
 		pstmt=con.prepareStatement(CartSQL.CART_SELECT_BY_USERID);
 		pstmt.setString(1, userId);
 		rs=pstmt.executeQuery();
@@ -199,9 +187,15 @@ public class CartRepository {
 							    		       rs.getString("p_desc"),
 							    		       rs.getString("p_img"),
 							    		       rs.getInt("p_click"),
-							    		       rs.getInt("ct_no"))		
-							       )
+							    		       null))
 					);
+		}
+		}finally {
+			if(con!=null) {
+				rs.close();
+				pstmt.close();
+				con.close();
+			}
 		}
 		return cartList;
 	}
@@ -217,10 +211,12 @@ public class CartRepository {
 		ResultSet rs = null;
 
 		con = dataSource.getConnection();
+		
+		try {
 		pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_CART_NO);
 		pstmt.setInt(1, cart_no);
 		rs = pstmt.executeQuery();
-		if (rs.next()) {
+		while (rs.next()) {
 			cart = new Cart( rs.getInt("c_no"), 
 					         rs.getInt("c_qty"), 
 					         rs.getString("u_id"),
@@ -231,9 +227,15 @@ public class CartRepository {
 					    		       rs.getString("p_desc"),
 					    		       rs.getString("p_img"),
 					    		       rs.getInt("p_click"),
-					    		       rs.getInt("ct_no"))	
+					    		       null)	
 			     
 			);
+		}
+		}finally {
+			if(con!=null)
+				rs.close();
+				pstmt.close();
+				con.close();
 		}
 		return cart;
 	}
