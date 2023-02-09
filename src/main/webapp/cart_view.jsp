@@ -6,16 +6,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<!-- <@include file="login_check.jspf"%>  user 완성되면 넣고 String sUserId 삭제하기 -->>   
-<%
-
-		String sUserId="sy0";
-=======
 <%@ include file="login_check.jspf"%>
 <%
 
->>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 		CartService cartService=new CartService();
 		List<Cart> cartList=cartService.getCartListByUserId(sUserId);
 		
@@ -118,7 +111,8 @@
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1>
 											<form action="cart_delete_item_action.jsp" method="post">
 												<input type="hidden" name="cart_no" value="<%=cart.getC_no()%>">
-												<input type="submit" value="삭제">
+												<button onclick="Location.href='cart_delete_item_action.jsp?p_no=<%=cart.getC_no() %>'">삭제</button>
+												<!-- input type="submit" value="삭제" -->
 											</form>
 										</td>
 									</tr>

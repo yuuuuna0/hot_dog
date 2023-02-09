@@ -135,6 +135,7 @@ public class DeliveryRepository {
 		return finddelivery;
 	}
 	//6. 배송지 수정
+<<<<<<< HEAD
 //	public Delivery updateByDeliveryNo(int d_no)  throws Exception {
 //		Connection con=null;
 //		PreparedStatement pstmt=null;
@@ -150,4 +151,24 @@ public class DeliveryRepository {
 //		}
 //		return null;
 //	}
+=======
+	public Delivery updateByDeliveryNo(int d_no)  throws Exception {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		Delivery finddelivery=null;
+		try {
+			pstmt=con.prepareStatement(DeliverySQL.DELIVERY_UPDATE_BY_D_NO);
+			pstmt.setString(1,"d_name");
+			pstmt.setString(2, "d_address");
+			pstmt.setInt(3, d_no);
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
+		}
+		return null;
+	}
+>>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 }

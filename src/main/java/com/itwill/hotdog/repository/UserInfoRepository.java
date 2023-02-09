@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.UserInfo;
@@ -20,25 +22,11 @@ public class UserInfoRepository {
 	 * - 톰캣에서제공하는 DataSource 객체사용
 	 */
 	private DataSource dataSource;
-
+	
 	public UserInfoRepository() throws Exception {
-		/******Apache BasicDataSource*****/
-		/*
-		 * jdbc.properties 파일을 Properties객체로생성
-		 */
-	  /*
-		BasicDataSource basicDataSource=new BasicDataSource();
-		Properties properties=new Properties();
-		properties.load(UserInfoRepository.class.getResourceAsStream("/jdbc.properties"));
-		basicDataSource.setDriverClassName(properties.getProperty("driverClass"));
-		basicDataSource.setUrl(properties.getProperty("url"));
-		basicDataSource.setUsername(properties.getProperty("username"));
-		basicDataSource.setPassword(properties.getProperty("password"));
-		dataSource=basicDataSource;
-		*/
 	  dataSource=DataSourceFactory.getDataSource();
 	}
-
+	
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
 	 */

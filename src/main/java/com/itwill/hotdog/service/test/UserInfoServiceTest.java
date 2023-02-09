@@ -14,10 +14,8 @@ public class UserInfoServiceTest {
 		//System.out.println("3.회원상세보기");
 		//System.out.println(userService.findUser("ks1"));
 		//System.out.println("4.회원수정");
-	//	System.out.println(userService.update(new UserInfo("ks1", "2222", "이형석", "222-222", 4000)));
-	//	System.out.println("회원탈퇴");
-	//	System.out.println(userService.remove("ks1"));
+		//System.out.println(userService.update(new UserInfo("ks1", "2222", "이형석", "222-222", 4000)));
+		//System.out.println("회원탈퇴");
+		//System.out.println(userService.remove("ks1"));
 	 }
-	
-
 }

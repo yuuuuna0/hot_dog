@@ -23,11 +23,9 @@ insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, c
 insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식1', 10000, 15, '강아지간식1입니다.', '4.jpg', 0, 2);
 insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식2', 10000, 25, '강아지간식2입니다.', '5.jpg', 0, 2);
 insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지간식3', 10000, 35, '강아지간식3입니다.', '6.jpg', 0, 2);
-<<<<<<< HEAD
-=======
 
 
->>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
+
 
 /**********************cart insert************************/
 --sy0님이 1번제품 1개, 3번제품 3개, 5번제품 5개 담기

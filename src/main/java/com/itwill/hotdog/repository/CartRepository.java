@@ -188,10 +188,14 @@ public class CartRepository {
 							    		       rs.getString("p_desc"),
 							    		       rs.getString("p_img"),
 							    		       rs.getInt("p_click"),
+<<<<<<< HEAD
 							    		       new Categories(rs.getInt("ct_no"),
 							    		    		   		  rs.getString("ct_name"),
 							    		    		   		  rs.getString("ct_img"))		
 							       ))
+=======
+							    		       null))
+>>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 					);
 		}
 		return cartList;
@@ -200,6 +204,7 @@ public class CartRepository {
 	 * 5. List- 카트 일부 목록보기 [선택주문]
 	 */
 
+<<<<<<< HEAD
 //	public Cart findByCartNo(int cart_no) throws Exception {
 //
 //		Cart cart = null;
@@ -228,4 +233,34 @@ public class CartRepository {
 //		}
 //		return cart;
 //	}
+=======
+	public Cart findByCartNo(int cart_no) throws Exception {
+
+		Cart cart = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		con = dataSource.getConnection();
+		pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_CART_NO);
+		pstmt.setInt(1, cart_no);
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			cart = new Cart( rs.getInt("c_no"), 
+					         rs.getInt("c_qty"), 
+					         rs.getString("u_id"),
+					         new Product(rs.getInt("p_no"),
+					    		       rs.getString("p_name"),
+					    		       rs.getInt("p_price"),
+					    		       rs.getInt("p_discount"),
+					    		       rs.getString("p_desc"),
+					    		       rs.getString("p_img"),
+					    		       rs.getInt("p_click"),
+					    		       null)	
+			     
+			);
+		}
+		return cart;
+	}
+>>>>>>> branch 'master' of https://github.com/2022-11-JAVA-DEVELOPER/web-project-team3-hotdog.git
 }

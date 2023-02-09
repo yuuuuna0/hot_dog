@@ -80,6 +80,8 @@ public class OrdersService {
 		return ordersRepository.insert(newOrder);
 	}
 	
+	
+	
 	/*
 	 * 주문 생성 - 장바구니의 품목 전체주문
 	 */
@@ -109,13 +111,29 @@ public class OrdersService {
 	/*
 	 * 주문 생성 - 장바구니의 품목에서 선택주문
 	 */
-	public int createFromCartSelect(Orders order, String[] cart_noStr_arry) throws Exception {
+	public int createFromCartSelect(Orders order, String[] cart_noStr_array) throws Exception {
 		
 		List<OrderItem> orderItemList = new ArrayList<OrderItem>();
 		int o_totalPrice = 0;
+		for(int i=0; i<cart_noStr_array.length; i++) {
+			Cart cartItem = cartRepository.findByCartNo(Integer.parseInt(cart_noStr_array[i]));
+			OrderItem orderItem = new OrderItem(0, cartItem.getC_qty(), 0, cartItem.getProduct());
+			orderItemList.add(orderItem);
+			o_totalPrice += orderItem.getOi_qty() * orderItem.getProduct().getP_price();
+		}
+		Orders newOrder = new Orders(0,
+									 null,
+									 o_totalPrice,
+									 order.getO_usedPoint(),
+									 new Payment(order.getPayment().getPm_no(), null),
+									 new UserInfo(order.getUserInfo().getU_id(), null, null, null, 0));
+		newOrder.setOrderItemList(orderItemList);
+		int rowCount = ordersRepository.insert(newOrder);
+		for(int i=0; i<cart_noStr_array.length; i++) {
+			cartRepository.deleteByCartNo(Integer.parseInt(cart_noStr_array[i]));
+		}
 		
-		
-		return 0;
+		return rowCount;
 	}
 	
 }

@@ -226,8 +226,8 @@
 											 --%>
 											<form id="cart_delete_item_form_<%=cart.getC_no()%>">
 												<input type="hidden" name="cart_no"
-													value="<%=cart.getC_no()%>"> <a
-													href="javascript:cart_delete_item_action('cart_delete_item_form_<%=cart.getC_no()%>');">
+													value="<%=cart.getC_no()%>"> <!-- a -->
+													<button onclick="Location.href="javascript:cart_delete_item_action('cart_delete_item_form_<%=cart.getC_no()%>');">삭제
 													<svg xmlns="http://www.w3.org/2000/svg" width="14"
 														height="14" viewBox="0 0 28 28" class="icon--close">
 													<g fill="none" fill-rule="evenodd"> <path
@@ -237,7 +237,8 @@
 														transform="rotate(-135 8 8)"></rect> <rect width="2"
 														height="18" x="7" y="-1" rx="1"
 														transform="rotate(-45 8 8)"></rect> </g> </g> </svg>
-												</a>
+												</button>
+												<!-- /a -->
 											</form>
 
 										</td>
