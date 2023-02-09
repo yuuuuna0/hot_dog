@@ -76,8 +76,7 @@ public class UserInfoRepository {
 			pstmt.setString(1, user.getU_password());
 			pstmt.setString(2, user.getU_name());
 			pstmt.setString(3, user.getU_phone());
-			pstmt.setInt(4, user.getU_point());
-			pstmt.setString(5, user.getU_id());
+			pstmt.setString(4, user.getU_id());
 			updateRowCount = pstmt.executeUpdate();
 		} finally {
 			/*

@@ -77,27 +77,27 @@
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="password" style="width: 150px"
-											name="password" value="<%=user.getU_password()%>"></td>
+											name="u_password" value="<%=user.getU_password()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호
 											확인</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="password" style="width: 150px"
-											name="password2" value="<%=user.getU_password()%>"></td>
+											name="u_password2" value="<%=user.getU_password()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="text" style="width: 150px"
-											name="name" value="<%=user.getU_name()%>"></td>
+											name="u_name" value="<%=user.getU_name()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">휴대폰
 											</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="text" style="width: 150px"
-											name="email" value="<%=user.getU_phone()%>"></td>
+											name="u_phone" value="<%=user.getU_phone()%>"></td>
 									</tr>
 								</table>
 							</form> <br>

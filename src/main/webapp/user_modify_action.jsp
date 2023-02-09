@@ -5,7 +5,7 @@
 <%@ include file="login_check.jspf" %>     
 <%
 	if(request.getMethod().equals("GET")){
-		response.sendRedirect("user_main.jsp");
+		response.sendRedirect("hotdog_main.jsp");
 		return;
 	}
 	try{
