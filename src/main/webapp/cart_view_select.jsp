@@ -5,10 +5,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="login_check.jspf"%>
+<%@include file="login_check.jspf"%>        
 <%
-	CartService cartService=new CartService();
-	List<Cart> cartList=cartService.getCartListByUserId(sUserId);
+  CartService cartService=new CartService();
+  List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -29,18 +29,25 @@
 		document.cart_view_form.action='cart_delete_action.jsp';
 		document.cart_view_form.submit();
 	}
+	/*
+	 카트에담긴전체상품을주문
+	*/
 	function cart_view_form_order_submit(){
 		document.cart_view_form.method='POST';
 		document.cart_view_form.buyType.value='cart';
 		document.cart_view_form.action='order_create_form.jsp';
 		document.cart_view_form.submit();
 	}
+	/*
+	 선택된 카트상품을 주문
+	*/
 	function cart_view_form_select_order_submit(){
 		var cart_item_no_check_list=document.getElementsByName("cart_item_no_check");
 		var isChecked=false;
 		for (var i = 0; i < cart_item_no_check_list.length; i++) {
 			if(cart_item_no_check_list.item(i).checked===true){
-				document.cart_view_form.innerHTML+="<input type='hidden' name='cart_item_no' value='"+cart_item_no_check_list.item(i).value+"'>"
+				document.cart_view_form.innerHTML+=
+					"<input type='hidden' name='cart_item_no' value='"+cart_item_no_check_list.item(i).value+"'>";
 				isChecked=true;
 			}
 		}
@@ -55,13 +62,14 @@
 		document.cart_view_form.submit();
 	}
 	/*
-	cart 수량
+	체크박스선택시 실행 (cart 수량)
 	*/
 	function cart_item_select_count(){
 		var cart_item_no_check_list = document.getElementsByName("cart_item_no_check");
 		var cart_item_check_selected_count = 0;
 		for (var i = 0; i < cart_item_no_check_list.length; i++) {
 			if (cart_item_no_check_list.item(i).checked === true) {
+				
 				cart_item_check_selected_count++;
 			}
 		}
@@ -71,6 +79,7 @@
 </head>
 <body onload="cart_item_select_count();" bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>
+	<!-- 선택된 cart 아이템을 주문폼으로 전송하기위한폼 -->
 	<form name="cart_view_form" style="margin:0">
 		<input type="hidden" name="buyType">
 	</form>
@@ -138,8 +147,14 @@
 									tot_price+=cart.getProduct().getP_price()*cart.getC_qty();
 									%>
 									<tr>
-										<td width=60 height=26 align=center bgcolor="ffffff" class=t1><input type="checkbox" name="cart_item_no_check" onchange="cart_item_select_count();" value="<%=cart.getC_no()%>" checked="checked"></td>
-										<td width=40 height=26 align=center bgcolor="ffffff" class=t1><img src='image/<%=cart.getProduct().getP_img() %>' width="34" height="28"/></td>
+										<td width=60 height=26 align=center bgcolor="ffffff" class=t1>
+											<input 	type="checkbox" 
+													name="cart_item_no_check" 
+													onchange="cart_item_select_count();" 
+													value="<%=cart.getC_no()%>" 
+													checked="checked">
+										</td>
+										<td width=40 height=26 align=center bgcolor="ffffff" class=t1><img src='image/<%=cart.getProduct().getP_img()%>' width="34" height="28"/></td>
 										<td width=210 height=26 align=center bgcolor="ffffff" class=t1><a href='product_detail.jsp?p_no=<%=cart.getProduct().getP_no()%>'><%=cart.getProduct().getP_name() %></a></td>
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=cart.getC_qty()%></td>
 										<td width=146 height=26 align=center bgcolor="ffffff" class=t1><%=new DecimalFormat("#,##0").format(cart.getProduct().getP_price()*cart.getC_qty()) %></td>

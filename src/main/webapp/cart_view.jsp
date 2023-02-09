@@ -1,17 +1,14 @@
 <%@page import="com.itwill.hotdog.domain.Cart"%>
 <%@page import="com.itwill.hotdog.service.CartService"%>
 <%@page import="java.util.List"%>
-<%@page import="java.util.List"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="login_check.jspf"%>
+<%@include file="login_check.jspf"%>        
 <%
-
-		CartService cartService=new CartService();
-		List<Cart> cartList=cartService.getCartListByUserId(sUserId);
-		
+      CartService cartService=new CartService();
+      List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -29,6 +26,9 @@
 		document.cart_view_form.action='cart_delete_action.jsp';
 		document.cart_view_form.submit();
 	}
+	/*
+	 카드에담긴전체상품을주문
+	*/
 	function cart_view_form_order_submit(){
 		document.cart_view_form.method='POST';
 		document.cart_view_form.buyType.value='cart';
@@ -104,15 +104,14 @@
 									%>
 									<tr>
 										<td width=60 height=26 align=center bgcolor="ffffff" class=t1></td>
-										<td width=40 height=26 align=center bgcolor="ffffff" class=t1><img src='image/<%=cart.getProduct().getP_img() %>' width="34" height="28"/></td>
+										<td width=40 height=26 align=center bgcolor="ffffff" class=t1><img src='image/<%=cart.getProduct().getP_img()%>' width="34" height="28"/></td>
 										<td width=210 height=26 align=center bgcolor="ffffff" class=t1><a href='product_detail.jsp?p_no=<%=cart.getProduct().getP_no()%>'><%=cart.getProduct().getP_name() %></a></td>
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=cart.getC_qty()%></td>
 										<td width=146 height=26 align=center bgcolor="ffffff" class=t1><%=new DecimalFormat("#,##0").format(cart.getProduct().getP_price()*cart.getC_qty()) %></td>
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1>
 											<form action="cart_delete_item_action.jsp" method="post">
 												<input type="hidden" name="cart_no" value="<%=cart.getC_no()%>">
-												<button onclick="Location.href='cart_delete_item_action.jsp?p_no=<%=cart.getC_no() %>'">삭제</button>
-												<!-- input type="submit" value="삭제" -->
+												<input type="submit" value="삭제">
 											</form>
 										</td>
 									</tr>

@@ -2,12 +2,13 @@
 <%@page import="com.itwill.hotdog.service.CartService"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="login_check.jspf"%>
 <%
-	String sUserId="sy0";
-	CartService cartService=new CartService();
-	List<Cart> cartList=cartService.getCartListByUserId(sUserId);
+CartService cartService = new CartService();
+List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -201,7 +202,7 @@
 
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1>
 											<form action="cart_update_action.jsp" method="post"
-												id="cart_update_form_<%=cart.getC_no() %>">
+												id="cart_update_form_<%=cart.getC_no()%>">
 												<input type="hidden" name="cart_no"
 													value="<%=cart.getC_no()%>"> <input
 													type="button" value="-"

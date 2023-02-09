@@ -5,10 +5,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="login_check.jspf"%>	
+<%@include file="login_check.jspf"%>
 <%
-	CartService cartService=new CartService();
-	List<Cart> cartList=cartService.getCartListByUserId(sUserId);
+CartService cartService = new CartService();
+List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,34 +21,29 @@
 <style type="text/css" media="screen">
 </style>
 <script type="text/javascript">
-	function changeNumber(desc, formId) {
-		console.log(formId);
-		var form = document.getElementById(formId);
-		if (desc == '+') {
-			form.cart_qty.value = parseInt(form.cart_qty.value) + 1;
 
-		} else if (desc == '-') {
-			if (form.cart_qty.value - 1 >= 0) {
-				form.cart_qty.value = parseInt(form.cart_qty.value) - 1;
-			}
-		}
-
-		form.method = 'POST';
-		form.action = 'cart_update_item_action.jsp';
-		form.submit();
-	}
-
+	/*
+	카트 비우기
+	*/
 	function cart_delete() {
 		document.cart_view_form.method = 'POST';
 		document.cart_view_form.action = 'cart_delete_action.jsp';
 		document.cart_view_form.submit();
 	}
+	
+	/*
+	카트에 담긴 전체 상품 주문
+	*/
 	function cart_view_form_order_submit() {
 		document.cart_view_form.method = 'POST';
 		document.cart_view_form.buyType.value = 'cart';
 		document.cart_view_form.action = 'order_create_form.jsp';
 		document.cart_view_form.submit();
 	}
+	
+	/*
+	선택된 카트 상품 주문
+	*/
 	function cart_view_form_select_order_submit() {
 		var cart_item_no_check_list = document
 				.getElementsByName("cart_item_no_check");
@@ -70,18 +65,83 @@
 		document.cart_view_form.action = 'order_create_form.jsp';
 		document.cart_view_form.submit();
 	}
+	
+	/*
+	체크박스 선택 시 실행(카트 수량)
+	*/
 	function cart_item_select_count(){
 		
 		var cart_item_no_check_list = document.getElementsByName("cart_item_no_check");
 		var cart_item_check_selected_count = 0;
+		var tot_order_price=0;
+		
 		for (var i = 0; i < cart_item_no_check_list.length; i++) {
 			if (cart_item_no_check_list.item(i).checked === true) {
+				var updateFormId = 'cart_update_form_'
+					+ cart_item_no_check_list.item(i).value;
+				var cart_qty = document.getElementById(updateFormId).cart_qty.value;
+				var cart_product_unit_price = document
+					.getElementById(updateFormId).cart_product_unit_price.value;
+				tot_order_price += cart_qty * cart_product_unit_price;
 				cart_item_check_selected_count++;
+				
 			}
 		}
 		
 		document.getElementById('cart_item_select_count').innerHTML = cart_item_check_selected_count;
+		document.getElementById('tot_order_price').innerHTML = tot_order_price.toLocaleString();
 	}
+	
+	function cart_item_select_count2() {
+		var cart_item_no_check_list = document.getElementsByName("cart_item_no_check");
+		var cart_item_check_selected_count2 = document.getElementsByName("cart_item_select_count");
+
+		if (cart_item_no_check_list.length - 1) {
+			all_select_checkbox.checked = false
+		} else if (cart_item_check_selected_count2 === cart_item_no_check_list.length) {
+			all_select_checkbox.checked = true
+		}
+	}
+	
+	/*
+	cart 상품 전체선택, 전체해제
+	 */
+	function cart_item_all_select(e) {
+
+		var cart_item_no_check_list = document
+				.getElementsByName("cart_item_no_check");
+		if (e.target.checked) {
+			for (var i = 0; i < cart_item_no_check_list.length; i++) {
+				cart_item_no_check_list.item(i).checked = true;
+			}
+		} else {
+			for (var i = 0; i < cart_item_no_check_list.length; i++) {
+				cart_item_no_check_list.item(i).checked = false;
+			}
+		}
+	}
+
+	/*
+	상품 수량 변경
+	 */
+	function changeNumber(desc, formId) {
+		console.log(formId);
+		var form = document.getElementById(formId);
+		if (desc == '+') {
+			form.cart_qty.value = parseInt(form.cart_qty.value) + 1;
+
+		} else if (desc == '-') {
+			if (form.cart_qty.value - 1 >= 0) {
+				form.cart_qty.value = parseInt(form.cart_qty.value) - 1;
+			}
+		}
+
+		form.method = 'POST';
+		form.action = 'cart_update_item_action.jsp';
+		form.submit();
+	}
+	
+	
 </script>
 </head>
 <body onload="cart_item_select_count();" bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
@@ -150,41 +210,52 @@
 										tot_price += cart.getProduct().getP_price() * cart.getC_qty();
 									%>
 									<tr>
-										<td width=60 height=26 align=center bgcolor="ffffff" class=t1><input
-											type="checkbox" name="cart_item_no_check"
-											onchange="cart_item_select_count();"
-											value="<%=cart.getC_no()%>" checked="checked"></td>
+										<td width=60 height=26 align=center bgcolor="ffffff" class=t1>
+											<input type="checkbox" name="cart_item_no_check"
+											onchange="cart_item_select_count();cart_item_select_count2();"
+											value="<%=cart.getC_no()%>" checked="checked">
+										</td>
+
 										<td width=40 height=26 align=center bgcolor="ffffff" class=t1><img
-											src='image/<%=cart.getProduct().getP_img() %>' width="34"
+											src='image/<%=cart.getProduct().getP_img()%>' width="34"
 											height="28" /></td>
 										<td width=210 height=26 align=center bgcolor="ffffff" class=t1><a
 											href='product_detail.jsp?p_no=<%=cart.getProduct().getP_no()%>'><%=cart.getProduct().getP_name()%></a></td>
-
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1>
 											<form action="cart_update_action.jsp" method="post"
 												id="cart_update_form_<%=cart.getC_no()%>">
+
 												<input type="hidden" name="cart_no"
 													value="<%=cart.getC_no()%>"> <input
 													type="button" value="-"
 													onclick="changeNumber('-','cart_update_form_<%=cart.getC_no()%>');">
+
 												<input type="text" readonly="readonly" size="2"
 													style="text-align: center; width: 15%" name="cart_qty"
 													value="<%=cart.getC_qty()%>"> <input
 													type="button" value="+"
 													onclick="changeNumber('+','cart_update_form_<%=cart.getC_no()%>');">
+												<input type="hidden" name="cart_product_unit_price"
+													value="<%=cart.getProduct().getP_price()%>" />
 											</form>
 										</td>
-
-										<td width=146 height=26 align=center bgcolor="ffffff" class=t1><%=new DecimalFormat("#,##0").format(cart.getProduct().getP_price() * cart.getC_qty())%></td>
+										<td width=146 height=26 align=center bgcolor="ffffff" class=t1><%=new DecimalFormat("#,###").format(cart.getProduct().getP_price() * cart.getC_qty())%></td>
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1>
+
+
+
+
 											<form action="cart_delete_item_action.jsp" method="post">
 												<input type="hidden" name="cart_no"
 													value="<%=cart.getC_no()%>"> <input
-													type="submit" value="삭제">
+													type="image" src='image/cancle_10px.png'>
 											</form>
 										</td>
 									</tr>
-									<%}%>
+									<%
+									}
+									%>
+
 									<!-- cart item end -->
 
 
@@ -192,7 +263,9 @@
 									<tr>
 										<td width=640 colspan=6 height=26 class=t1 bgcolor="ffffff">
 											<p align=right>
-												<br /> <span id="tot_order_price" style="color: red">총주문금액 : <%=new DecimalFormat("#,##0").format(tot_price)%>원</span>
+												<br /> <font style="color: red">총주문금액 : <span
+													id="tot_order_price"><%=new DecimalFormat("#,###").format(tot_price)%></span>원
+												</font>
 											</p>
 										</td>
 									</tr>
@@ -206,15 +279,13 @@
 								cellspacing="1" width="590">
 								<tr>
 									<td align=center>&nbsp;&nbsp; <a href="product_list.jsp"
-										class=m1>계속 구경하기</a>&nbsp;&nbsp; <%
- if (cartList.size() >= 1) {
- %> <a
+										class=m1>계속 구경하기</a>&nbsp;&nbsp; <a
 										href="javascript:cart_view_form_select_order_submit();"
-										class=m1>총 <span style="font-weight: bold;" id="cart_item_select_count"></span> 개 주문하기[주문폼]</a>&nbsp;&nbsp; <a
-										href="javascript:cart_delete();" class=m1>장바구니 비우기</a>&nbsp;&nbsp;
-										<%
-										}
-										%>
+										class=m1> 총 <span style="font-weight: bold;"
+											id="cart_item_select_count"></span>개 주문하기
+									</a>&nbsp;&nbsp; <a href="javascript:cart_delete();" class=m1>장바구니
+											비우기</a>&nbsp;&nbsp;
+
 									</td>
 								</tr>
 							</table></td>
