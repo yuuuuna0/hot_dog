@@ -9,20 +9,10 @@ import com.itwill.hotdog.repository.ReviewRepository;
 
 
 public class ReviewService {
-	private static ReviewService _instance;
+
 	
 	private ReviewRepository reviewDao;
 	
-	public ReviewService() throws Exception{
-		reviewDao = new ReviewRepository();
-	}
-	
-	public static ReviewService getInstance() throws Exception{
-		if(_instance==null) {
-			_instance=new ReviewService();
-		}
-	return _instance;
-	}
 
 /*
  * 리뷰 생성	
