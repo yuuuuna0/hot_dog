@@ -1,3 +1,4 @@
+<%@page import="com.itwill.hotdog.domain.Delivery"%>
 <%@page import="com.itwill.hotdog.service.UserInfoService"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.itwill.hotdog.domain.Cart"%>
@@ -22,6 +23,7 @@
 	String p_qtyStr = request.getParameter("p_qty");
 	String p_priceStr = request.getParameter("p_price");
 	int o_usedPoint = 0;
+	int addPoint = 0;
 	String pm_noStr = request.getParameter("pm_no");
 	String[] cart_item_noStr_array = request.getParameterValues("cart_item_no");
 	
@@ -82,6 +84,8 @@ form > table tr td{
 		<input type="hidden" name="p_no" value="<%=p_noStr%>"> 
 		<input type="hidden" name="p_qty" value="<%=p_qtyStr%>">
 		<input type="hidden" name="o_usedPoint" value="<%=o_usedPoint%>">
+		<input type="hidden" name="addPoint" value="<%=addPoint%>">
+		
 		<%
 		for (String cart_item_noStr : cart_item_noStr_array) {
 		%>
@@ -125,16 +129,26 @@ form > table tr td{
 									cellspacing="1" bgcolor="BBBBBB">
 									<caption style="text-align: left;">구매자정보</caption>
 									<tr>
-										<td width=290 height=25 align=center bgcolor="E6ECDE" class=t1>아이디</td>
+										<td width=150 height=25 align=center bgcolor="E6ECDE" class=t1>아이디</td>
 										<td width=112 height=25 align=center bgcolor="E6ECDE" class=t1>이름</td>
 										<td width=166 height=25 align=center bgcolor="E6ECDE" class=t1>전화번호</td>
-										<td width=50 height=25 align=center bgcolor="E6ECDE" class=t1>비고</td>
+										<td width=50 height=25 align=center bgcolor="E6ECDE" class=t1>포인트</td>
+										<td width=150 height=25 align=center bgcolor="E6ECDE" class=t1>배송지</td>
+										
 									</tr>
 									<tr>
-										<td width=290 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_id()%></td>
+										<td width=150 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_id()%></td>
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_name()%></td>
 										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_phone()%></td>
-										<td width=50 height=26 align=center bgcolor="ffffff" class=t1></td>
+										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_point() %></td>
+										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
+											<label for="select_delivery" ></label>
+											<select name="select_delivery"> required>
+											<%for(Delivery deliver: sUser.getDeliveryList()){%>
+												<option value="<%=deliver.getD_no()%>"><%=deliver.getD_address() %></option>>
+											<%} %>
+											</select>
+										</td>
 									</tr>
 								</table>
 
@@ -144,10 +158,11 @@ form > table tr td{
 									cellspacing="1" bgcolor="BBBBBB">
 									<caption style="text-align: left;">주문제품목록</caption>
 									<tr style="border: 0.1px solid">
-										<td width=290 height=25 bgcolor="E6ECDE" align=center class=t1>강아지이름</td>
+										<td width=290 height=25 bgcolor="E6ECDE" align=center class=t1>제품이미지</td>
+										<td width=290 height=25 bgcolor="E6ECDE" align=center class=t1>제품명</td>
 										<td width=112 height=25 bgcolor="E6ECDE" align=center class=t1>수량</td>
-										<td width=166 height=25 bgcolor="E6ECDE" align=center class=t1>가격</td>
-										<td width=50 height=25 bgcolor="E6ECDE" align=center class=t1>비고</td>
+										<td width=120 height=25 bgcolor="E6ECDE" align=center class=t1>가격</td>
+										<td width=150 height=25 bgcolor="E6ECDE" align=center class=t1>적립포인트</td>
 									</tr>
 									<%
 									int tot_price = 0;
@@ -156,15 +171,19 @@ form > table tr td{
 									%>
 									<!-- cart item start -->
 									<tr>
+										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=cart.getProduct().getP_img()%></td>
 										<td width=290 height=26 align=center bgcolor="ffffff" class=t1>
 											<a
 											href='product_detail.jsp?p_no=<%=cart.getProduct().getP_no()%>'><%=cart.getProduct().getP_name()%></a>
 										</td>
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=cart.getC_qty()%></td>
-										<td width=166 height=26 align=center bgcolor="ffffff" class=t1>
+										<td width=120 height=26 align=center bgcolor="ffffff" class=t1>
 											<%=new DecimalFormat("#,###").format(cart.getC_qty() * cart.getProduct().getP_price())%>
 										</td>
-										<td width=50 height=26 align=center bgcolor="ffffff" class=t1></td>
+										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
+											<input type="hidden" name="addPoint" value="<%=new DecimalFormat("#,###").format((cart.getC_qty() * cart.getProduct().getP_price())*0.05)%>">
+											<%=addPoint %>
+										</td>
 									</tr>
 									<!-- cart item end -->
 									<%}%>
@@ -175,7 +194,7 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td width=100 bgcolor="ffffff" style="padding-left: 10px" align="left">
+										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<%=new DecimalFormat("#,###").format(tot_price)%>원
 										</td>
 									</tr>
@@ -186,8 +205,8 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td width=100 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="text" style="width: 150px" name="o_usedPoint"
+										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="number" style="width: 150px" name="o_usedPoint" min="0" max="<%sUser.getU_point(); %>"
 											value="">
 										</td>
 									</tr>
@@ -198,7 +217,7 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td width=100 bgcolor="ffffff" style="padding-left: 10px" align="left">
+										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
 											<%=new DecimalFormat("#,###").format(tot_price-o_usedPoint) %>원
 										</td>
 									</tr>
@@ -208,7 +227,7 @@ form > table tr td{
 							<table border="0" cellpadding="0" cellspacing="1" width="590">
 								<tr>
 									<td align=center>&nbsp;&nbsp; <a
-										href="javascript:order_create_form_submit();" class=m1>구매/결재하기</a>
+										href="javascript:order_create_form_submit();" class=m1>구매하기</a>
 										&nbsp;&nbsp;<a href=product_list.jsp class=m1>계속 쇼핑하기</a>
 
 									</td>
