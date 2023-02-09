@@ -73,8 +73,8 @@ public class OrdersService {
 									 null,
 									 orderItem.getOi_qty() * orderItem.getProduct().getP_price(),
 									 order.getO_usedPoint(),
-									 new Payment(order.getPayment().getPm_no(), null),
-									 new UserInfo(order.getUserInfo().getU_id(), null, null, null, 0));
+									 new Payment(order.getPayment().getPm_no(), order.getPayment().getPm_name()),
+									 new UserInfo(order.getUserInfo().getU_id(), order.getUserInfo().getU_password(), order.getUserInfo().getU_name(), order.getUserInfo().getU_phone(), order.getUserInfo().getU_point()));
 		newOrder.setOrderItemList(orderItemList);
 		
 		return ordersRepository.insert(newOrder);

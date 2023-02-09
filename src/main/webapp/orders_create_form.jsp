@@ -1,3 +1,4 @@
+<%@page import="com.itwill.hotdog.service.UserInfoService"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.itwill.hotdog.domain.Cart"%>
 <%@page import="java.util.List"%>
