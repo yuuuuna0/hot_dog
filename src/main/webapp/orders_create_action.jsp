@@ -65,7 +65,7 @@
 		//newOrders=new Orders(0,null,o_tot_price,Integer.parseInt(o_usedPointStr),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
 		newOrders=new Orders(0,null,o_tot_price,0,paymentService.findByPaymentNo(1),sUser);
 		newOrders.setOrderItemList(orderItemList);
-		ordersService.create(newOrders);
+		ordersService.createFromCartSelect(newOrders, cart_item_noStr_array);
 		
 		for(int i=0;i<cart_item_noStr_array.length;i++){
 			cartService.deleteCartItemByCartNo(Integer.parseInt(cart_item_noStr_array[i]));
