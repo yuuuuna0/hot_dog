@@ -71,10 +71,29 @@ form > table tr td{
 </style>
 <script type="text/javascript">
 	function order_create_form_submit() {
+		document.getElementByName
 		document.orders_create_form.method = 'POST';
 		document.orders_create_form.action = 'orders_create_action.jsp';
 		document.orders_create_form.submit();
 	}
+	//포인트 사용하기
+	function changePoint(tot_price){
+		var u_point=<%=sUser.getU_point()%>;
+		var v_point =parseInt(document.getElementById("use_point").value);	//사용할 포인트(input 입력값)
+		if(v_point>u_point){	//입력값이 사용가능보다 클 때
+			alert('최대 사용 가능한 값은'+u_point+'p 입니다.');
+			v_point=u_point;
+			document.getElementById("use_point").value=v_point;
+		}
+		if(v_point>tot_price){	//입력값이 총 결제금액보다 클 때
+			alert('최대 사용 가능한 값은'+tot_price+'p 입니다.');
+			v_point=tot_price;
+			document.getElementById("use_point").value=v_point;
+		}
+		u_point-=v_point;
+		document.getElementById("result_price").innerHTML=tot_price-v_point;
+	}
+	
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
@@ -83,7 +102,7 @@ form > table tr td{
 		<input type="hidden" name="buyType" value="<%=buyType%>"> 
 		<input type="hidden" name="p_no" value="<%=p_noStr%>"> 
 		<input type="hidden" name="p_qty" value="<%=p_qtyStr%>">
-		<input type="hidden" name="o_usedPoint" value="<%=o_usedPoint%>">
+		<input type="hidden" name="o_usedPoint" >
 		<input type="hidden" name="addPoint" value="<%=addPoint%>">
 		
 		<%
@@ -142,12 +161,7 @@ form > table tr td{
 										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_phone()%></td>
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_point() %></td>
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
-											<label for="select_delivery" ></label>
-											<select name="select_delivery"> required>
-											<%for(Delivery deliver: sUser.getDeliveryList()){%>
-												<option value="<%=deliver.getD_no()%>"><%=deliver.getD_address() %></option>>
-											<%} %>
-											</select>
+											<input type="button" value="선택하기" onclick="orders_choose_delivery.jsp"/>
 										</td>
 									</tr>
 								</table>
@@ -195,7 +209,7 @@ form > table tr td{
 											</p>
 										</td>
 										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<%=new DecimalFormat("#,###").format(tot_price)%>원
+											<span id="tot_price"><%=new DecimalFormat("#,###").format(tot_price)%>원</span>
 										</td>
 									</tr>
 									<tr>
@@ -205,9 +219,10 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="number" style="width: 150px" name="o_usedPoint" min="0" max="<%sUser.getU_point(); %>"
-											value="">
+										<td width=100 colspan=2 height=26 bgcolor="ffffff" class=t1>
+											<input type="number" name="use_point" id="use_point" min="0" max="<%=sUser.getU_point() %>" />
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type="button" value="사용하기" onclick="changePoint(<%=tot_price%>)";/>
 										</td>
 									</tr>
 									<tr>
@@ -218,7 +233,8 @@ form > table tr td{
 											</p>
 										</td>
 										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<%=new DecimalFormat("#,###").format(tot_price-o_usedPoint) %>원
+											<span id="result_price"><%=new DecimalFormat("#,###").format(tot_price) %></span>
+											<span>원</span>
 										</td>
 									</tr>
 								</table>

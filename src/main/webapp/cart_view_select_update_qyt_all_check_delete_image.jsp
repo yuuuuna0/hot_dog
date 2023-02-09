@@ -204,17 +204,11 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 										</td>
 
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1>
-											<form action="cart_update_action.jsp" method="post"
-												id="cart_update_form_<%=cart.getC_no()%>">
-												<input type="hidden" name="cart_no"
-													value="<%=cart.getC_no()%>"> <input
-													type="button" value="-"
-													onclick="changeNumber('-','cart_update_form_<%=cart.getC_no()%>');"/>
-												<input type="text" readonly="readonly" size="2"
-													style="text-align: center; width: 15%" name="cart_qty"
-													value="<%=cart.getC_qty()%>"> <input
-													type="button" value="+"
-													onclick="changeNumber('+','cart_update_form_<%=cart.getC_no()%>');"/>
+											<form action="cart_update_action.jsp" method="post" id="cart_update_form_<%=cart.getC_no()%>">
+												<input type="hidden" name="cart_no" value="<%=cart.getC_no()%>"> 
+												<input type="button" value="-" onclick="changeNumber('-','cart_update_form_<%=cart.getC_no()%>');"/>
+												<input type="text" readonly="readonly" size="2" style="text-align: center; width: 15%" name="cart_qty" value="<%=cart.getC_qty()%>"> 
+												<input type="button" value="+" onclick="changeNumber('+','cart_update_form_<%=cart.getC_no()%>');"/>
 												<input type="hidden" name="cart_product_unit_price" value="<%=cart.getProduct().getP_price()%>"/>	
 											</form>
 										</td>
