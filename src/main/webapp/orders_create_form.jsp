@@ -161,12 +161,7 @@ form > table tr td{
 										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_phone()%></td>
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_point() %></td>
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
-											<label for="select_delivery" ></label>
-											<select name="select_delivery">
-											<%for(Delivery deliver: sUser.getDeliveryList()){%>
-												<option value="<%=deliver.getD_no()%>"><%=deliver.getD_address() %></option>
-											<%} %>
-											</select>
+											<input type="button" value="선택하기" onclick="orders_choose_delivery.jsp"/>
 										</td>
 									</tr>
 								</table>
