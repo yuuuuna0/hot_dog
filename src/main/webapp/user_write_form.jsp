@@ -42,11 +42,7 @@
 			f.name.focus();
 			return false;
 		}
-		if (f.email.value == "") {
-			alert("이메일 주소를 입력하십시요.");
-			f.email.focus();
-			return false;
-		}
+		
 		if (f.password.value != f.password2.value) {
 			alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
 			f.password.focus();
@@ -135,7 +131,7 @@
 										<td width=100 align=center bgcolor="E6ECDE" height="22">휴대폰번호
 											</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="text" style="width: 150px" name="email"
+											<input type="text" style="width: 150px" name="phone"
 											value="<%=fuser.getU_phone()%>">
 										</td>
 									</tr>

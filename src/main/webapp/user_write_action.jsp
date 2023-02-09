@@ -1,60 +1,33 @@
-
-<%@page import="com.itwill.hotdog.exception.ExistedUserException"%>
 <%@page import="com.itwill.hotdog.service.UserInfoService"%>
 <%@page import="com.itwill.hotdog.domain.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	if(request.getMethod().equalsIgnoreCase("GET")){
-		response.sendRedirect("user_write_form.jsp");
-		return;
-	}
-	request.setCharacterEncoding("UTF-8");
-	String userId=request.getParameter("u_id");
-	String password=request.getParameter("u_password");
-	String name=request.getParameter("u_name");
-	String phone=request.getParameter("u_phone");
-	UserInfo newUser=null;
-	try{
-		newUser=new UserInfo(userId,password,name,phone,0);
-		UserInfoService userService=new UserInfoService();
-		int rowCount = userService.create(newUser);
-		response.sendRedirect("user_login_form.jsp");
-	}catch(ExistedUserException e){
-		/*************************case1[redirect]**************
-    	response.sendRedirect("user_write_form.jsp?msg="+URLEncoder.encode(e.getMessage(),"UTF-8"));
-    	****************************************************/
-    	/*************case2[forward]**************
-    	//이동할려는 page로 데이타를 전달해야할때
-    	//<jsp:forward parth="user_write_form.jsp"/>
-    	request.setAttribute("msg", e.getMessage());
-    	request.setAttribute("fuser", newUser);
-    	RequestDispatcher rd=request.getRequestDispatcher("user_write_form.jsp");
-    	rd.forward(request, response);
-    	******************************************/
-		/*****************case3[정상응답]***************/
-		out.println("<script>");
-		out.println("alert('"+e.getMessage()+"');");
-		out.println("location.href='user_write_form.jsp';");
-		out.println("</script>");
-		/********************************************/
-	}catch(Exception e){
-		e.printStackTrace();
-		response.sendRedirect("user_error.jsp");		
-	}
+   if(request.getMethod().equalsIgnoreCase("get")){
+      response.sendRedirect("user_write_form.jsp");
+      return;
+   }
+
+   String userId = request.getParameter("userId");
+   String password = request.getParameter("password");
+   String name = request.getParameter("name");
+   String phone = request.getParameter("phone");
+   
+   UserInfo newUser = null;
+   try {
+      newUser = new UserInfo(userId,password,name,phone,0);
+      System.out.println(newUser);
+      UserInfoService userService = new UserInfoService();
+      int result = userService.create(newUser);
+      if(result == 1){
+         // 회원가입 성공
+         response.sendRedirect("user_login_form.jsp");
+      } 
+   } catch (Exception e) {
+      e.printStackTrace();
+      response.sendRedirect("user_write_form.jsp");
+   }
+   
+   
+   
 %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -15,9 +15,11 @@ public class UserInfoService {
 	public int create(UserInfo user)throws Exception{
 		// 1.아이디중복체크
 				if (userInfo.existedUser(user.getU_id())) {
-					throw new ExistedUserException(user.getU_id() + " 는 이미존재하는 아이디입니다.");
+					return -1;
+				}else {
+				int insertRowcount =userInfo.insert(user);
+				return insertRowcount;
 				}
-				return userInfo.insert(user);
 
 			}
 
