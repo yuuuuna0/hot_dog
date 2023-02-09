@@ -25,6 +25,7 @@
 	String pm_noStr = request.getParameter("pm_no");
 	String[] cart_item_noStr_array = request.getParameterValues("cart_item_no");
 	
+	
 	if(buyType==null) buyType="";
 	if(p_noStr==null) p_noStr="";
 	if(p_qtyStr==null) p_qtyStr="";
@@ -168,27 +169,37 @@ form > table tr td{
 									<!-- cart item end -->
 									<%}%>
 									<tr>
-										<td width=640 colspan=4 height=26 bgcolor="ffffff" class=t1>
+										<td width=640 colspan=3 height=26 bgcolor="ffffff" class=t1>
 											<p align=right style="padding-top: 10px">
-												<font color=#FF0000>총 주문 금액 : <%=new DecimalFormat("#,###").format(tot_price)%>원
+												<font color=#FF0000>총 주문 금액 :
 												</font>
 											</p>
 										</td>
-									</tr>
-									<tr>
-										<td width=640 colspan=4 height=26 bgcolor="ffffff" class=t1>
-											<p align=right style="padding-top: 10px">
-												<font color=#FF0000>사용 포인트 : <%=new DecimalFormat("#,###").format(tot_price)%>원
-												</font>
-											</p>
+										<td width=100 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<%=new DecimalFormat("#,###").format(tot_price)%>원
 										</td>
 									</tr>
 									<tr>
-										<td width=640 colspan=4 height=26 bgcolor="ffffff" class=t1>
+										<td width=640 colspan=3 height=26 bgcolor="ffffff" class=t1>
 											<p align=right style="padding-top: 10px">
-												<font color=#FF0000>최종 금액 : <%=new DecimalFormat("#,###").format(tot_price)%>원
+												<font color=#FF0000>사용 포인트 : 
 												</font>
 											</p>
+										</td>
+										<td width=100 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" style="width: 150px" name="o_usedPoint"
+											value="">
+										</td>
+									</tr>
+									<tr>
+										<td width=640 colspan=3 height=26 bgcolor="ffffff" class=t1>
+											<p align=right style="padding-top: 10px">
+												<font color=#FF0000>최종 금액 : 
+												</font>
+											</p>
+										</td>
+										<td width=100 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<%=new DecimalFormat("#,###").format(tot_price)%>원
 										</td>
 									</tr>
 								</table>
