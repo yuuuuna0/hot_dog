@@ -80,7 +80,7 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 
 			return;
 		}
-		document.cart_view_form.buyType.value = 'cart_select';
+		document.cart_view_form.buyType.value = 'cart_all';
 		document.cart_view_form.method = 'POST';
 		document.cart_view_form.action = 'orders_create_form.jsp';
 		document.cart_view_form.submit();
