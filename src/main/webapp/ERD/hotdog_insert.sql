@@ -15,7 +15,6 @@ insert into delivery(d_no, d_name, d_address, u_id) values(DELIVERY_D_NO_SEQ.nex
 /**********************cartegory insert************************/
 insert into categories(ct_no, ct_name, ct_img) values(CATEGORIES_CT_NO_SEQ.nextval, '사료', '사료.jpg');
 insert into categories(ct_no, ct_name, ct_img) values(CATEGORIES_CT_NO_SEQ.nextval, '간식', '간식.jpg');
-insert into categories(ct_no, ct_name, ct_img) values(CATEGORIES_CT_NO_SEQ.nextval, '장난감', '장난감.jpg');
 
 /**********************product insert************************/
 insert into product(p_no, p_name, p_price, p_discount, p_desc, p_img, p_click, ct_no) values(PRODUCT_P_NO_SEQ.nextval, '강아지사료1', 10000, 10, '강아지사료1입니다.', '1.jpg', 0, 1);
