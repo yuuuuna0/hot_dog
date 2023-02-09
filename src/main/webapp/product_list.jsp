@@ -1,18 +1,22 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.List"%>
 <%@page import="com.itwill.hotdog.domain.Categories"%>
 <%@page import="com.itwill.hotdog.domain.Product"%>
 <%@page import="com.itwill.hotdog.service.ProductService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="java.text.DecimalFormat"%>
-<%@page import="java.util.ArrayList"%>
-
-	
+	pageEncoding="UTF-8"%>
 <%
-ProductService productService = new ProductService();
-List<Product> productList = productService.productList();
+	String ct_noStr=request.getParameter("ct_no");
+	if(ct_noStr==null){
+		ct_noStr="1";
+	}
+	
+	ProductService productService=new ProductService();
+	Categories category=productService.findCategoryByCategoryNo(Integer.parseInt(ct_noStr));
+	List<Product> productList=productService.productListByCategoryNo(Integer.parseInt(ct_noStr));
+	System.out.println(productList);
+	List<Categories> categoriesList=productService.categoriesList();
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +26,22 @@ List<Product> productList = productService.productList();
 <link rel=stylesheet href="css/styles.css" type="text/css">
 <link rel=stylesheet href="css/shop.css" type="text/css">
 <script type="text/javascript">
-
+function add_cart_popup_window(f){
+	if (true) {
+		alert('로그인 하세요');
+		location.href = 'user_login_form.jsp';
+	} else {
+		var left = Math.ceil(( window.screen.width)/5);
+		var top = Math.ceil(( window.screen.height)/3); 
+		console.log(left);
+		console.log(top);
+		var cartWin = window.open("about:blank","cartForm","width=260,height=130,top="+top+",left="+left+",location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
+		f.action = 'cart_add_action_popup_window.jsp';
+		f.target = 'cartForm';
+		f.method = 'POST';
+		f.submit();
+	}
+}
 
 </script> 
 <style type="text/css" media="screen">
@@ -35,14 +54,62 @@ List<Product> productList = productService.productList();
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-			<jsp:include page="include_common_top.jsp" />
+			
+
+
+
+
+		
+<div id="menu">
+	<ul>
+		<li id="logo"><a href="shop_main.jsp"></a></li>
+		
+			<li id="mypage" title="나의페이지" ><a href="user_login_form.jsp" ></a></li>
+			<li id="cart" title="장바구니"><span class="w3-badge-no-login w3-green-no-login w3-margin-right">0 </span><a href="user_login_form.jsp" title="장바구니"></a></li>
+			
+		
+	</ul>
+</div>
+<h1>
+	<a href=""></a>
+</h1>
+
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			<jsp:include page="include_common_left.jsp" />
+			
+
+
+
+
+	
+<script type="text/javascript">
+	function login_message() {
+		alert('로그인하세요');
+		location.href = 'user_login_form.jsp';
+	}
+</script>
+<p>
+	<strong>메 뉴</strong>
+</p>
+<ul>
+	
+	     	<li><a href="user_login_form.jsp">로그인</a></li>
+			<li><a href="user_write_form.jsp">회원가입</a></li>
+			<li><a href="user_write_form_popup.jsp">회원가입[팝업]</a></li>
+			<li><a href=""></a></li>
+			<li><a href="javascript:login_message();">장바구니</a></li>
+	
+		<li><a href="product_list.jsp">상품리스트</a></li>
+		<li><a href=""></a></li>
+		<li><a href="board_list.jsp">게시판리스트</a></li>
+		<li><a href="board_write.jsp">게시판쓰기</a></li>
+		
+</ul>
+
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -61,75 +128,50 @@ List<Product> productList = productService.productList();
 									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>쇼핑몰 -
 											상품리스트</b></td>
 								</tr>
-							</table>
-							<table style="padding-left: 10px" border=0 cellpadding=0
-								cellspacing=0>
 								<tr>
-					
-								<td bgcolor="ffffff" height="15">&nbsp;&nbsp;<b>카테고리 사료/간식</b></td>
-								</tr>
-								</table>
-							<div id="f">
-								<table width="100%" align="center" border="0" cellpadding="10"
-									cellspacing="1" bgcolor="BBBBBB">
-									<%
-									int product_size=productList.size();
-									int product_column_size=4;
-									int product_line_count = 1;
-									
-									
-									for (int i=0;i<productList.size();i++) {
-											Product product=productList.get(i);
-									%>
-									<!--상품시작 -->
-									<%
-									 if(i%product_column_size==0){
-									%>
-									<tr>
-									<%} %>
-										<td align="center" width="25%"  bgcolor="ffffff"><a
-											href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="88px"
-												src="image/<%=product.getP_img()%>" border="0"></a><br />
-												
-											<br /> <b>상품명:<%=product.getP_name()%></b>
-											<br /> <b></b>
+									<td bgcolor="ffffff" height="20"><b>
+									<%=category.getCt_name() %>
+								
+							</table>
 
 							<div id="f">
 								<table width="100%" align="center" border="0" cellpadding="10"
 									cellspacing="1" bgcolor="BBBBBB">
-									<%
-									int product_size=productList.size();
-									int product_column_size=4;
-									int product_line_count = 1;
 									
 									
-									for (int i=0;i<productList.size();i++) {
-											Product product=productList.get(i);
-									%>
-									<!--상품시작 -->
-									<%
-									 if(i%product_column_size==0){
-									%>
+									
 									<tr>
-									<%} %>
+									<%for(Product product:productList){ %>
+									<!--상품시작 -->
 										<td align="center" width="25%"  bgcolor="ffffff"><a
-											href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="65px"
-												src="image/<%=product.getP_img()%>" border="0"></a><br />
+											href="product_detail.jsp?p_no=1"><img width="88px" height="65px"
+												src="image/<%=product.getP_img() %>" border="0"></a><br />
 												
-											<br /> <b>상품명:<%=product.getP_name()%></b>
+											<br /> <b><%=product.getP_name() %></b>
 											<form style="display: inline;">
-												<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
+												<input type="hidden" name="p_no" value="1">
 												<input type="hidden" name="cart_qty" value="1">
 												<img src='image/cart20.png' style="cursor:pointer;" onclick="add_cart_popup_window(this.parentElement);" align="top"/>
 											</form><br> <font
-											color="#FF0000">가격:<%=new DecimalFormat("#,##0").format(product.getP_price())%>원
+											color="#FF0000">가격:<%=new DecimalFormat("#,###").format(product.getP_price()) %>원
 										</font></td>
-									<%if(i%product_column_size==3){%>
-									</tr>
 									<%} %>	
 									
 								   <!--상품 끝 -->
-								   <%}%>	
+								   
+								
+									
+								   
+									
+									
+									</tr>
+										
+									
+								
+										
+									
+								   <!--상품 끝 -->
+								   	
 								</table>
 							</div> <br /></td>
 					</tr>
@@ -141,7 +183,10 @@ List<Product> productList = productService.productList();
 		<!--wrapper end-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			<jsp:include page="include_common_bottom.jsp" />
+			
+	<p align="center">Copyright (&copy;) By Java Class 5. All
+		rights reserved.</p>
+
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>
