@@ -15,8 +15,9 @@
 	try{
 		userId=request.getParameter("userId");
 		password=request.getParameter("password");
+		
 		UserInfoService userService=new UserInfoService();
-		int loginUser = userService.login(userId, password);
+		UserInfo loginUser = userService.login(userId, password);
 		session.setAttribute("sUserId", userId);
 		session.setAttribute("sUser", loginUser);
 		response.sendRedirect("hotdog_main.jsp");

@@ -3,6 +3,8 @@ package com.itwill.hotdog.service;
 import com.itwill.hotdog.repository.UserInfoRepository;
 import com.itwill.hotdog.domain.UserInfo;
 import com.itwill.hotdog.exception.ExistedUserException;
+import com.itwill.hotdog.exception.PasswordMismatchException;
+import com.itwill.hotdog.exception.UserNotFoundException;
 
 public class UserInfoService {
 	private UserInfoRepository userInfo;
@@ -23,7 +25,7 @@ public class UserInfoService {
 
 			}
 
-	
+	/*
 	public int login(String u_id,String u_password) throws Exception{
 		int result=-1;
 		//1.아이디존재여부
@@ -44,6 +46,21 @@ public class UserInfoService {
 		
 		return result;
 	}
+	*/
+	
+	public UserInfo login(String userId, String password) throws Exception {
+		// 1.아이디존재여부
+		UserInfo user = userInfo.findUser(userId);
+		if (user == null) {
+			throw new UserNotFoundException(userId + " 는 존재하지않는 아이디 입니다.");
+		}
+		// 2.패쓰워드일치여부
+		if (!user.isMatchPassword(password)) {
+			throw new PasswordMismatchException("패쓰워드가 일치하지않습니다.");
+		}
+		return user;
+	}
+	
 	/*
 	 * 회원상세보기
 	 */
