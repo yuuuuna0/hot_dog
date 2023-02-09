@@ -27,9 +27,15 @@ if(pageno==null||pageno.equals("")){
 	pageno="1";
 }
 
-//게시물조회
-ReviewListPageMakerDto reviewListPage = reviewService.findReviewList(Integer.parseInt(pageno));
-
+	//게시물조회
+	ReviewListPageMakerDto reviewListPage = null;
+	
+	try {
+		reviewListPage = reviewService.findReviewList(Integer.parseInt(pageno));
+	} catch(NumberFormatException e) {
+		response.sendRedirect("review_list.jsp?pageno=1");
+		return;
+	}
 %>
 
 <!DOCTYPE html>
