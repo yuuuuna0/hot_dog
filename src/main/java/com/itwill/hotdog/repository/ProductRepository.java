@@ -147,4 +147,35 @@ return categoriesList;
 
 }
 
+
+public List<Categories> findAllCat() throws Exception{
+	List<Categories> categoriesList=new ArrayList<Categories>();
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs= null;
+	
+	try {
+		con=dataSource.getConnection();
+		pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_ALL);
+		rs=pstmt.executeQuery();
+		while(rs.next()) {
+			categoriesList.add(new Categories(
+						rs.getInt("ct_no"),
+						rs.getString("ct_name"),
+						rs.getString("ct_img"),
+						new ArrayList<Product>()
+		));
+		}
+	}finally {
+	if (con != null) {
+	con.close();
+	}
 }
+return categoriesList;
+
+}
+<<<<<<< HEAD
+=======
+
+}
+>>>>>>> refs/heads/master

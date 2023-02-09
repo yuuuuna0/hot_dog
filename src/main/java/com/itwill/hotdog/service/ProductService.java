@@ -34,4 +34,8 @@ public class ProductService {
 	public List<Categories> categoriesList() throws Exception{
 		return productRepository.findAllCat();
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/heads/master

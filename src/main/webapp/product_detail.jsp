@@ -104,6 +104,10 @@ Product product = productService.productDetail(Integer.parseInt(p_noStr));
 									<td width=40% height=200 align=center><img border=0
 										src='image/<%=product.getP_img()%>' 
 										width=120 height=200></td>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/master
 									<td width=30% height=200 class=t1>
 										<ol type="disc">
 											<li><b>상품 이름 : <%=product.getP_name()%>&nbsp;&nbsp;&nbsp;
