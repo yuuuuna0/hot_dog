@@ -22,6 +22,9 @@ public class ProductService {
 	public List<Product> productList() throws Exception{
 		return productRepository.findAll();
 	}
+	public List<Product> productListByCategoryNo(int ct_no) throws Exception{
+		return productRepository.findByCategoryNo(ct_no);
+	}
 	/*
 	 * 상품상세보기
 	 */
@@ -34,4 +37,8 @@ public class ProductService {
 	public List<Categories> categoriesList() throws Exception{
 		return productRepository.findAllCat();
 	}
+	public Categories findCategoryByCategoryNo(int ct_no) throws Exception {
+		return productRepository.findCategoryByCategoryNo(ct_no);
+	}
 }
+
