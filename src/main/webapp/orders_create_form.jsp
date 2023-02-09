@@ -126,7 +126,7 @@ form > table tr td{
 									<tr>
 										<td width=290 height=25 align=center bgcolor="E6ECDE" class=t1>아이디</td>
 										<td width=112 height=25 align=center bgcolor="E6ECDE" class=t1>이름</td>
-										<td width=166 height=25 align=center bgcolor="E6ECDE" class=t1>전화번</td>
+										<td width=166 height=25 align=center bgcolor="E6ECDE" class=t1>전화번호</td>
 										<td width=50 height=25 align=center bgcolor="E6ECDE" class=t1>비고</td>
 									</tr>
 									<tr>
@@ -171,6 +171,22 @@ form > table tr td{
 										<td width=640 colspan=4 height=26 bgcolor="ffffff" class=t1>
 											<p align=right style="padding-top: 10px">
 												<font color=#FF0000>총 주문 금액 : <%=new DecimalFormat("#,###").format(tot_price)%>원
+												</font>
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td width=640 colspan=4 height=26 bgcolor="ffffff" class=t1>
+											<p align=right style="padding-top: 10px">
+												<font color=#FF0000>사용 포인트 : <%=new DecimalFormat("#,###").format(tot_price)%>원
+												</font>
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td width=640 colspan=4 height=26 bgcolor="ffffff" class=t1>
+											<p align=right style="padding-top: 10px">
+												<font color=#FF0000>최종 금액 : <%=new DecimalFormat("#,###").format(tot_price)%>원
 												</font>
 											</p>
 										</td>
