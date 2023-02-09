@@ -26,7 +26,7 @@
 			<li><a href=""></a></li>
 			<li><a href="javascript:login_message();">장바구니</a></li>
 	<%
-		}else{ 
+		}else{
 			UserInfo sUser=new UserInfoService().findUser(sUserId);
 		    CartService cartService=new CartService();
 		  	int cart_item_count = cartService.getCartListByUserId(sUserId).size();
@@ -39,9 +39,7 @@
 		<li><a href="cart_view_select_update_qty.jsp">장바구니[수량변경]<span class="w3-badge w3-badge-menu w3-green cart_item_count"><%=cart_item_count%></span></a></li>
 		<li><a href="cart_view_select_update_qyt_all_check_delete_image.jsp">장바구니[최종완성]<span class="w3-badge w3-badge-menu w3-green cart_item_count"><%=cart_item_count%></span></a></li>
 		<li><a href=""></a></li>
-		<li><a href="order_list.jsp">주문목록</a></li>
-		<li><a href="order_list_orderitem1.jsp">주문+아이템 목록1</a></li>
-		<li><a href="order_list_orderitem2.jsp">주문+아이템 목록2</a></li>
+		<li><a href="orders_list_orderitem.jsp">주문목록</a></li>
 		
 	<%} %>
 		<li><a href="product_list.jsp">상품리스트</a></li>

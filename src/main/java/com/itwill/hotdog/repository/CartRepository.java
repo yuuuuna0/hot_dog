@@ -172,7 +172,7 @@ public class CartRepository {
 		
 		con=dataSource.getConnection();
 		
-		  
+		try {  
 		pstmt=con.prepareStatement(CartSQL.CART_SELECT_BY_USERID);
 		pstmt.setString(1, userId);
 		rs=pstmt.executeQuery();
@@ -190,6 +190,13 @@ public class CartRepository {
 							    		       null))
 					);
 		}
+		}finally {
+			if(con!=null) {
+				rs.close();
+				pstmt.close();
+				con.close();
+			}
+		}
 		return cartList;
 	}
 	/*
@@ -204,10 +211,12 @@ public class CartRepository {
 		ResultSet rs = null;
 
 		con = dataSource.getConnection();
+		
+		try {
 		pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_CART_NO);
 		pstmt.setInt(1, cart_no);
 		rs = pstmt.executeQuery();
-		if (rs.next()) {
+		while (rs.next()) {
 			cart = new Cart( rs.getInt("c_no"), 
 					         rs.getInt("c_qty"), 
 					         rs.getString("u_id"),
@@ -221,6 +230,12 @@ public class CartRepository {
 					    		       null)	
 			     
 			);
+		}
+		}finally {
+			if(con!=null)
+				rs.close();
+				pstmt.close();
+				con.close();
 		}
 		return cart;
 	}
