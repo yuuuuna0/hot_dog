@@ -93,7 +93,6 @@ public class ProductRepository {
 }
 
 	public Categories findByCategoryNumber(int c_no) throws Exception{
-		
 		Categories categories=null;
 		Connection con=null;
 		PreparedStatement pstmt = null;
@@ -108,15 +107,7 @@ public class ProductRepository {
 							rs.getInt("ct_no"),
 							rs.getString("ct_name"),
 							rs.getString("ct_img"),
-								new Product(
-										rs.getInt("p_no"),
-										rs.getString("p_name"), 
-										rs.getInt("p_price"), 
-										rs.getInt("p_discount"), 
-										rs.getString("p_desc"), 
-										rs.getString("p_img"), 
-										rs.getInt("p_click"),
-										null)
+								new ArrayList<Product>()
 							);
 		}
 		}finally {
@@ -128,7 +119,32 @@ public class ProductRepository {
 		return categories;
 	}
 
+
+public List<Categories> findAllCat() throws Exception{
+	List<Categories> categoriesList=new ArrayList<Categories>();
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs= null;
+	
+	try {
+		con=dataSource.getConnection();
+		pstmt=con.prepareStatement(ProductSQL.PRODUCT_SELECT_ALL);
+		rs=pstmt.executeQuery();
+		while(rs.next()) {
+			categoriesList.add(new Categories(
+						rs.getInt("ct_no"),
+						rs.getString("ct_name"),
+						rs.getString("ct_img"),
+						new ArrayList<Product>()
+		));
+		}
+	}finally {
+	if (con != null) {
+	con.close();
+	}
+}
+return categoriesList;
+
 }
 
-
-
+}

@@ -172,9 +172,9 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 									<tr>
 										<td width=60 height=25 align="center" bgcolor="E6ECDE"
 											class=t1><input type="checkbox" id="all_select_checkbox" checked="checked" onchange="cart_item_all_select(event);cart_item_select_count();"></td>
-										<td width=40 height=25 align="center" bgcolor="E6ECDE"
+										<td width=180 height=25 align="center" bgcolor="E6ECDE"
 											class=t1><font></font></td>
-										<td width=210 height=25 align="center" bgcolor="E6ECDE"
+										<td width=100 height=25 align="center" bgcolor="E6ECDE"
 											class=t1><font>상품명</font></td>
 										<td width=112 height=25 align="center" bgcolor="E6ECDE"
 											class=t1><font>수 량</font></td>
@@ -183,6 +183,9 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 										<td width=50 height=25 align="center" bgcolor="E6ECDE"
 											class=t1><font>비 고</font></td>
 									</tr>
+								
+									
+									
 									<!-- cart item start -->
 									<%
 									int tot_price = 0;
@@ -245,9 +248,8 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 									</tr>
 									<%}%>
 									<!-- cart item end -->
-
-
-
+	
+							<%if(cartList.size()>=1){ %>
 									<tr>
 										<td width=640 colspan=6 height=26 class=t1 bgcolor="ffffff">
 											<p align=right>
@@ -255,7 +257,19 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 												<font color='red'>총주문금액 : <span id="tot_order_price"><%=new DecimalFormat("#,##0").format(tot_price)%></span> 원</font>
 											</p>
 										</td>
-									</tr>
+									</tr>	
+									<% }else{%>
+									<table align=center>
+									<tr>
+									<td width=700 colspan=6 height=26 class=t1 bgcolor="ffffff">
+											<p align=center>
+												<br /> 
+												<font color='blue' size=5px>장바구니가 비어있습니다.</font>
+											</p>
+										</td>
+	        						</tr>
+									<%} %>							
+									
 								</table>
 
 							</div> <!-- 

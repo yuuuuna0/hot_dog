@@ -20,7 +20,7 @@ public class ProductService {
 	 * 전체상품보기
 	 */
 	public List<Product> productList() throws Exception{
-			return productRepository.findAll();
+		return productRepository.findAll();
 	}
 	/*
 	 * 상품상세보기
@@ -28,7 +28,10 @@ public class ProductService {
 	public Product productDetail(int p_no) throws Exception{
 		return productRepository.findByPrimaryKey(p_no);
 	}
-	public Categories categoryDetail(int c_no) throws Exception{
+	public Categories categoriesDetail(int c_no) throws Exception{
 		return productRepository.findByCategoryNumber(c_no);
+	}
+	public List<Categories> categoriesList() throws Exception{
+		return productRepository.findAllCat();
 	}
 }
