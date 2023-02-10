@@ -15,7 +15,8 @@ public class ProductSQL {
 	
 	//상품 이름으로 검색하는 기능 추가
 	public static final String PRODUCT_BY_NAME= "select*from product where p_name like '%'||?||'%'";
-
+	
+	//카테고리만 검색하는 SQL 추가
 	public final static String CATEGORIES_SELECT_ONLY = "select * from categories";
 
 }

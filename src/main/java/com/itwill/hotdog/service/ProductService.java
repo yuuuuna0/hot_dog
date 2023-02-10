@@ -47,5 +47,12 @@ public class ProductService {
 	public Categories findCategoryByCategoryNo(int ct_no) throws Exception {
 		return productRepository.findCategoryByCategoryNo(ct_no);
 	}
+	
+	/*
+	 * include_common_left.jsp에서 사용하기 위해서 만든 서비스 메소드
+	 */
+	public List<Categories> getCategoryListOnly() throws Exception {
+		return productRepository.findAllCategoriesOnly();
+	}
 }
 

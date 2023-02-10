@@ -10,7 +10,7 @@
 <%
 	String sUserId=(String)session.getAttribute("sUserId");
 	
-	List<Categories> categoryList = new ProductService().categoriesList();
+	List<Categories> categoryList = new ProductService().getCategoryListOnly();
 %>	
 <script type="text/javascript">
 	function login_message() {
@@ -45,7 +45,7 @@
 		<li><a href="orders_list_orderitem.jsp">주문목록</a></li>
 		
 	<%} %>
-		<li><a href="product_list.jsp">상품리스트</a></li>
+		<li><a href="product_search_list.jsp">상품리스트</a></li>
 		<%for(Categories category : categoryList) {%>
 		<li><a href="product_list.jsp?ct_no=<%=category.getCt_no()%>"><%=category.getCt_name()%></a></li>
 		<%}%>

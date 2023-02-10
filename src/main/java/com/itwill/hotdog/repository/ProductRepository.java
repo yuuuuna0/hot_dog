@@ -183,5 +183,27 @@ public class ProductRepository {
 
 	}
 	
+	public List<Categories> findAllCategoriesOnly() throws Exception {
+		List<Categories> categoriesList = new ArrayList<Categories>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(ProductSQL.CATEGORIES_SELECT_ONLY);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				categoriesList.add(new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null));
+			}
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+		return categoriesList;
+
+	}
+	
 	
 }
