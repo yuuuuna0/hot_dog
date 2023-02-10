@@ -40,9 +40,7 @@ public class ProductService {
 	public Product productDetail(int p_no) throws Exception{
 		return productRepository.findByPrimaryKey(p_no);
 	}
-	public Categories categoriesDetail(int c_no) throws Exception{
-		return productRepository.findByCategoryNumber(c_no);
-	}
+
 	public List<Categories> categoriesList() throws Exception{
 		return productRepository.findAllCat();
 	}
