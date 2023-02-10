@@ -26,7 +26,7 @@ insert into product values(product_p_no_SEQ.nextval, '퓨리나 프로플랜 대
 insert into product values(product_p_no_SEQ.nextval, '피너클 사료 그레인프리 송어,고구마 10.89kg', 127000,11, '무알러지 사료와 검수받은 천연 원료를 선별하였습니다.','6.jpg',0, 1);
 insert into product values(product_p_no_SEQ.nextval, '네츄럴코어 사료 에코 4 오리고기 슬림다운 작은알갱이 6kg', 66000,14, '소화흡수율이 높은 다이어트 사료입니다. 균형잡힌 영양식과 체중조절을 위한 오리고기 레시피','7.jpg',0, 1);
 insert into product values(product_p_no_SEQ.nextval, '퓨리나 프로플랜 대형견 사료 어덜트 큰알갱이 15.4kg', 116000,14, '대형견을 위한 사료입니다. 관절, 연골, 면역 기능 강화에 도움을 줄 수 있습니다.','8.jpg',0, 1);
-insert into product values(product_p_no_SEQ.nextval, 'ANF 사료 램 28 프리미엄 7.2kg', 42,000,11, '모든 반려견에 적합한 크기의 알갱이와 단백질 밸런스를 고려한 사료입니다','9.jpg',0, 1);
+insert into product values(product_p_no_SEQ.nextval, 'ANF 사료 램 28 프리미엄 7.2kg', 42000,11, '모든 반려견에 적합한 크기의 알갱이와 단백질 밸런스를 고려한 사료입니다','9.jpg',0, 1);
 insert into product values(product_p_no_SEQ.nextval, '오리젠 사료 시니어 독 11.4kg', 132000,10, '노견용 사료입니다. 칼로리 제한을 위한 재료구성을 이용합니다','10.jpg',0, 1);
 insert into product values(product_p_no_SEQ.nextval, '네츄럴코어 비프 주식 캔 80g', 2400,21,'호주산 소 살코기와 그레이비 소스가 들어있는 습식캔입니다.','11.jpg',0, 2);
 insert into product values(product_p_no_SEQ.nextval, '내추럴키티 스팀 농어 도미 2종 콤보 10개', 2800,0, '100% 농어를 사용했습니다. 낱개포장으로 본연의 맛과 향이 풍부합니다.','12.jpg',0, 2);
