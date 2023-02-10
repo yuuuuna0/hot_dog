@@ -26,7 +26,6 @@
 	String p_priceStr = request.getParameter("p_price");
 	int o_usedPoint = 0;
 	int addPoint = 0;
-	String pm_noStr = request.getParameter("pm_no");
 	String[] cart_item_noStr_array = request.getParameterValues("cart_item_no");
 	
 	
@@ -34,8 +33,7 @@
 	if(p_noStr==null) p_noStr="";
 	if(p_qtyStr==null) p_qtyStr="";
 	if(p_priceStr==null) p_priceStr="";
-	if(pm_noStr==null) pm_noStr="";
-	if(cart_item_noStr_array==null) cart_item_noStr_array=new String[]{};
+	//if(cart_item_noStr_array==null) cart_item_noStr_array=new String[]{};
 	
 	CartService cartService=new CartService();
 	UserInfoService userInfoService=new UserInfoService();
@@ -75,7 +73,6 @@ form > table tr td{
 <script type="text/javascript">
 	//주문하기 버튼 클릭
 	function order_create_form_submit() {
-		document.orders_create_form.pm_no.value = document.orders_detail_f.paymentType.value;
 		document.getElementByName
 		document.orders_create_form.method = 'POST';
 		document.orders_create_form.action = 'orders_create_action.jsp';
@@ -107,8 +104,8 @@ form > table tr td{
 		window.open("orders_choose_delivery.jsp","checkForm","width=500,height=400,top="+top+",left="+left+",resizable = no,location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
 	}
 	//결제수단 고르기
-	function selectPayment(pm_no){
-		document.orders_create_form.pm_no.value=document.getElementById(p).value;
+	function selectPayment(){
+		document.orders_create_form.pm_no.value = document.orders_detail_f.paymentType.value;
 	}
 
 	
@@ -241,7 +238,7 @@ form > table tr td{
 										<td width=100 colspan=2 height=26 bgcolor="ffffff" align="left" class=t1>
 											&nbsp;&nbsp;<input type="text" name="use_point" id="use_point" />
 											&nbsp;&nbsp;&nbsp;&nbsp;
-											<input type="button" value="사용하기" onclick="changePoint(<%=tot_price%>)";/>
+											<input type="button" value="사용하기" onclick="changePoint(<%=tot_price%>);"/>
 										</td>
 									</tr>
 									<tr>
@@ -264,10 +261,11 @@ form > table tr td{
 											</p>
 										</td>
 										<td colspan=2>
-										<select data-trigger="" name="paymentType" style="width:150px;height:30px">
+										<select data-trigger="" name="paymentType" style="width:150px;height:30px" onchange="selectPayment();">
 										<%for(Payment payment:paymentService.findAll()){ %>
 											<option  value="<%=payment.getPm_no() %>"><%=payment.getPm_name() %></option>
 										<%} %>
+										</select>
 										</td>
 									</tr>
 								</table>
