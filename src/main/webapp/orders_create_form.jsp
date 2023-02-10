@@ -1,3 +1,5 @@
+<%@page import="com.itwill.hotdog.domain.Payment"%>
+<%@page import="com.itwill.hotdog.service.PaymentService"%>
 <%@page import="com.itwill.hotdog.domain.Delivery"%>
 <%@page import="com.itwill.hotdog.service.UserInfoService"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -39,6 +41,7 @@
 	UserInfoService userInfoService=new UserInfoService();
 	ProductService productService=new ProductService();
 	DeliveryService deliveryService=new DeliveryService();
+	PaymentService paymentService=new PaymentService();
 	
 	List<Cart> cartItemList=new ArrayList<Cart>();
 	
@@ -70,6 +73,7 @@ form > table tr td{
 */
 </style>
 <script type="text/javascript">
+	//주문하기 버튼 클릭
 	function order_create_form_submit() {
 		document.getElementByName
 		document.orders_create_form.method = 'POST';
@@ -97,7 +101,11 @@ form > table tr td{
 	function orders_choose_delivery(){
 		var left = Math.ceil(( window.screen.width)/5);
 		var top = Math.ceil(( window.screen.height)/5);
-		window.open("orders_choose_delivery.jsp","checkForm","width=600,height=400,top="+top+",left="+left+",resizable = no,location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
+		window.open("orders_choose_delivery.jsp","checkForm","width=500,height=400,top="+top+",left="+left+",resizable = no,location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
+	}
+	//결제수단 선택하기
+	function selectPayment(p_no){
+		document
 	}
 	
 </script>
@@ -105,11 +113,12 @@ form > table tr td{
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>
 	<form name="orders_create_form" method="post">
-		<input type="hidden" name="buyType" value="<%=buyType%>"> 
-		<input type="hidden" name="p_no" value="<%=p_noStr%>"> 
-		<input type="hidden" name="p_qty" value="<%=p_qtyStr%>">
+		<input type="hidden" name="buyType" value="<%=buyType%>"/> 
+		<input type="hidden" name="p_no" value="<%=p_noStr%>"/> 
+		<input type="hidden" name="p_qty" value="<%=p_qtyStr%>"/>
 		<input type="hidden" name="o_usedPoint" >
-		<input type="hidden" name="addPoint" value="<%=addPoint%>">
+		<input type="hidden" name="addPoint" value="<%=addPoint%>"/>
+		<input type="hidden" name="payment" value=""/>
 		
 		<%
 		for (String cart_item_noStr : cart_item_noStr_array) {
@@ -149,7 +158,7 @@ form > table tr td{
 											주문/결제폼</b></td>
 								</tr>
 							</table> <!--form-->
-							<form>
+							<form name='orders_detail_f'>
 								<table align=center width=80% border="0" cellpadding="0"
 									cellspacing="1" bgcolor="BBBBBB">
 									<caption style="text-align: left;">구매자정보</caption>
@@ -167,6 +176,7 @@ form > table tr td{
 										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_phone()%></td>
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_point() %></td>
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
+											<input type="text" readonly name="address" value=""/>
 											<input type="button" value="선택하기" onclick="orders_choose_delivery();"/>
 										</td>
 									</tr>
@@ -201,8 +211,8 @@ form > table tr td{
 											<%=new DecimalFormat("#,###").format(cart.getC_qty() * cart.getProduct().getP_price())%>
 										</td>
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
-											<input type="hidden" name="addPoint" value="<%=new DecimalFormat("#,###").format((cart.getC_qty() * cart.getProduct().getP_price())*0.05)%>">
-											<%=addPoint %>
+											<input type="hidden" name="addPoint" value="">
+											<%=new DecimalFormat("#,###").format((cart.getC_qty() * cart.getProduct().getP_price())*0.05)%>
 										</td>
 									</tr>
 									<!-- cart item end -->
@@ -225,8 +235,8 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td width=100 colspan=2 height=26 bgcolor="ffffff" class=t1>
-											<input type="number" name="use_point" id="use_point" min="0" max="<%=sUser.getU_point() %>" />
+										<td width=100 colspan=2 height=26 bgcolor="ffffff" align="left" class=t1>
+											&nbsp;&nbsp;<input type="text" name="use_point" id="use_point" />
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<input type="button" value="사용하기" onclick="changePoint(<%=tot_price%>)";/>
 										</td>
@@ -243,6 +253,21 @@ form > table tr td{
 											<span>원</span>
 										</td>
 									</tr>
+									<tr>
+										<td width=640 colspan=3 height=26 bgcolor="ffffff" class=t1>
+											<p align=right style="padding-top: 10px">
+												<font color=#FF0000>결제수단 : 
+												</font>
+											</p>
+										</td>
+										<%for(Payment payment:paymentService.findAll()){ %>
+										<td width=100  bgcolor="ffffff" style="padding-left: 10px" align="left">
+											&nbsp;<input type="button" name="payment" id="payment_<%=payment.getPm_no() %>" value="<%=payment.getPm_name()%>" onclick="selectPayment('payment_<%=payment.getPm_no()%>');"/>
+											
+										</td>
+										<%} %>
+										
+									</tr>
 								</table>
 							</form>
 							<br />
@@ -254,8 +279,8 @@ form > table tr td{
 
 									</td>
 								</tr>
-							</table></td>
-					</tr>
+							</table>
+				
 				</table>
 			</div>
 			<!-- include_content.jsp end-->
