@@ -95,7 +95,7 @@ public class ProductRepository {
 			while (rs.next()) {
 				productList.add(new Product(rs.getInt("p_no"), rs.getString("p_name"), rs.getInt("p_price"),
 						rs.getInt("p_discount"), rs.getString("p_desc"), rs.getString("p_img"), rs.getInt("p_click"),
-						new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null)));
+						new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"))));
 			}
 		} finally {
 			if (con != null) {
@@ -105,6 +105,10 @@ public class ProductRepository {
 		return productList;
 
 	}
+	
+	/*
+	 * List<Product> findByCategoryNo: 카테고리 넘버로 productList검색
+	 */
 	public List<Product> findByCategoryNo(int ct_no) throws Exception {
 		List<Product> productList = new ArrayList<Product>();
 		Connection con = null;
@@ -129,28 +133,9 @@ public class ProductRepository {
 		return productList;
 
 	}
-	public Categories findByCategoryNumber(int c_no) throws Exception {
-		Categories categories = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(ProductSQL.PRODUCT_SELECT_BY_CNO);
-			pstmt.setInt(1, c_no);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				categories = new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null);
-			}
-		} finally {
-			if (con != null) {
-				con.close();
-			}
-		}
-
-		return categories;
-	}
-
+	/*
+	 * List<Categories> findAllCat: 카테고리 전체검색
+	 */
 	public List<Categories> findAllCat() throws Exception {
 		List<Categories> categoriesList = new ArrayList<Categories>();
 		Connection con = null;
@@ -162,7 +147,7 @@ public class ProductRepository {
 			pstmt = con.prepareStatement(ProductSQL.PRODUCT_SELECT_ALL);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				categoriesList.add(new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null));
+				categoriesList.add(new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img")));
 			}
 		} finally {
 			if (con != null) {
@@ -172,6 +157,9 @@ public class ProductRepository {
 		return categoriesList;
 
 	}
+	/*
+	 * Categories findByCategoryNumber: 카테고리 넘버로 categories검색
+	 */
 	public Categories findCategoryByCategoryNo(int ct_no) throws Exception {
 		Categories category = null;
 		Connection con = null;
@@ -184,7 +172,7 @@ public class ProductRepository {
 			pstmt.setInt(1, ct_no);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				category=new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null);
+				category=new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"));
 			}
 		} finally {
 			if (con != null) {

@@ -82,7 +82,7 @@ form > table tr td{
 	}
 	//포인트 사용하기
 	function changePoint(tot_price){
-		var u_point=<%=sUser.getU_point()%>;
+		var u_point=<%=sUser.getU_point()%>;	//가지고 있는 포인트
 		var v_point =parseInt(document.getElementById("use_point").value);	//사용할 포인트(input 입력값)
 		if(v_point>u_point){	//입력값이 사용가능보다 클 때
 			alert('최대 사용 가능한 값은'+u_point+'p 입니다.');
@@ -95,7 +95,9 @@ form > table tr td{
 			document.getElementById("use_point").value=v_point;
 		}
 		u_point-=v_point;
-		document.getElementById("result_price").innerHTML=tot_price-v_point;
+		var result_price=tot_price-v_point
+		document.getElementById("result_price").innerHTML=result_price;
+		document.orders_create_form.o_usedPoint.value=v_point;
 	}
 	//배송지 선택하기 띄우기
 	function orders_choose_delivery(){
@@ -103,10 +105,11 @@ form > table tr td{
 		var top = Math.ceil(( window.screen.height)/5);
 		window.open("orders_choose_delivery.jsp","checkForm","width=500,height=400,top="+top+",left="+left+",resizable = no,location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
 	}
-	//결제수단 선택하기
-	function selectPayment(p_no){
-		document
+	//결제수단 고르기
+	function selectPayment(pm_no){
+		document.orders_create_form.pm_no.value=document.getElementById(pm_no).value;
 	}
+
 	
 </script>
 </head>
@@ -116,12 +119,11 @@ form > table tr td{
 		<input type="hidden" name="buyType" value="<%=buyType%>"/> 
 		<input type="hidden" name="p_no" value="<%=p_noStr%>"/> 
 		<input type="hidden" name="p_qty" value="<%=p_qtyStr%>"/>
-		<input type="hidden" name="o_usedPoint" >
-		<input type="hidden" name="addPoint" value="<%=addPoint%>"/>
-		<input type="hidden" name="payment" value=""/>
+		<input type="hidden" name="o_usedPoint" value=""/>
+		<input type="hidden" name="pm_no" value=""/>
 		
-		<%
-		for (String cart_item_noStr : cart_item_noStr_array) {
+		<%-- <input type="hidden" name="addPoint" value="<%=addPoint%>"/> --%>
+		<%for (String cart_item_noStr : cart_item_noStr_array) {
 		%>
 		<input type="hidden" name="cart_item_no" value="<%=cart_item_noStr%>">
 	  <%}%>
@@ -262,8 +264,7 @@ form > table tr td{
 										</td>
 										<%for(Payment payment:paymentService.findAll()){ %>
 										<td width=100  bgcolor="ffffff" style="padding-left: 10px" align="left">
-											&nbsp;<input type="button" name="payment" id="payment_<%=payment.getPm_no() %>" value="<%=payment.getPm_name()%>" onclick="selectPayment('payment_<%=payment.getPm_no()%>');"/>
-											
+											&nbsp;<input type="button" name="payment" id="payment_<%=payment.getPm_no() %>" value="<%=payment.getPm_name()%>" onclick="selectPayment(payment_'<%=payment.getPm_no()%>');"/>
 										</td>
 										<%} %>
 										
@@ -273,10 +274,10 @@ form > table tr td{
 							<br />
 							<table border="0" cellpadding="0" cellspacing="1" width="590">
 								<tr>
-									<td align=center>&nbsp;&nbsp; <a
-										href="javascript:order_create_form_submit();" class=m1>구매하기</a>
-										&nbsp;&nbsp;<a href=product_list.jsp class=m1>계속 쇼핑하기</a>
-
+									<td align=center>&nbsp;&nbsp; 
+										<a href="javascript:order_create_form_submit();" class=m1>구매하기</a>
+										&nbsp;&nbsp;
+										<a href=product_list.jsp class=m1>계속 쇼핑하기</a>
 									</td>
 								</tr>
 							</table>
