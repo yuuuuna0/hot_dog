@@ -33,7 +33,6 @@ function add_cart_popup_window(f){
 	if (<%=!isLogin%>) {
 		alert('로그인 하세요');
 		location.href = 'user_login_form.jsp';
-		return;
 	} else {
 		let left = Math.ceil(( window.screen.width)/5);
 		let top = Math.ceil(( window.screen.height)/3); 
