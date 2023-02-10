@@ -16,6 +16,9 @@
 	List<Product> productList=productService.productListByCategoryNo(Integer.parseInt(ct_noStr));
 	System.out.println(productList);
 	List<Categories> categoriesList=productService.categoriesList();
+	
+	boolean isLogin = false;
+	if(session.getAttribute("sUserId")!=null) isLogin = true;
 %>
 
 <!DOCTYPE html>
@@ -27,9 +30,10 @@
 <link rel=stylesheet href="css/shop.css" type="text/css">
 <script type="text/javascript">
 function add_cart_popup_window(f){
-	if (sUserId=null) {
+	if (<%=!isLogin%>) {
 		alert('로그인 하세요');
 		location.href = 'user_login_form.jsp';
+		return;
 	} else {
 		let left = Math.ceil(( window.screen.width)/5);
 		let top = Math.ceil(( window.screen.height)/3); 
