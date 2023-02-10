@@ -124,7 +124,8 @@ public class ProductRepository {
 
 		return categories;
 	}
-
+	
+	//PRODUCT_SELECT_ALL -> CATEGORIES_SELECT_ONLY로 수정
 	public List<Categories> findAllCat() throws Exception {
 		List<Categories> categoriesList = new ArrayList<Categories>();
 		Connection con = null;
@@ -133,7 +134,7 @@ public class ProductRepository {
 
 		try {
 			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(ProductSQL.PRODUCT_SELECT_ALL);
+			pstmt = con.prepareStatement(ProductSQL.CATEGORIES_SELECT_ONLY);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				categoriesList.add(new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null));
