@@ -14,13 +14,13 @@ import com.itwill.hotdog.repository.ProductRepository;
 public class ProductService {
 	private ProductRepository productRepository;
 	public ProductService() throws Exception{
-		productRepository=new ProductRepository();
+		productRepository=new ProductRepository();	
 	}
-
-	/*
-	 * 상품이름으로 검색하기 기능 추가
-	 */
 	
+	
+	/*
+	 * 상품이름으로 검색하기 기능추가
+	 */
 	 public List <Product> productFindByName(String p_name) throws Exception {
 		 return productRepository.productFindByName(p_name);
 	 }
@@ -40,9 +40,7 @@ public class ProductService {
 	public Product productDetail(int p_no) throws Exception{
 		return productRepository.findByPrimaryKey(p_no);
 	}
-	public Categories categoriesDetail(int c_no) throws Exception{
-		return productRepository.findByCategoryNumber(c_no);
-	}
+
 	public List<Categories> categoriesList() throws Exception{
 		return productRepository.findAllCat();
 	}

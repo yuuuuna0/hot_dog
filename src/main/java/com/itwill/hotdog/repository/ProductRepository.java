@@ -95,7 +95,7 @@ public class ProductRepository {
 			while (rs.next()) {
 				productList.add(new Product(rs.getInt("p_no"), rs.getString("p_name"), rs.getInt("p_price"),
 						rs.getInt("p_discount"), rs.getString("p_desc"), rs.getString("p_img"), rs.getInt("p_click"),
-						new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"))));
+						new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null)));
 			}
 		} finally {
 			if (con != null) {
@@ -147,7 +147,7 @@ public class ProductRepository {
 			pstmt = con.prepareStatement(ProductSQL.PRODUCT_SELECT_ALL);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				categoriesList.add(new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img")));
+				categoriesList.add(new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null));
 			}
 		} finally {
 			if (con != null) {
@@ -172,7 +172,7 @@ public class ProductRepository {
 			pstmt.setInt(1, ct_no);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				category=new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"));
+				category=new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null);
 			}
 		} finally {
 			if (con != null) {
