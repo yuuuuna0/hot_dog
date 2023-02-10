@@ -85,7 +85,7 @@ function add_cart_popup_window(f){
 											상품리스트</b></td>
 								</tr>
 								<tr>
-									<td bgcolor="ffffff" height="20"><b>
+									<td bgcolor="f5f5f5" height="20"><b>
 									<%=category.getCt_name() %>
 								
 							</table>
