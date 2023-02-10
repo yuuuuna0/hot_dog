@@ -104,7 +104,7 @@
 							<form name="f" method="post">
 							-->
 							<table style="margin-left: 10px" border=0 width=80% height=376
-								align=center>
+								align=center bgcolor="ffffff">
 								<tr valign=bottom>
 									<td width=30% align=center class=t1><font size=2
 										color=#0000FF><b>주문량</b></font></td>
