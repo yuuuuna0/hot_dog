@@ -9,7 +9,7 @@ div#header h1 {
 	line-height: 80px;
 	margin: 0px 0 0 0;
 	padding-left: 10px;
-	background: #fff url('../image/nav_bg01.png');
+	background: #fff url('../image/hotdog_nav.jpg');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 100%
@@ -46,23 +46,24 @@ div#header #menu {
 	text-decoration: none;
 }
 #menu .active {
-	background-color: #4CAF50;
+	background-color:orange;
 }
 
 #menu li#logo {
-	width: 80px;
-	background: url('../image/itwill-logo.png');
+	width: 250px;
+	height: 100px;
+	background: url('../image/hotdog_logo_syntax.JPG');
 	background-position: left;
-	background-size: 110%;
+	background-size: 100%;
 	background-repeat: no-repeat;
-	opacity: 0.8;
+	opacity: 1.0;
 }
 #menu li#logo:hover{
 	opacity: 1;
 }
 #menu li#cart {
 	width: 40px;
-	background: url('../image/image__header-cart.svg');
+	background: url('../image/shopping-cart.png');
 	background-position: center;
 	background-size: 60%;
 	background-repeat: no-repeat;
@@ -73,7 +74,7 @@ div#header #menu {
 }
  #menu li#mypage {
 	width: 40px;
-	background: url('../image/image__header-mypage.svg');
+	background: url('../image/user.png');
 	background-position: bottom;
 	background-size: 60%;
 	background-repeat: no-repeat;
