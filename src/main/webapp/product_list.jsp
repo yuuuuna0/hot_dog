@@ -97,8 +97,21 @@ function add_cart_popup_window(f){
 									
 									
 									<tr>
-									<%for(Product product:productList){ %>
+									<%
+									int product_size=productList.size();
+									int product_column_size=4;
+									int product_line_count = 1;
+									
+									
+									for (int i=0;i<productList.size();i++) {
+											Product product=productList.get(i);
+									%>
 									<!--상품시작 -->
+									<%
+									 if(i%product_column_size==0){
+									%>
+									<tr>
+									<%} %>
 										<td align="center" width="25%"  bgcolor="ffffff"><a
 											href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="65px"
 												src="image/<%=product.getP_img() %>" border="0"></a><br />
@@ -111,11 +124,14 @@ function add_cart_popup_window(f){
 											</form><br> <font
 											color="#FF0000">가격:<%=new DecimalFormat("#,###").format(product.getP_price()) %>원
 										</font></td>
+										<%if(i%product_column_size==3){%>
+									</tr>
 									<%} %>	
+										
 									
 								   <!--상품 끝 -->
 								   
-								
+								<%} %>
 									
 								   
 									
