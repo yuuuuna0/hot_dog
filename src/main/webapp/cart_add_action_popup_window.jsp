@@ -19,8 +19,12 @@
 	String cart_qtyStr=request.getParameter("cart_qty");
 	String p_noStr=request.getParameter("p_no");
 	CartService cartService=new CartService();
-	cartService.addCart(new Cart(0,Integer.parseInt(cart_qtyStr),null,
-			            new Product(Integer.parseInt(p_noStr),null,0,0,null,null,0,null)));
+	cartService.addCart(new Cart(0,
+								 Integer.parseInt(cart_qtyStr),
+								 sUserId,
+								 new Product(Integer.parseInt(p_noStr),null,0,0,null,null,0,null)
+								 )
+						);
 %>
 
 <!DOCTYPE html>
@@ -46,7 +50,7 @@
 				장바구니로
 			</button> 
 			-->
-			<button onclick="window.close();opener.location.href='cart_view_select_update_qty.jsp';" style="font-size: 6pt">
+			<button onclick="window.close();opener.location.href='cart_view_select_update_qyt_all_check_delete_image.jsp';" style="font-size: 6pt">
 				장바구니
 			</button>
 		</div>

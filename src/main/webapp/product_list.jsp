@@ -31,11 +31,11 @@ function add_cart_popup_window(f){
 		alert('로그인 하세요');
 		location.href = 'user_login_form.jsp';
 	} else {
-		var left = Math.ceil(( window.screen.width)/5);
-		var top = Math.ceil(( window.screen.height)/3); 
+		let left = Math.ceil(( window.screen.width)/5);
+		let top = Math.ceil(( window.screen.height)/3); 
 		console.log(left);
 		console.log(top);
-		var cartWin = window.open("about:blank","cartForm","width=260,height=130,top="+top+",left="+left+",location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
+		let cartWin = window.open("about:blank","cartForm","width=260,height=130,top="+top+",left="+left+",location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
 		f.action = 'cart_add_action_popup_window.jsp';
 		f.target = 'cartForm';
 		f.method = 'POST';
@@ -101,7 +101,7 @@ function add_cart_popup_window(f){
 												
 											<br /> <b><%=product.getP_name() %></b>
 											<form style="display: inline;">
-												<input type="hidden" name="p_no" value="1">
+												<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
 												<input type="hidden" name="cart_qty" value="1">
 												<img src='image/cart20.png' style="cursor:pointer;" onclick="add_cart_popup_window(this.parentElement);" align="top"/>
 											</form><br> <font
