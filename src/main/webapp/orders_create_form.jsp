@@ -92,6 +92,9 @@ form > table tr td{
 			v_point=tot_price;
 			document.getElementById("use_point").value=v_point;
 		}
+		if(v_point==null){
+			v_point=0;
+		}
 		u_point-=v_point;
 		var result_price=tot_price-v_point
 		document.getElementById("result_price").innerHTML=result_price;
