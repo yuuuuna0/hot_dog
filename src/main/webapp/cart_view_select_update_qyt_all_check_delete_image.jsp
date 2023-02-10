@@ -255,13 +255,10 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 									<% }else{%>
 									<table align=center>
 									<tr>
-									<td width=700 colspan=6 height=26 class=t1 bgcolor="ffffff">
-											<p align=center>
-												<br /> 
-												<font color='blue' size=5px>장바구니가 비어있습니다.</font>
-											</p>
-										</td>
-	        						</tr>
+									<td>
+							        	<img src="image/cart_empty.png">
+							        	</td>
+							        	</tr>
 									<%} %>							
 									
 								</table>
