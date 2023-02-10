@@ -1,6 +1,6 @@
 .w3-green, .w3-hover-green:hover {
     color: #fff!important;
-    background-color: #4CAF50!important;
+    background-color: rgb(255, 0, 0)!important;
 }
 .w3-badge {
 	border-radius: 60%;
