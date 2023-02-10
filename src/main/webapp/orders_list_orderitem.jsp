@@ -29,16 +29,16 @@ List<Orders> ordersList=ordersService.findDetailAll(sUserId);
 		document.orders_delete_all_form.method='POST';
 		document.orders_delete_all_form.submit();
 	}
-	function orders_delete_action(){
-		document.orders_delete_form.action='orders_delete_action.jsp';
-		document.orders_delete_form.method='POST';
-		document.orders_delete_form.submit();
+	function orders_checkbox_deselect(){
+	
+			document.getElementById('orders_no_select').checked=false;
+	
 	}
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>
-<form name="order_delete_all_form" style="margin: 0">
+<form name="orders_delete_all_form" style="margin: 0">
 </form>	
 	<!-- container start-->
 	<div id="container">
@@ -86,6 +86,10 @@ List<Orders> ordersList=ordersService.findDetailAll(sUserId);
 											<span
 											style="font-size: 10pt; font-style: bold;">&nbsp;<%=orders.getO_date()%></span>
 											<span style="font-size: 8pt">주문번호 <%=orders.getO_no()%></span> <a href='orders_detail.jsp?o_no=<%=orders.getO_no()%>' style="font-size: 6pt">상세보기</a>
+											<span width=60 height=26 align=center bgcolor="ffffff" class=t1>
+										 <input type="checkbox" name="orders_no_select" onchange="주문선택" value="<%=orders.getO_no()%>" checked="checked">
+										 	</span>
+										</td>
 										</td>
 									</tr>
 									<tr>
@@ -146,8 +150,6 @@ List<Orders> ordersList=ordersService.findDetailAll(sUserId);
 										class=m1>계속 구경하기</a>
 									<a href='javascript:orders_delete_all_action();'
 										class=m1>주문전체삭제</a>
-									<a href='javascript:orders_delete_action();'
-										class=m1>주문선택삭제</a>
 									</td>
 									
 								</tr>
