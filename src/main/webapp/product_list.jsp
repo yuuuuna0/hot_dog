@@ -27,7 +27,7 @@
 <link rel=stylesheet href="css/shop.css" type="text/css">
 <script type="text/javascript">
 function add_cart_popup_window(f){
-	if (true) {
+	if (sUserId=null) {
 		alert('로그인 하세요');
 		location.href = 'user_login_form.jsp';
 	} else {
