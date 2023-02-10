@@ -1,3 +1,6 @@
+<%@page import="com.itwill.hotdog.domain.Categories"%>
+<%@page import="java.util.List"%>
+<%@page import="com.itwill.hotdog.service.ProductService"%>
 <%@page import="com.itwill.hotdog.domain.UserInfo"%>
 <%@page import="com.itwill.hotdog.service.UserInfoService"%>
 <%@page import="com.itwill.hotdog.service.CartService"%>
@@ -6,6 +9,8 @@
 	pageEncoding="UTF-8"%>
 <%
 	String sUserId=(String)session.getAttribute("sUserId");
+	
+	List<Categories> categoryList = new ProductService().categoriesList();
 %>	
 <script type="text/javascript">
 	function login_message() {
@@ -23,7 +28,7 @@
 	     	<li><a href="user_login_form.jsp">로그인</a></li>
 			<li><a href="user_write_form.jsp">회원가입</a></li>
 			<li><a href="user_write_form_popup.jsp">회원가입[팝업]</a></li>
-			<li><a href=""></a></li>
+			<br/>
 			<li><a href="javascript:login_message();">장바구니</a></li>
 	<%
 		}else{
@@ -41,7 +46,10 @@
 		
 	<%} %>
 		<li><a href="product_list.jsp">상품리스트</a></li>
-		<li><a href=""></a></li>
+		<%for(Categories cartegory : categoryList) {%>
+		<li><a href="product_list.jsp?ct_no=<%=cartegory.getCt_no()%>"><%=cartegory.getCt_name()%></a></li>
+		<%}%>
+		<br/>
 		<li><a href="board_list.jsp">게시판리스트</a></li>
 		<li><a href="board_write.jsp">게시판쓰기</a></li>
 		

@@ -22,6 +22,11 @@ Product product = productService.productDetail(Integer.parseInt(p_noStr));
 <link rel=stylesheet href="css/shop.css" type="text/css">
 <style type="text/css" media="screen">
 </style>
+<script type="text/javascript">
+	function productList() {
+		location.href = "product_list.jsp?ct_no=<%=product.getCategories().getCt_no()%>";
+	}
+</script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>

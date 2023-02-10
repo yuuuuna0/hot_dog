@@ -6,17 +6,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String ct_noStr=request.getParameter("ct_no");
-	if(ct_noStr==null){
-		response.sendRedirect("product_list_all.jsp");
-		return;
-	}
 	
-	ProductService productService=new ProductService();
-	Categories category=productService.findCategoryByCategoryNo(Integer.parseInt(ct_noStr));
-	List<Product> productList=productService.productListByCategoryNo(Integer.parseInt(ct_noStr));
-	System.out.println(productList);
-	List<Categories> categoriesList=productService.categoriesList();
+	ProductService productService = new ProductService();
+	List<Categories> categoriesList = productService.categoriesList();
 	
 	boolean isLogin = false;
 	if(session.getAttribute("sUserId")!=null) isLogin = true;
@@ -84,6 +76,7 @@ function add_cart_popup_window(f){
 									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>쇼핑몰 -
 											상품리스트</b></td>
 								</tr>
+								<%for(Categories category : categoriesList) {%>
 								<tr>
 									<td bgcolor="ffffff" height="20"><b>
 									<%=category.getCt_name() %>
@@ -95,9 +88,10 @@ function add_cart_popup_window(f){
 									cellspacing="1" bgcolor="BBBBBB">
 									
 									
+									<%-- Categories가 Product를 List로 가져야 한다. 여유 있을 때 고치고 나서 생각하자.
 									
 									<tr>
-									<%for(Product product:productList){ %>
+									<%for(Product product:category.getProduct()){ %>
 									<!--상품시작 -->
 										<td align="center" width="25%"  bgcolor="ffffff"><a
 											href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="65px"
@@ -113,6 +107,8 @@ function add_cart_popup_window(f){
 										</font></td>
 									<%} %>	
 									
+									--%>
+									<%}%>
 								   <!--상품 끝 -->
 								   
 								
