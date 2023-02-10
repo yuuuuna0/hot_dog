@@ -26,7 +26,11 @@
 </style>
 <script type="text/javascript">
 	function productList() {
+		<%-- 각 카테고리별 상품리스트로 이동
 		location.href = "product_list.jsp?ct_no=<%=product.getCategories().getCt_no()%>";
+		--%>
+		<%-- 메인 상품리스트로 이동 --%>
+		location.href = "product_search_list.jsp";
 	}
 	
 	function order_create_form() {
