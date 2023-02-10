@@ -75,6 +75,7 @@ form > table tr td{
 <script type="text/javascript">
 	//주문하기 버튼 클릭
 	function order_create_form_submit() {
+		document.orders_create_form.pm_no.value = document.orders_detail_f.paymentType.value;
 		document.getElementByName
 		document.orders_create_form.method = 'POST';
 		document.orders_create_form.action = 'orders_create_action.jsp';
@@ -107,7 +108,7 @@ form > table tr td{
 	}
 	//결제수단 고르기
 	function selectPayment(pm_no){
-		document.orders_create_form.pm_no.value=document.getElementById(pm_no).value;
+		document.orders_create_form.pm_no.value=document.getElementById(p).value;
 	}
 
 	
@@ -262,12 +263,12 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
+										<td colspan=2>
+										<select data-trigger="" name="paymentType" style="width:150px;height:30px">
 										<%for(Payment payment:paymentService.findAll()){ %>
-										<td width=100  bgcolor="ffffff" style="padding-left: 10px" align="left">
-											&nbsp;<input type="button" name="payment" id="payment_<%=payment.getPm_no() %>" value="<%=payment.getPm_name()%>" onclick="selectPayment(payment_'<%=payment.getPm_no()%>');"/>
-										</td>
+											<option  value="<%=payment.getPm_no() %>"><%=payment.getPm_name() %></option>
 										<%} %>
-										
+										</td>
 									</tr>
 								</table>
 							</form>
