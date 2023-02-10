@@ -41,9 +41,14 @@ public class ProductRepository {
 			pstmt.setInt(1, p_no);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				product = new Product(rs.getInt("p_no"), rs.getString("p_name"), rs.getInt("p_price"),
-						rs.getInt("p_discount"), rs.getString("p_desc"), rs.getString("p_img"), rs.getInt("p_click"),
-						null);
+				product = new Product(rs.getInt("p_no"),
+									  rs.getString("p_name"),
+									  rs.getInt("p_price"),
+									  rs.getInt("p_discount"),
+									  rs.getString("p_desc"),
+									  rs.getString("p_img"),
+									  rs.getInt("p_click"),
+									  new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"), null));
 			}
 		} finally {
 			if (con != null) {
