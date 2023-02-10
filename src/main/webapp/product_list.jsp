@@ -96,7 +96,7 @@ function add_cart_popup_window(f){
 									<%for(Product product:productList){ %>
 									<!--상품시작 -->
 										<td align="center" width="25%"  bgcolor="ffffff"><a
-											href="product_detail.jsp?p_no=1"><img width="88px" height="65px"
+											href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="65px"
 												src="image/<%=product.getP_img() %>" border="0"></a><br />
 												
 											<br /> <b><%=product.getP_name() %></b>
