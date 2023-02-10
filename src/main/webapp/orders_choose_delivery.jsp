@@ -20,7 +20,7 @@
 
 <style type="text/css">
 #wrap {
-	width: 1000px;
+	width: 500px;
 	text-align: center;
 	margin: 0 auto 0 auto;
 }
@@ -39,6 +39,11 @@
 </style>
 
 <script type="text/javascript">
+	//선택한 배송지 넣기
+	function sendSelectedDelivery(d_no){
+		opener.document.orders_detail_f.address.value=window.document.getElementById(d_no).value;
+		window.close();
+	}
 	
 
 	
@@ -60,9 +65,12 @@
 				<form>
 				<tr>
 					<td width=500 height=25 align=center bgcolor="ffffff" class=t1><%=delivery.getD_name() %></td>
-					<td width=300 height=25 align=center bgcolor="ffffff" class=t1><%=delivery.getD_address() %></td>
+					<td width=300 height=25 align=center bgcolor="ffffff" class=t1>
+						<input type="hidden" readonly id="selected_delivery_<%=delivery.getD_no() %>"  value="<%=delivery.getD_address() %>" />
+						<%=delivery.getD_address() %>
+					</td>
 					<td width=500 height=25 align=center bgcolor="ffffff" class=t1>
-						<input type="submit" name="selected_delivery"  value="선택"/>
+						<input type="button" value="선택" onclick="sendSelectedDelivery('selected_delivery_<%=delivery.getD_no() %>')"/>
 					</td>
 				</tr>
 				</form>

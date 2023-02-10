@@ -11,5 +11,5 @@ if(request.getMethod().equalsIgnoreCase("GET")){
 
 OrdersService ordersService=new OrdersService();
 ordersService.deleteAll(sUserId);
-response.sendRedirect("orders_list_orderitem.jsp");
+response.sendRedirect("hotdog_main.jsp");
 %>
