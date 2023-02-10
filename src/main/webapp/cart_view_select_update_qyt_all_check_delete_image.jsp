@@ -256,7 +256,7 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 									<table align=center>
 									<tr>
 									<td>
-							        	<img src="image/cart_empty.png">
+							        	<img src="image/cart_empty (1).png">
 							        	</td>
 							        	</tr>
 									<%} %>							
