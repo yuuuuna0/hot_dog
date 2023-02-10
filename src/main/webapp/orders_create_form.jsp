@@ -33,7 +33,7 @@
 	if(p_noStr==null) p_noStr="";
 	if(p_qtyStr==null) p_qtyStr="";
 	if(p_priceStr==null) p_priceStr="";
-	//if(cart_item_noStr_array==null) cart_item_noStr_array=new String[]{};
+	if(cart_item_noStr_array==null) cart_item_noStr_array=new String[]{};
 	
 	CartService cartService=new CartService();
 	UserInfoService userInfoService=new UserInfoService();

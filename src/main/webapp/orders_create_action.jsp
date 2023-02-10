@@ -1,3 +1,4 @@
+<%@page import="com.itwill.hotdog.domain.Product"%>
 <%@page import="com.itwill.hotdog.domain.Payment"%>
 <%@page import="com.itwill.hotdog.domain.Cart"%>
 <%@page import="com.itwill.hotdog.service.PaymentService"%>
@@ -22,7 +23,7 @@
 	String buyType = request.getParameter("buyType");
 	String p_noStr = request.getParameter("p_no");
 	String p_qtyStr = request.getParameter("p_qty");
-	String p_priceStr = request.getParameter("p_price");
+	//String p_priceStr = request.getParameter("p_price");
 	String o_usedPointStr = request.getParameter("o_usedPoint");
 	String pm_noStr = request.getParameter("pm_no");
 	String[] cart_item_noStr_array = request.getParameterValues("cart_item_no");
@@ -39,8 +40,21 @@
 	
 	
 	//ordersService.create(orders);
+	
+	//상품에서 직접 주문시 필요한 값을 Orders객체에 넣어서 전달해야 한다.
 	if(buyType.equals("direct")){
-		newOrders=new Orders(0,null,(Integer.parseInt(p_qtyStr)*Integer.parseInt(p_priceStr)),Integer.parseInt(o_usedPointStr),paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),sUser);
+		newOrders = new Orders(0,
+							   null,
+							   Integer.parseInt(p_qtyStr) * productService.productDetail(Integer.parseInt(p_noStr)).getP_price(),
+							   Integer.parseInt(o_usedPointStr),
+							   paymentService.findByPaymentNo(Integer.parseInt(pm_noStr)),
+							   sUser);
+		orderItem = new OrderItem(0,
+								  Integer.parseInt(p_qtyStr),
+								  0,
+								  new Product(Integer.parseInt(p_noStr), null, productService.productDetail(Integer.parseInt(p_noStr)).getP_price(), 0, null, null, 0, null));
+		orderItemList.add(orderItem);
+		newOrders.setOrderItemList(orderItemList);
 		ordersService.create(newOrders);
 
 	}else if(buyType.equals("cart_all")){
