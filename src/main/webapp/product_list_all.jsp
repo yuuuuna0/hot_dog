@@ -78,8 +78,7 @@ function add_cart_popup_window(f){
 								</tr>
 								<%for(Categories category : categoriesList) {%>
 								<tr>
-									<td bgcolor="ffffff" height="20"><b>
-									<%=category.getCt_name() %>
+									
 								
 							</table>
 
