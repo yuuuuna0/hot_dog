@@ -86,7 +86,7 @@ function add_cart_popup_window(f){
 								</tr>
 								<tr>
 									<td bgcolor="f5f5f5" height="20"><b>
-									<%=category.getCt_name() %>
+									<%=         category.getCt_name() %>
 								
 							</table>
 
