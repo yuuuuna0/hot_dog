@@ -48,10 +48,13 @@ public class PaymentRepository {
 		ResultSet rs = null;
 		Payment findPayment=null;
 		try {
-			pstmt=con.prepareStatement(PaymentSQL.PAYMENT_SELECT_ALL);
+			pstmt=con.prepareStatement(PaymentSQL.PAYMENT_SELECT_BY_PM_NO);
+			pstmt.setInt(1, pm_no);
 			rs=pstmt.executeQuery();
-			findPayment=(new Payment(rs.getInt("pm_no"),
-									 rs.getString("pm_name")));
+			if(rs.next()) {
+			findPayment=new Payment(rs.getInt("pm_no"),
+									 rs.getString("pm_name"));
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}finally {

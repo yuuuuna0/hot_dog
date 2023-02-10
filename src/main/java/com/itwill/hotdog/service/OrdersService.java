@@ -124,7 +124,7 @@ public class OrdersService {
 									 null,
 									 o_totalPrice,
 									 order.getO_usedPoint(),
-									 new Payment(order.getPayment().getPm_no(), null),
+									 order.getPayment(),
 									 new UserInfo(order.getUserInfo().getU_id(), null, null, null, 0));
 		newOrder.setOrderItemList(orderItemList);
 		int rowCount = ordersRepository.insert(newOrder);
