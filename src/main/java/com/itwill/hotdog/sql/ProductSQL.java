@@ -12,4 +12,7 @@ public class ProductSQL {
 	public final static String CATEGORY_SELECT_BY_CTNO=
 			"select * from categories c where ct_no=?";
 	
+	
+	//상품 이름으로 검색하는 기능 추가
+	public static final String PRODUCT_BY_NAME= "select*from product where p_name like '%'||?||'%'";
 }

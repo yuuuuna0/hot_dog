@@ -26,7 +26,33 @@ public class ProductRepository {
 		dataSource = DataSourceFactory.getDataSource();
 
 	}
+	
+	/*
+	 * 상품 이름으로 검색하는 기능 추가
+	 */
+	public List <Product> productFindByName(String p_name) throws Exception {
 
+		List <Product> productList = new ArrayList<>();
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(ProductSQL.PRODUCT_BY_NAME);
+		pstmt.setString(1, p_name);
+		ResultSet rs = pstmt.executeQuery();
+
+		if(rs.next()) {
+			do {
+				Product product =new Product(rs.getInt("p_no"), rs.getString("p_name"), rs.getInt("p_price"),
+						rs.getInt("p_discount"), rs.getString("p_desc"), rs.getString("p_img"), rs.getInt("p_click"),
+						null);
+
+				productList.add(product);
+
+			} while(rs.next());
+		}
+		return productList;
+	}
+	
+	
+	
 	/*
 	 * selelctByPK : 상품번호로 검색
 	 */
@@ -168,5 +194,6 @@ public class ProductRepository {
 		return category;
 
 	}
-
+	
+	
 }

@@ -16,6 +16,15 @@ public class ProductService {
 	public ProductService() throws Exception{
 		productRepository=new ProductRepository();
 	}
+
+	/*
+	 * 상품이름으로 검색하기 기능 추가
+	 */
+	
+	 public List <Product> productFindByName(String p_name) throws Exception {
+		 return productRepository.productFindByName(p_name);
+	 }
+	
 	/*
 	 * 전체상품보기
 	 */
