@@ -56,8 +56,9 @@
 		ordersService.createFromCartAll(newOrders);
 	
 	}else if(buyType.equals("cart_select")){
-		//newOrders=new Orders(0, null, 0, o_usedPointStr, new Payment(Integer.parseInt(pm_noStr), null), sUser);
-		newOrders=new Orders(0, null, 0, 1000, new Payment(1, null), sUser);
+		/* newOrders=new Orders(0, null, 0, o_usedPointStr, new Payment(Integer.parseInt(pm_noStr), null), sUser);*/
+		//Payment payment=paymentService.findByPaymentNo(Integer.parseInt(pm_noStr));
+		newOrders=new Orders(0, null, 0, Integer.parseInt(o_usedPointStr), new Payment(1,null), sUser);
 		ordersService.createFromCartSelect(newOrders, cart_item_noStr_array);
 		
 		for(int i=0;i<cart_item_noStr_array.length;i++){
