@@ -15,6 +15,7 @@ insert into delivery(d_no, d_name, d_address, u_id) values(DELIVERY_D_NO_SEQ.nex
 /**********************cartegory insert************************/
 insert into categories(ct_no, ct_name, ct_img) values(CATEGORIES_CT_NO_SEQ.nextval, '사료', '사료.jpg');
 insert into categories(ct_no, ct_name, ct_img) values(CATEGORIES_CT_NO_SEQ.nextval, '간식', '간식.jpg');
+insert into categories(ct_no, ct_name, ct_img) values(CATEGORIES_CT_NO_SEQ.nextval, '장난감', '장난감.jpg');
 
 /**********************product insert************************/
 insert into product values(product_p_no_SEQ.nextval, '뉴트리나 건강백서 사료 푸들 10.2kg', 67000,4, '견종의 특성을 고려한 사료입니다. DHA,상어연골,글루코사민을 첨가하였습니다.','1.jpg',0,1);

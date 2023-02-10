@@ -9,9 +9,9 @@ DROP TABLE categories CASCADE CONSTRAINTS;
 DROP TABLE userInfo CASCADE CONSTRAINTS;
 
 CREATE TABLE userInfo(
-		u_id                          		VARCHAR2(20)		 NULL ,
-		u_password                    		VARCHAR2(50)		 NULL ,
-		u_name                        		VARCHAR2(10)		 NULL ,
+		u_id                          		VARCHAR2(100)		 NULL ,
+		u_password                    		VARCHAR2(100)		 NULL ,
+		u_name                        		VARCHAR2(100)		 NULL ,
 		u_phone                       		VARCHAR2(50)		 NULL ,
 		u_point                       		NUMBER(10)		 NULL 
 );
@@ -32,10 +32,10 @@ CREATE SEQUENCE categories_ct_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
 
 CREATE TABLE product(
 		p_no                          		NUMBER(10)		 NULL ,
-		p_name                        		VARCHAR2(100)		 NULL ,
+		p_name                        		VARCHAR2(1000)		 NULL ,
 		p_price                       		NUMBER(10)		 NULL ,
 		p_discount                    		NUMBER(10)		 NULL ,
-		p_desc                        		VARCHAR2(100)		 NULL ,
+		p_desc                        		VARCHAR2(1000)		 NULL ,
 		p_img                         		VARCHAR2(100)		 NULL ,
 		p_click                       		NUMBER(10)		 DEFAULT 0		 NULL ,
 		ct_no                         		NUMBER(10)		 NULL 
@@ -58,7 +58,6 @@ CREATE TABLE cart(
 DROP SEQUENCE cart_c_no_SEQ;
 
 CREATE SEQUENCE cart_c_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
-
 
 
 
