@@ -16,7 +16,7 @@ public class ProductRepositoryTestMain {
 //		System.out.println("2.findAll");
 //		System.out.println(productRepository.findAll());
 //		System.out.println("3.findByCategoryNumber");
-//		System.out.println(productRepository.findByCategoryNumber(2));	
+//		System.out.println(productRepository.findCategoryByCategoryNo(2));	
 //		System.out.println("4.findAllCat");
 //		System.out.println(productRepository.findAllCat());	
 //		System.out.println("5.findCategoryByCategoryNo");
