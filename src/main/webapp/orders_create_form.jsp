@@ -73,6 +73,18 @@ form > table tr td{
 <script type="text/javascript">
 	//주문하기 버튼 클릭
 	function order_create_form_submit() {
+		if(document.orders_detail_f.address.value=="") {
+			alert("배송지를 선택하세요.");
+			return false;
+		}
+		if(document.orders_create_form.o_usedPoint.value=="") {
+			alert("포인트를 사용하세요.");
+			return false;
+		}
+		if(document.orders_create_form.pm_no.value=="") {
+			alert("결제수단을 선택하세요.");
+			return false;
+		}
 		document.getElementByName
 		document.orders_create_form.method = 'POST';
 		document.orders_create_form.action = 'orders_create_action.jsp';
@@ -239,7 +251,7 @@ form > table tr td{
 											</p>
 										</td>
 										<td width=100 colspan=2 height=26 bgcolor="ffffff" align="left" class=t1>
-											&nbsp;&nbsp;<input type="text" name="use_point" id="use_point" />
+											&nbsp;&nbsp;<input type="text" name="use_point" id="use_point" value=0 />
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<input type="button" value="사용하기" onclick="changePoint(<%=tot_price%>);"/>
 										</td>
@@ -265,6 +277,7 @@ form > table tr td{
 										</td>
 										<td colspan=2>
 										<select data-trigger="" name="paymentType" style="width:150px;height:30px" onchange="selectPayment();">
+											<option value="">결제수단</option>
 										<%for(Payment payment:paymentService.findAll()){ %>
 											<option  value="<%=payment.getPm_no() %>"><%=payment.getPm_name() %></option>
 										<%} %>

@@ -270,7 +270,7 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 							<table style="padding-left: 10px" border="0" cellpadding="0"
 								cellspacing="1" width="590">
 								<tr>
-									<td align=center>&nbsp;&nbsp; <a href="product_list.jsp"
+									<td align=center>&nbsp;&nbsp; <a href="product_search_list.jsp"
 										class=m1>계속 구경하기</a>&nbsp;&nbsp; <%
 										 if (cartList.size() >= 1) {
 										 %> <a href="javascript:cart_view_form_select_submit();" class=m1>
