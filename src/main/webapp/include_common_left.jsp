@@ -46,8 +46,8 @@
 		
 	<%} %>
 		<li><a href="product_list.jsp">상품리스트</a></li>
-		<%for(Categories cartegory : categoryList) {%>
-		<li><a href="product_list.jsp?ct_no=<%=cartegory.getCt_no()%>"><%=cartegory.getCt_name()%></a></li>
+		<%for(Categories category : categoryList) {%>
+		<li><a href="product_list.jsp?ct_no=<%=category.getCt_no()%>"><%=category.getCt_name()%></a></li>
 		<%}%>
 		<br/>
 		<li><a href="board_list.jsp">게시판리스트</a></li>
