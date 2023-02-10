@@ -144,7 +144,7 @@ form > table tr td{
 									<td align=center> 
 										&nbsp;&nbsp;<a href=orders_list_orderitem.jsp
 										class=m1>주문목록</a>
-										&nbsp;&nbsp;<a href=product_list.jsp
+										&nbsp;&nbsp;<a href=product_search_list.jsp
 										class=m1>계속 쇼핑하기</a>
 
 									</td>

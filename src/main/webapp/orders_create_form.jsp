@@ -279,7 +279,7 @@ form > table tr td{
 									<td align=center>&nbsp;&nbsp; 
 										<a href="javascript:order_create_form_submit();" class=m1>구매하기</a>
 										&nbsp;&nbsp;
-										<a href=product_list.jsp class=m1>계속 쇼핑하기</a>
+										<a href=product_search_list.jsp class=m1>계속 쇼핑하기</a>
 									</td>
 								</tr>
 							</table>
