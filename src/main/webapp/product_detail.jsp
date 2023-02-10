@@ -3,15 +3,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-String p_noStr = request.getParameter("p_no");
-if (p_noStr == null || p_noStr.equals("")) {
-	response.sendRedirect("product_list.jsp");
-	return;
-}
+	String p_noStr = request.getParameter("p_no");
+	if (p_noStr == null || p_noStr.equals("")) {
+		response.sendRedirect("product_list.jsp");
+		return;
+	}
+	
+	ProductService productService = new ProductService();
+	Product product = productService.productDetail(Integer.parseInt(p_noStr));
 
-ProductService productService = new ProductService();
-Product product = productService.productDetail(Integer.parseInt(p_noStr));
-
+	boolean isLogin = false;
+	if(session.getAttribute("sUserId")!=null) isLogin = true;
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,14 +28,43 @@ Product product = productService.productDetail(Integer.parseInt(p_noStr));
 	function productList() {
 		location.href = "product_list.jsp?ct_no=<%=product.getCategories().getCt_no()%>";
 	}
+	
+	function order_create_form() {
+		if(<%=!isLogin%>) {
+			alert('로그인 하세요');
+			location.href = 'user_login_form.jsp';
+		} else {
+			document.product_detail_form.p_qty.value = document.add_cart_form.cart_qty.value;
+			document.product_detail_form.method = 'POST';
+			document.product_detail_form.action = 'orders_create_form.jsp';
+			document.product_detail_form.submit();
+		}
+	}
+	
+	function add_cart_popup_window(f) {
+		if (<%=!isLogin%>) {
+			alert('로그인 하세요');
+			location.href = 'user_login_form.jsp';
+		} else {
+			let left = Math.ceil(( window.screen.width)/5);
+			let top = Math.ceil(( window.screen.height)/3); 
+			console.log(left);
+			console.log(top);
+			let cartWin = window.open("about:blank","cartForm","width=260,height=130,top="+top+",left="+left+",location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
+			f.action = 'cart_add_action_popup_window.jsp';
+			f.target = 'cartForm';
+			f.method = 'POST';
+			f.submit();
+		}
+	}
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>
 	<form name="product_detail_form">
 		<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
-		<input type="hidden" name="p_qty" value="1"> <input
-			type="hidden" name="buyType" value="direct">
+		<input type="hidden" name="p_qty" value="1">
+		<input type="hidden" name="buyType" value="direct">
 	</form>
 	<!-- container start-->
 	<div id="container">
@@ -84,6 +115,7 @@ Product product = productService.productDetail(Integer.parseInt(p_noStr));
 								<tr width=100%>
 									<td width=30% height=200 align=center class=t1>
 										<form name="add_cart_form" method="post" onsubmit="return add_cart();" action="cart_add_action.jsp">
+											<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
 											수량 :
 											<!-- 
 											 <input type=text name="cart_qty" value=1 size=4 class=TXTFLD>  
@@ -100,9 +132,11 @@ Product product = productService.productDetail(Integer.parseInt(p_noStr));
 												<option value="9">9
 												<option value="10">10
 											</select> 개<br><br> 
+												<%--
 												<input width=40px height=40px type=image src='image/cart.png' value="장바구니담기[장바구니보여주기]" title="장바구니담기[장바구니보여주기]" style="font-size: 6pt;"/> 
 												<a href="javascript:add_cart_popup_window(this.parentElement);" title="장바구니담기[계속쇼핑팝업]"><img src='image/cart20.png' style="margin-bottom: 5px "></a>
 												<input type="hidden" name=p_no value="<%=product.getP_no()%>">
+												--%>
 										</form>
 									</td>
 									<td width=40% height=200 align=center><img border=0
@@ -129,9 +163,11 @@ Product product = productService.productDetail(Integer.parseInt(p_noStr));
 
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
-									<td align=center><input type="button" value="주문하기[주문폼]"
-										onClick="order_create_form();"> &nbsp; <input
-										type="button" value="상품리스트" onClick="productList();"></td>
+									<td align=center>
+										<input type="button" value="바로주문하기[주문폼]" onClick="order_create_form();"> &nbsp; 
+										<input type="button" value="장바구니담기" onClick="add_cart_popup_window(document.add_cart_form);">&nbsp;
+										<input type="button" value="상품리스트보기" onClick="productList();">
+									</td>
 								</tr>
 							</table></td>
 					</tr>
