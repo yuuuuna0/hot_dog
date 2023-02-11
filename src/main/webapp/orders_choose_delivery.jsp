@@ -64,18 +64,22 @@
 				<%for(Delivery delivery:deliveryList){ %>
 				<form>
 				<tr>
-					<td width=500 height=25 align=center bgcolor="ffffff" class=t1><%=delivery.getD_name() %></td>
+					<td width=500 height=25 align=center bgcolor="ffffff" class=t1 style="font-size: 7pt"><%=delivery.getD_name() %></td>
 					<td width=300 height=25 align=center bgcolor="ffffff" class=t1>
-						<input type="hidden" readonly id="selected_delivery_<%=delivery.getD_no() %>"  value="<%=delivery.getD_address() %>" />
+						<input type="hidden" readonly id="selected_delivery_<%=delivery.getD_no() %>"  value="<%=delivery.getD_address() %>" style="font-size: 7pt" />
 						<%=delivery.getD_address() %>
 					</td>
 					<td width=500 height=25 align=center bgcolor="ffffff" class=t1>
-						<input type="button" value="선택" onclick="sendSelectedDelivery('selected_delivery_<%=delivery.getD_no() %>')"/>
+						<input type="button" value="선택" style="font-size: 7pt" onclick="sendSelectedDelivery('selected_delivery_<%=delivery.getD_no() %>')"/>
 					</td>
 				</tr>
 				</form>
 				<%} %>
 			</table>
+		</div>
+		<div>
+			<input id="addDeilivey" type="button" value="추가"  style="font-size: 7pt" onclick="hotdog_main.jsp">
+			<input id="cancle" type="button" value="취소" style="font-size: 7pt" onclick="window.close();"> 
 		</div>
 	</div>
 </body>
