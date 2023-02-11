@@ -215,5 +215,40 @@ public class UserInfoRepository {
 		}
 		return isExist;
 	}
+	
+	/*
+	 * 
+	 */
+	/*
+	 * 기존의 사용자정보를 수정
+	 */
+	public int updatePoint(String sUserId, int u_point) throws Exception {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int updateRowCount = 0;
+		try {
+			/*
+			 * 예외발생 예상코드
+			 */
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(UserInfoSQL.USER_UPDATE_Point);
+			pstmt.setInt(1, u_point);
+			pstmt.setString(2, sUserId);
+			updateRowCount = pstmt.executeUpdate();
+			
+		} finally {
+			/*
+			 * 예외발생과 관계없이 반듯시 실행되는 코드
+			 */
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		}
+		return updateRowCount;
+	}
+
 
 }

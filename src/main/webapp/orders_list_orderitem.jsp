@@ -29,11 +29,7 @@ List<Orders> ordersList=ordersService.findDetailAll(sUserId);
 		document.orders_delete_all_form.method='POST';
 		document.orders_delete_all_form.submit();
 	}
-	function orders_checkbox_deselect(){
 	
-			document.getElementById('orders_no_select').checked=false;
-	
-	}
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
@@ -86,9 +82,6 @@ List<Orders> ordersList=ordersService.findDetailAll(sUserId);
 											<span
 											style="font-size: 10pt; font-style: bold;">&nbsp;<%=orders.getO_date()%></span>
 											<span style="font-size: 8pt">주문번호 <%=orders.getO_no()%></span> <a href='orders_detail.jsp?o_no=<%=orders.getO_no()%>' style="font-size: 6pt">상세보기</a>
-											<span width=60 height=26 align=center bgcolor="ffffff" class=t1>
-										 <input type="checkbox" name="orders_no_select" onchange="주문선택" value="<%=orders.getO_no()%>" checked="checked">
-										 	</span>
 										</td>
 										</td>
 									</tr>

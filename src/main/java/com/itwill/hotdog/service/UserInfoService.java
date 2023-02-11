@@ -75,6 +75,13 @@ public class UserInfoService {
 	}
 	
 	/*
+	 * 회원 포인트 수정
+	 */
+	public int updatPoint(String sUserId, int u_point)throws Exception{
+		return userInfo.updatePoint(sUserId,u_point);
+	}
+	
+	/*
 	 * 회원탈퇴
 	 */
 	public int remove(String u_id)throws Exception{

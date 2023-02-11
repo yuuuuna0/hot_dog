@@ -7,11 +7,13 @@
 	pageEncoding="UTF-8"%>
 	
 <%
+
 String keyword =null;
 keyword = request.getParameter("keyword");
 ProductService productService = new ProductService();
 
 List<Product> productList=new ArrayList<Product>();
+
 //List<Product> productList = productService.productList();
 
 if(keyword != null){
@@ -25,6 +27,9 @@ boolean isLogin = false;
 if (session.getAttribute("sUserId") != null) {
 	isLogin = true;
 }
+	
+
+
 %>
 <!DOCTYPE html>
 <html>
@@ -121,7 +126,7 @@ function searchByKeyword() {
 											<form style="display: inline;">
 												<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
 												<input type="hidden" name="cart_qty" value="1">
-												<%--<img src='image/cart20.png' style="cursor:pointer;" onclick="add_cart_popup_window(this.parentElement);" align="top"/>--%>
+												<img src='image/cart20.png' style="cursor:pointer;" onclick="add_cart_popup_window(this.parentElement);" align="top"/>
 											</form><br> <font
 											color="#FF0000"><%=new DecimalFormat("#,##0").format(product.getP_price())%>원
 										</font></td>
