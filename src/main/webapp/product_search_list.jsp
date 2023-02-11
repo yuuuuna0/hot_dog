@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.itwill.hotdog.domain.Product"%>
 <%@page import="com.itwill.hotdog.service.ProductService"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -6,10 +7,20 @@
 	pageEncoding="UTF-8"%>
 	
 <%
+String keyword =null;
+keyword = request.getParameter("keyword");
 ProductService productService = new ProductService();
-List<Product> productList = productService.productFindByName("");
-%>
-<%
+
+List<Product> productList=new ArrayList<Product>();
+//List<Product> productList = productService.productList();
+
+if(keyword != null){
+	productList=productService.productFindByName(keyword);
+}else{
+	productList=productService.productList();
+}
+
+
 boolean isLogin = false;
 if (session.getAttribute("sUserId") != null) {
 	isLogin = true;
@@ -121,7 +132,7 @@ function searchByKeyword() {
 								   <!--상품 끝 -->
 								   <%}%>
 								   <!--검색 -->
-								   <form name="ff" method="POST">'
+								   <form name="ff" align="right" method="POST" style:"margin-right: 70px;">
 								   
 								   <!-- 수정확인해보기 
 										<select data-trigger="" name="searchType" style="width:60px;height:30px">
@@ -129,8 +140,7 @@ function searchByKeyword() {
 											<option value="name">제목</option>
 										</select>
 										-->
-										
-											<input id="search" type="text" name="keyword" placeholder="검색어를 입력하세요" style="width:200px;height:25px"> 
+											<input id="search" type="text" name="keyword" placeholder="검색어를 입력하세요" style="width:200px;height:25px;"> 
 											<input type="button" value="검색" onclick="searchByKeyword();">
 									</form>
 									<!--검색 끝 -->

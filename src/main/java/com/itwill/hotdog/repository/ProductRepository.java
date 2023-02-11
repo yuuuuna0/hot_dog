@@ -48,6 +48,7 @@ public class ProductRepository {
 
 			} while(rs.next());
 		}
+		con.close();
 		return productList;
 	}
 	
