@@ -40,7 +40,6 @@
 	
 	//작성자 여부 체크
 	boolean isWriter = false;
-	//if(((String)session.getAttribute("sUserId")).equals(review.getU_id())) isWriter = true;
 	if(review.getU_id().equals((String)session.getAttribute("sUserId"))) isWriter = true;
 %>    
 <!DOCTYPE html>
