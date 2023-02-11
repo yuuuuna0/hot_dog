@@ -7,6 +7,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file='login_check.jspf' %>
 <%
+	String[] d_noStr_array=null;
 	DeliveryService deliveryService=new DeliveryService();
 	List<Delivery> deliveryList=deliveryService.findByUserId(sUserId);
 	
@@ -57,6 +58,7 @@
 		
 	}
 	*/
+	
 	//delivery 전체선택 및 해제
 	function delivery_all_select(e){
 		var delivery_no_check_list = document.getElementsByName("delivery_no_check");
@@ -70,8 +72,9 @@
 			}
 		}
 	}
+	
 	/*
-	//delivery 선택삭제
+	//선택된 delivery의 값
 	function delete_checked_delivery(){
 		var=delivery_no_list;
 		var=delivery_no_check_list;
@@ -80,15 +83,23 @@
 				delivery_no_check_list=document.getElementsByName("delivery_no_check").value;
 			}
 		}
+		for(var i=0;delivery_no_check_list.length;i++){
+		}
 	}
 	*/
+
+	
 
 	
 </script>
 
 </head>
-<body onload="delivery_select">
+<body>
 	<form name="orders_delivery_choose_form" style="margin:0">
+	<%for (String d_noStr : d_noStr_array) {
+		%>
+		<input type="hidden" name="d_no" value="<%=d_noStr%>">
+	  <%}%>
 	</form>
 	<div id="wrap">
 		<br> <b><font size="3" color="gray"><%=sUser.getU_name() %>님의 배송지 선택</font></b>
