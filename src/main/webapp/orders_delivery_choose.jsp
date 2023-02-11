@@ -45,7 +45,8 @@
 		window.close();
 	}
 	
-	//배송지 한 개 삭제하기
+	/*
+	배송지 한 개 삭제하기
 	function delivery_delete_item_action(formId) {
 		if(window.confirm('해당 배송지을 삭제하시겠습니까?')){
 			var form = document.getElementById(formId);
@@ -55,6 +56,7 @@
 		}
 		
 	}
+	*/
 	//delivery 전체선택 및 해제
 	function delivery_all_select(e){
 		var delivery_no_check_list = document.getElementsByName("delivery_no_check");
@@ -68,6 +70,7 @@
 			}
 		}
 	}
+	/*
 	//delivery 선택삭제
 	function delivery_select_delete(){
 		var=delivery_no_list;
@@ -78,7 +81,7 @@
 			}
 		}
 	}
-	
+	*/
 
 	
 </script>
