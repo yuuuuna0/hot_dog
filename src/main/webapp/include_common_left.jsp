@@ -50,7 +50,5 @@
 		<li><a href="product_list.jsp?ct_no=<%=category.getCt_no()%>"><%=category.getCt_name()%></a></li>
 		<%}%>
 		<br/>
-		<li><a href="board_list.jsp">게시판리스트</a></li>
-		<li><a href="board_write.jsp">게시판쓰기</a></li>
 		
 </ul>
