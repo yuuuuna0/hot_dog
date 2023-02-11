@@ -29,4 +29,13 @@ public class DeliveryService {
 	public Delivery updateByDeliveryBo(int d_no) throws Exception {
 		return deliveryRepository.updateByDeliveryNo(d_no);
 	}
+	//배송지명 중복 여부
+	public boolean isDuplicateDeliveryName(String sUserId, String d_name) throws Exception{
+		boolean isExist=deliveryRepository.existedDeliveryName(sUserId, d_name);
+		if(isExist) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

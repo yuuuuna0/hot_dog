@@ -57,9 +57,9 @@ function add_cart_popup_window(f){
 	
 	
 }
-function searchByKeyword() {
-	document.ff.action ='product_search_action.jsp';
-	document.ff.method='POST';
+function searchByKeyword(keyword) {
+	document.ff.action ='product_search_list.jsp?keyword='+keyword;
+	document.ff.method='GET';
 	document.ff.submit();
 }
 </script> 

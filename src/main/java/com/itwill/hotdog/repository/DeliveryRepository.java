@@ -153,4 +153,30 @@ public class DeliveryRepository {
 		}
 		return null;
 	}
+	//7. 사용자의 배송지명이 존재하는지의 여부를 판별
+	public boolean existedDeliveryName(String sUserId, String d_name) throws Exception{
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		boolean isExisted = false;
+		try {
+			con = dataSource.getConnection();
+			pstmt=con.prepareStatement(DeliverySQL.DELIVERY_SELECT_ALL_BY_U_ID);
+			pstmt.setString(1, sUserId);
+			pstmt.setString(2, d_name);
+			rs=pstmt.executeQuery();
+			rs.next();
+			int count=rs.getInt("cnt");
+			if(count==1) {
+				isExisted=true;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
+		}
+		return isExisted;
+	}
 }
