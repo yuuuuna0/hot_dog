@@ -93,7 +93,7 @@ form > table tr td{
 	}
 	//포인트 사용하기
 	function changePoint(tot_price){
-		var u_point=<%=sUser.getU_point()%>;	//가지고 있는 포인트
+		var u_point=<%=userInfoService.findUser(sUserId).getU_point()%>;	//가지고 있는 포인트
 		var v_point =parseInt(document.getElementById("use_point").value);	//사용할 포인트(input 입력값)
 		if(v_point>u_point){	//입력값이 사용가능보다 클 때
 			alert('최대 사용 가능한 값은'+u_point+'p 입니다.');
@@ -191,7 +191,7 @@ form > table tr td{
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_id()%></td>
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_name()%></td>
 										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_phone()%></td>
-										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=new DecimalFormat("#,###").format(sUser.getU_point()) %></td>
+										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=new DecimalFormat("#,###").format(userInfoService.findUser(sUserId).getU_point()) %></td>
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
 											<input type="text" readonly name="address" value=""/>
 											<input type="button" value="선택하기" onclick="orders_choose_delivery();"/>
