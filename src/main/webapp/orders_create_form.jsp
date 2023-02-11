@@ -110,10 +110,15 @@ form > table tr td{
 		}
 		u_point-=v_point;
 		var result_price=tot_price-v_point
-		document.getElementById("result_price").innerHTML=result_price;
+		document.getElementById("result_price").innerHTML=priceToString(result_price);
 		//document.orders_create_form.new_u_point.value=u_point;
 		document.orders_create_form.o_usedPoint.value=v_point;
 	}
+	
+	function priceToString(price) {
+	    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+	
 	//배송지 선택하기 띄우기
 	function orders_delivery_choose(){
 		var left = Math.ceil(( window.screen.width)/5);
