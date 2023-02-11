@@ -34,9 +34,14 @@
 	UserInfo userInfo = new UserInfo();
 	String sUserId=(String)session.getAttribute("sUserId");
 	
+	//로그인 여부 체크
 	boolean isLogin = false;
 	if(session.getAttribute("sUserId")!=null) isLogin = true;
 	
+	//작성자 여부 체크
+	boolean isWriter = false;
+	//if(((String)session.getAttribute("sUserId")).equals(review.getU_id())) isWriter = true;
+	if(review.getU_id().equals((String)session.getAttribute("sUserId"))) isWriter = true;
 %>    
 <!DOCTYPE html>
 <html>
@@ -76,6 +81,10 @@
 			location.href = 'user_login_form.jsp';
 			return;
 		}
+		if(<%=!isWriter%>) {
+			alert('작성자 본인만 수정할 수 있습니다.');
+			return;
+		}
 		document.f.action = "review_modify.jsp";
 		document.f.submit();
 	}
@@ -84,6 +93,10 @@
 		if(<%=!isLogin%>) {
 			alert('로그인 하세요');
 			location.href = 'user_login_form.jsp';
+			return;
+		}
+		if(<%=!isWriter%>) {
+			alert('작성자 본인만 삭제할 수 있습니다.');
 			return;
 		}
 		if (confirm("정말 삭제하시겠습니까?")) {
