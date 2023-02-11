@@ -52,9 +52,9 @@ public class OrdersRepository_yn {
 			con.rollback();
 			throw e;
 		} finally {
-			if(con!=null) {
-				con.close();
-			}
+			if(pstmt1!=null) pstmt1.close();
+			if(pstmt2!=null) pstmt2.close();
+			if(con!=null) con.close();
 		}
 		return 0;
 	}
@@ -75,9 +75,8 @@ public class OrdersRepository_yn {
 			con.rollback();
 			throw e;
 		} finally {
-			if(con!=null) {
-				con.close();
-			}
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return 0;
 	}
@@ -96,9 +95,8 @@ public class OrdersRepository_yn {
 			con.rollback();
 			throw e;
 		} finally {
-			if(con!=null) {
-				con.close();
-			}
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return 0;
 	}
@@ -132,10 +130,9 @@ public class OrdersRepository_yn {
 			con.rollback();
 			throw e;
 		} finally {
-			if(con!=null) {
-				rs.close();
-				con.close();
-			}
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return ordersList;
 	}
@@ -216,5 +213,4 @@ public class OrdersRepository_yn {
 		
 		return ordersList;
 	}
-	
 }

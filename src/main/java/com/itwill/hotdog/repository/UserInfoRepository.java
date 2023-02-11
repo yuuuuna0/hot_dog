@@ -47,15 +47,8 @@ public class UserInfoRepository {
 			pstmt.setInt(5, user.getU_point());
 			insertRowCount = pstmt.executeUpdate();
 		} finally {
-			/*
-			 * 예외발생과 관계없이 반듯시 실행되는 코드
-			 */
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (con != null) {
-				con.close();
-			}
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return insertRowCount;
 	}
@@ -79,15 +72,8 @@ public class UserInfoRepository {
 			pstmt.setString(4, user.getU_id());
 			updateRowCount = pstmt.executeUpdate();
 		} finally {
-			/*
-			 * 예외발생과 관계없이 반듯시 실행되는 코드
-			 */
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (con != null) {
-				con.close();
-			}
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return updateRowCount;
 	}
@@ -106,12 +92,8 @@ public class UserInfoRepository {
 			removeRowCount = pstmt.executeUpdate();
 
 		} finally {
-			/*
-			 * 예외발생과 관계없이 반듯시 실행되는 코드
-			 */
-			if(pstmt != null) pstmt.close();
-			if(con != null) con.close();
-
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return removeRowCount;
 	}
@@ -140,15 +122,9 @@ public class UserInfoRepository {
 
 			}
 		} finally {
-			/*
-			 * 예외발생과 관계없이 반듯시 실행되는 코드
-			 */
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (con != null)
-				con.close();
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return findUser;
 	}
@@ -174,15 +150,9 @@ public class UserInfoRepository {
 
 			}
 		} finally {
-			/*
-			 * 예외발생과 관계없이 반듯시 실행되는 코드
-			 */
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (con != null)
-				con.close();
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return findUserList;
 	}
@@ -206,12 +176,9 @@ public class UserInfoRepository {
 				isExist = true;
 			}
 		} finally {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (con != null)
-				con.close();
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return isExist;
 	}
@@ -237,18 +204,9 @@ public class UserInfoRepository {
 			updateRowCount = pstmt.executeUpdate();
 			
 		} finally {
-			/*
-			 * 예외발생과 관계없이 반듯시 실행되는 코드
-			 */
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (con != null) {
-				con.close();
-			}
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return updateRowCount;
 	}
-
-
 }

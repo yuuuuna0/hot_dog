@@ -33,21 +33,30 @@ public class ProductRepository {
 	public List <Product> productFindByName(String p_name) throws Exception {
 
 		List <Product> productList = new ArrayList<>();
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(ProductSQL.PRODUCT_BY_NAME);
-		pstmt.setString(1, p_name);
-		ResultSet rs = pstmt.executeQuery();
-
-		if(rs.next()) {
-			do {
-				Product product =new Product(rs.getInt("p_no"), rs.getString("p_name"), rs.getInt("p_price"),
-						rs.getInt("p_discount"), rs.getString("p_desc"), rs.getString("p_img"), rs.getInt("p_click"),
-						null);
-
-				productList.add(product);
-
-			} while(rs.next());
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(ProductSQL.PRODUCT_BY_NAME);
+			pstmt.setString(1, p_name);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				do {
+					Product product =new Product(rs.getInt("p_no"), rs.getString("p_name"), rs.getInt("p_price"),
+							rs.getInt("p_discount"), rs.getString("p_desc"), rs.getString("p_img"), rs.getInt("p_click"),
+							null);
+	
+					productList.add(product);
+	
+				} while(rs.next());
+			}
+		} finally {
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
+		
 		return productList;
 	}
 	
@@ -72,9 +81,9 @@ public class ProductRepository {
 						null);
 			}
 		} finally {
-			if (con != null) {
-				con.close();
-			}
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return product;
 	}
@@ -98,9 +107,9 @@ public class ProductRepository {
 						new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null)));
 			}
 		} finally {
-			if (con != null) {
-				con.close();
-			}
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return productList;
 
@@ -126,9 +135,9 @@ public class ProductRepository {
 						null));
 			}
 		} finally {
-			if (con != null) {
-				con.close();
-			}
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return productList;
 
@@ -150,9 +159,9 @@ public class ProductRepository {
 				categoriesList.add(new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null));
 			}
 		} finally {
-			if (con != null) {
-				con.close();
-			}
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return categoriesList;
 
@@ -175,9 +184,9 @@ public class ProductRepository {
 				category=new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null);
 			}
 		} finally {
-			if (con != null) {
-				con.close();
-			}
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return category;
 
@@ -197,13 +206,10 @@ public class ProductRepository {
 				categoriesList.add(new Categories(rs.getInt("ct_no"), rs.getString("ct_name"), rs.getString("ct_img"),null));
 			}
 		} finally {
-			if (con != null) {
-				con.close();
-			}
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return categoriesList;
-
 	}
-	
-	
 }

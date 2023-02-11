@@ -13,9 +13,10 @@ import com.itwill.hotdog.sql.CartSQL;
 
 public class CartRepository {
 
-		private DataSource dataSource;
-		public CartRepository() throws Exception{
-		  dataSource=DataSourceFactory.getDataSource();
+	private DataSource dataSource;
+	
+	public CartRepository() throws Exception{
+	  dataSource=DataSourceFactory.getDataSource();
 	}
 
 	/*
@@ -40,10 +41,10 @@ public class CartRepository {
 				count = rs.getInt(1);
 			}
 			
-		}finally {
-			if(con != null) {
-				con.close();
-			}
+		} finally {
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return count;
 	}
@@ -65,10 +66,9 @@ public class CartRepository {
 			pstmt.setInt(3, cart.getProduct().getP_no());
 			insertRowCount = pstmt.executeUpdate();
 			
-		}finally {
-			if(con != null) {
-				con.close();
-			}
+		} finally {
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return insertRowCount;
 }
@@ -87,9 +87,8 @@ public class CartRepository {
 			pstmt.setString(1, u_id);
 			deleteRowCount = pstmt.executeUpdate();
 		}finally {
-			if(con != null) {
-				con.close();
-			}
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return deleteRowCount;
 	}
@@ -107,9 +106,8 @@ public class CartRepository {
 			pstmt.setInt(1, c_no);
 			deleteRowCount = pstmt.executeUpdate();
 		}finally {
-			if(con != null) {
-				con.close();
-			}
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return deleteRowCount;
 	}
@@ -130,9 +128,8 @@ public class CartRepository {
 			pstmt.setInt(3, cart.getProduct().getP_no());
 			updateRowCount = pstmt.executeUpdate();
 		}finally {
-			if(con != null) {
-				con.close();
-			}
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return updateRowCount;
 	}	
@@ -152,9 +149,8 @@ public class CartRepository {
 			pstmt.setInt(2, cart.getC_no());
 			updateRowCount = pstmt.executeUpdate();
 		}finally {
-			if(con != null) {
-				con.close();
-			}
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return updateRowCount;
 	}
@@ -191,11 +187,9 @@ public class CartRepository {
 					);
 		}
 		}finally {
-			if(con!=null) {
-				rs.close();
-				pstmt.close();
-				con.close();
-			}
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return cartList;
 	}
@@ -232,10 +226,9 @@ public class CartRepository {
 			);
 		}
 		}finally {
-			if(con!=null)
-				rs.close();
-				pstmt.close();
-				con.close();
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
 		}
 		return cart;
 	}
