@@ -1,6 +1,6 @@
 <%@page import="com.itwill.hotdog.domain.Review" %>
 <%@page import="com.itwill.hotdog.service.ReviewService"%>
-
+<%@include file="login_check.jspf"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -24,7 +24,7 @@
 	답글 데이타
 	*/
 	int p_no = Integer.parseInt(request.getParameter("p_no"));
-	review.setU_id(request.getParameter("rewriter"));
+	review.setU_id(sUserId);
 	review.setR_comment(request.getParameter("recomment"));
 	review.setP_no(p_no);
 
@@ -33,9 +33,7 @@
 	if (request.getParameter("pageno") != null) {
 		pageno = request.getParameter("pageno");
 	}
+	response.sendRedirect("review_list.jsp?p_no="+p_no);
 	
-	response.sendRedirect(
-			String.format("review_view.jsp?r_no=%d&pageno=%s",
-			review.getR_no(), pageno));
 
 %>

@@ -1,8 +1,17 @@
+<%@page import="com.itwill.hotdog.domain.ReviewListPageMakerDto"%>
+<%@page import="com.itwill.hotdog.service.ReviewService"%>
 <%@page import="com.itwill.hotdog.domain.Product"%>
 <%@page import="com.itwill.hotdog.service.ProductService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+/********게시판*********/
+String pageno = "1";
+if (pageno == null || pageno.equals("")) {
+	pageno="1";
+}
+pageno= request.getParameter("pageno");
+/*********************/
 	String p_noStr = request.getParameter("p_no");
 	if (p_noStr == null || p_noStr.equals("")) {
 		response.sendRedirect("product_list.jsp");
@@ -14,6 +23,11 @@
 
 	boolean isLogin = false;
 	if(session.getAttribute("sUserId")!=null) isLogin = true;
+	
+	/********리뷰불러오기*********/
+	ReviewService reviewService = new ReviewService();
+	ReviewListPageMakerDto reviewListPage = reviewService.findReviewPno(Integer.parseInt("1"),Integer.parseInt(p_noStr));
+		
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -60,6 +74,11 @@
 			f.method = 'POST';
 			f.submit();
 		}
+	}
+	
+	function reviewList() {
+		product_detail_form.action = "review_list.jsp?pageno="+<%=1%>+"&p_no="+<%=Integer.parseInt(p_noStr)%>;
+		product_detail_form.submit();
 	}
 </script>
 </head>
@@ -170,7 +189,8 @@
 									<td align=center>
 										<input type="button" value="바로주문하기[주문폼]" onClick="order_create_form();"> &nbsp; 
 										<input type="button" value="장바구니담기" onClick="add_cart_popup_window(document.add_cart_form);">&nbsp;
-										<input type="button" value="상품리스트보기" onClick="productList();">
+										<input type="button" value="상품리스트보기" onClick="productList();">&nbsp;
+										<input type="button" value="상품후기보기" onClick="reviewList();">
 									</td>
 								</tr>
 							</table></td>

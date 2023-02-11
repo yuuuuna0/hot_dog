@@ -1,5 +1,6 @@
 <%@page import="com.itwill.hotdog.domain.Review" %>
 <%@page import="com.itwill.hotdog.service.ReviewService"%>
+<%@ include file="login_check.jspf" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -35,7 +36,9 @@ if (request.getParameter("pageno") != null) {
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel=stylesheet href="css/styles.css" type="text/css">
+<link rel=stylesheet href="css/board.css" type="text/css">
 <title>리뷰수정</title>
 <script type="text/javascript">
 	function reviewUpdate() {
@@ -54,8 +57,8 @@ if (request.getParameter("pageno") != null) {
 		f.submit();
 	}
 
-	function reviewList() {
-		f.action = "review_list.jsp";
+	function reviewView() {
+		f.action = "review_view.jsp?r_no=<%=r_no%>&pageno=<%=pageno%>&p_no=<%=review.getP_no()%>";
 		f.submit();
 	}
 </script>
@@ -84,20 +87,21 @@ if (request.getParameter("pageno") != null) {
 										<td width=100 align=center bgcolor="E6ECDE" height="22">작성자</td>
 										<td width=500 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="text" style="width: 150px"
-											name="writer" value="<%=review.getU_id()%>"></td>
+											name="u_id" value="<%=review.getU_id()%>" disabled></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">평점</td>
 										<td width=500 bgcolor="ffffff" style="padding-left: 10px"
-											align="left"><input type="text" style="width: 150px"
-											name="grade"></td>
+											align="left">
+									<input type="text" style="width: 150px"
+											name="grade" value="<%=review.getR_grade()%>"></td>
 									</tr>
 								
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE">리뷰내용</td>
 										<td width=500 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><textarea name="comment" class="textarea"
-												style="width: 350px" rows="14"></textarea></td>
+												style="width: 350px" rows="14"><%=review.getR_comment()%></textarea></td>
 									</tr>
 								</table>
 							</form>
@@ -105,7 +109,7 @@ if (request.getParameter("pageno") != null) {
 								<table width=590 border=0 cellpadding=0 cellspacing=0>
 								<tr>
 									<td align=center><input type="button" value="리뷰수정" onClick="reviewUpdate()"> &nbsp; 
-									<input type="button" value="수정취소" onClick="reviewList()"></td>
+									<input type="button" value="수정취소" onClick="reviewView()"></td>
 								</tr>
 							</table></td>
 					</tr>
