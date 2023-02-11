@@ -72,7 +72,7 @@
 	}
 	/*
 	//delivery 선택삭제
-	function delivery_select_delete(){
+	function delete_checked_delivery(){
 		var=delivery_no_list;
 		var=delivery_no_check_list;
 		for(var i=0;i<delivery_no_list.length;i++){
@@ -106,7 +106,8 @@
 				<form name="delivery_detail_form">
 				<tr>
 					<td width=60 height=26 align=center bgcolor="ffffff" class=t1>
-						<input type="checkbox" name="delivery_no_check" onchange="delivery_select_deselect(event);" value="<%=delivery.getD_no() %>"></td>
+						<input type="checkbox" name="delivery_no_check" onchange="delivery_select_deselect(event);" value="<%=delivery.getD_no() %>">
+					</td>
 					<td width=500 height=25 align=center bgcolor="ffffff" class=t1 style="font-size: 9pt"><%=delivery.getD_name() %></td>
 					<td width=300 height=25 align=center bgcolor="ffffff" class=t1  style="font-size: 9pt">
 						<input type="hidden" readonly id="selected_delivery_<%=delivery.getD_no() %>"  value="<%=delivery.getD_address() %>" />
@@ -125,7 +126,7 @@
 			<input id="addDelivery" type="button" value="추가"  style="font-size: 7pt" 
 			onclick="window.open('orders_delivery_write_form.jsp','checkForm','width=500','height=400')">
 			<input id="deleteDelivery" type="button" value="선택삭제"  style="font-size: 7pt" 
-			onclick="delivery_delete_action();">
+			onclick="delete_checked_delivery();">
 			<input id="cancle" type="button" value="취소" style="font-size: 7pt" onclick="window.close();"> 
 		</div>
 	</div>
