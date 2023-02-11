@@ -122,7 +122,6 @@ form > table tr td{
 	function selectPayment(){
 		document.orders_create_form.pm_no.value = document.orders_detail_f.paymentType.value;
 	}
-
 	
 </script>
 </head>
