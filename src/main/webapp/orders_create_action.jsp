@@ -44,7 +44,7 @@
 	//기존포인트 - (사용포인트+적립포인트) 반영한 값을 user에 넣어줌
 	int new_u_point=sUser.getU_point()+Integer.parseInt(add_pointStr)-Integer.parseInt(o_usedPointStr);
 	userInfoService.updatPoint(sUserId, new_u_point);
-	
+
 	
 	//상품에서 직접 주문시 필요한 값을 Orders객체에 넣어서 전달해야 한다.
 	if(buyType.equals("direct")){
@@ -84,6 +84,8 @@
 		}
 		
 	}
+	
+	
 	
 	response.setHeader("Refresh", "0; URL=hotdog_main.jsp"); 
 	return;

@@ -54,7 +54,7 @@
 	<div id="wrap">
 		<br> <b><font size="3" color="gray"><%=sUser.getU_name() %>님의 배송지 선택</font></b>
 		<hr size="0.5" style="margin: 0 0 0 0"  >
-		<div id="chk" style="margin-top: 10px">
+		<div id="deliveryList" style="margin-top: 10px">
 			<table align=center width=80% border="0" cellpadding="0" cellspacing="1" bgcolor="E6ECDE">
 				<tr>
 					<td width=300 height=25 align=center bgcolor="E6ECDE" class=t1>배송지 이름</td>
@@ -74,9 +74,7 @@
 					</td>
 				</tr>
 				</form>
-
 				<%} %>
-			
 			</table>
 		</div>
 	</div>
