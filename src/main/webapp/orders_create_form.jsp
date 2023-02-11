@@ -115,10 +115,10 @@ form > table tr td{
 		document.orders_create_form.o_usedPoint.value=v_point;
 	}
 	//배송지 선택하기 띄우기
-	function orders_choose_delivery(){
+	function orders_delivery_choose(){
 		var left = Math.ceil(( window.screen.width)/5);
 		var top = Math.ceil(( window.screen.height)/5);
-		window.open("orders_choose_delivery.jsp","checkForm","width=500,height=400,top="+top+",left="+left+",resizable = no,location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
+		window.open("orders_delivery_choose.jsp","checkForm","width=500,height=400,top="+top+",left="+left+",resizable = no,location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
 	}
 	//결제수단 고르기
 	function selectPayment(){
@@ -194,7 +194,7 @@ form > table tr td{
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=new DecimalFormat("#,###").format(userInfoService.findUser(sUserId).getU_point()) %></td>
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
 											<input type="text" readonly name="address" value=""/>
-											<input type="button" value="선택하기" onclick="orders_choose_delivery();"/>
+											<input type="button" value="선택하기" onclick="orders_delivery_choose();"/>
 										</td>
 									</tr>
 								</table>

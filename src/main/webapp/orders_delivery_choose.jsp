@@ -79,7 +79,9 @@
 		</div>
 		<br/>
 		<div>
-			<input id="addDeilivey" type="button" value="추가"  style="font-size: 7pt" onclick="hotdog_main.jsp">
+			<input id="addDeilivey" type="button" value="추가"  style="font-size: 7pt" 
+			onclick="window.open('orders_delivery_write_form.jsp','checkForm','width=500','height=400')">
+			
 			<input id="cancle" type="button" value="취소" style="font-size: 7pt" onclick="window.close();"> 
 		</div>
 	</div>
