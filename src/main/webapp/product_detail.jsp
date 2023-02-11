@@ -195,10 +195,10 @@
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
 									<td align=center>
-										<input type="button" value="바로주문하기[주문폼]" onClick="order_create_form();"> &nbsp; 
-										<input type="button" value="장바구니담기" onClick="add_cart_popup_window(document.add_cart_form);">&nbsp;
-										<input type="button" value="상품리스트보기" onClick="productList();">&nbsp;
-										<input type="button" value="상품후기보기" onClick="reviewList();">
+										<input style="color:grey" type="button" value="바로주문하기[주문폼]" onClick="order_create_form();"> &nbsp; 
+										<input style="color:grey" type="button" value="장바구니담기" onClick="add_cart_popup_window(document.add_cart_form);">&nbsp;
+										<input style="color:grey" type="button" value="상품리스트보기" onClick="productList();">&nbsp;
+										<input style="color:grey" type="button" value="상품후기보기" onClick="reviewList();">
 									</td>
 								</tr>
 							</table></td>
