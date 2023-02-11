@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 if(request.getMethod().equalsIgnoreCase("GET")){
-	response.sendRedirect("product_list.jsp");
+	response.sendRedirect("product_search_list.jsp");
 	return;
 }
 String keyword = request.getParameter("keyword");

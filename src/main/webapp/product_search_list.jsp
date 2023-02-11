@@ -136,19 +136,7 @@ function searchByKeyword() {
 									
 								   <!--상품 끝 -->
 								   <%}%>
-								   <!--검색 -->
-								   <form name="ff" align="right" method="POST" style:"margin-right: 70px;">
-								   
-								   <!-- 수정확인해보기 
-										<select data-trigger="" name="searchType" style="width:60px;height:30px">
-											<option value="all">통합</option>
-											<option value="name">제목</option>
-										</select>
-										-->
-											<input id="search" type="text" name="keyword" placeholder="검색어를 입력하세요" style="width:200px;height:25px;"> 
-											<input type="button" value="검색" onclick="searchByKeyword();">
-									</form>
-									<!--검색 끝 -->
+
 							</table>
 							</div> <br /></td>
 					</tr>
