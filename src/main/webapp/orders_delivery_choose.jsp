@@ -68,23 +68,16 @@
 			}
 		}
 	}
-	
+	//delivery 선택삭제
 	function delivery_select_delete(){
-		var delivery_no_check_list = document.getElementsByName("delivery_no_check");
-		document.orders_delivery_choose_form.innerHTML ='';
-		var tot_order_price=0;
-		for (var i = 0; i < delivery_no_check_list.length; i++) {
-			if (delivery_no_check_list.item(i).checked === true) {
-				document.orders_delivery_choose_form.innerHTML += "<input type='hidden' name='delivery_no' value='"+ delivery_no_check_list.item(i).value + "'>";
-				var updateFormId='orders_delivery_choose_form_'+ cart_item_no_check_list.item(i).value;
-				var cart_qty=document.getElementById(updateFormId).cart_qty.value;
-				var cart_product_unit_price=document.getElementById(updateFormId).cart_product_unit_price.value;
-				tot_order_price+=cart_qty*cart_product_unit_price;
-				cart_item_check_selected_count++;
+		var=delivery_no_list;
+		var=delivery_no_check_list;
+		for(var i=0;i<delivery_no_list.length;i++){
+			if(e.target.checked){
+				delivery_no_check_list=document.getElementsByName("delivery_no_check").value;
 			}
 		}
-		document.getElementById('cart_item_select_count').innerHTML = cart_item_check_selected_count;
-		document.getElementById('tot_order_price').innerHTML = tot_order_price.toLocaleString();
+	}
 		
 }
 	
@@ -109,10 +102,10 @@
 					<td width=100 height=25 align=center bgcolor="E6ECDE" class=t1>선택</td>
 				</tr>
 				<%for(Delivery delivery:deliveryList){ %>
-				<form>
+				<form name="delivery_detail_form">
 				<tr>
 					<td width=60 height=26 align=center bgcolor="ffffff" class=t1>
-						<input type="checkbox" name="delivery_no_check" onchange="delivery_select_deselect();" value="<%=delivery.getD_no() %>"></td>
+						<input type="checkbox" name="delivery_no_check" onchange="delivery_select_deselect(event);" value="<%=delivery.getD_no() %>"></td>
 					<td width=500 height=25 align=center bgcolor="ffffff" class=t1 style="font-size: 9pt"><%=delivery.getD_name() %></td>
 					<td width=300 height=25 align=center bgcolor="ffffff" class=t1  style="font-size: 9pt">
 						<input type="hidden" readonly id="selected_delivery_<%=delivery.getD_no() %>"  value="<%=delivery.getD_address() %>" />
