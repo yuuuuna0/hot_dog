@@ -1,7 +1,8 @@
+
+<%@page import="com.itwill.hotdog.domain.UserInfo"%>
 <%@page import="com.itwill.hotdog.domain.ReviewListPageMakerDto"%>
 <%@page import="com.itwill.hotdog.domain.Review" %>
 <%@page import="com.itwill.hotdog.service.ReviewService"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -27,12 +28,18 @@
 	if(review==null){
 		response.sendRedirect("review_list.jsp?pageno="+pageno);
 		return;
+		
 }
+	UserInfo userInfo = new UserInfo();
+	String sUserId=(String)session.getAttribute("sUserId");
+	
 %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel=stylesheet href="css/styles.css" type="text/css">
+<link rel=stylesheet href="css/board.css" type="text/css">
 <title>상품후기</title>
 
 <script language="JavaScript">
@@ -44,10 +51,15 @@
 	
 	function reviewReplyCreate() {
 
-		if (f.recomment.value == "") {
+		if (f.recomment.value === "" || f.recomment.value === null) {
 			alert("내용을 입력하세요.");
 			f.recomment.focus();
 			return false;
+		}
+		
+		if(f.rewriter.value ==""){
+			alert("로그인 하세요.");
+			location.href = 'user_login_form.jsp';
 		}
 
 		f.action = "review_reply_write_action.jsp";
@@ -113,16 +125,17 @@
 											style="padding-left: 10px" align="left"><%= review.getR_comment().replace("\n","<br/>")%><br />
 
 									</tr>
+	
 									<tr>
-									<!-- 	<td width=100 align=center bgcolor="E6ECDE" height="22">댓글작성자</td> -->
-										<td width=500 bgcolor="ffffff" style="padding-left: 10px"
-											align="left"><input type="hidden" style="width: 150px"
-											name="rewriter" value="sy1"></td>
+										<!-- <td width=100 align=center bgcolor="E6ECDE" height="22">답변자 </td> -->
+										<td width=500 bgcolor="ffffff" style="padding-left: 0px"
+											align="left"><input type="hidden" style="width: 100px"
+											name="rewriter" value="<%=sUserId%>" disabled></td>
 									</tr>
 									
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE">댓글</td>
-										<td width=500 bgcolor="ffffff" style="padding-left: 10px"
+										<td width=100 align=center bgcolor="E6ECDE">답변</td>
+										<td width=500 bgcolor="ffffff" style="padding-left: 0px"
 											align="left"><textarea name="recomment" class="textarea"
 												style="width: 500px" rows="14"></textarea></td>
 									</tr>
@@ -130,10 +143,11 @@
 								</table>
 
 							</form> <br>
+						
 									<table width=600 border=0 cellpadding=0 cellspacing=0>
 								<tr>
 									<td align=center>
-										<input type="button" value="댓글달기" onClick="reviewReplyCreate()"> &nbsp; 
+										<input type="button" value="답변달기" onClick="reviewReplyCreate()"> &nbsp; 
 										<input type="button" value="리뷰수정" onClick="reviewUpdate()"> &nbsp; 
 										<input type="button" value="리뷰삭제" onClick="reviewRemove()"> &nbsp; 
 										<input type="button" value="목록보기" onClick="reviewList()"></td>

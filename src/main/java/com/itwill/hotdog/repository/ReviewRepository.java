@@ -3,6 +3,7 @@ package com.itwill.hotdog.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -10,7 +11,6 @@ import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import com.itwill.hotdog.common.DataSourceFactory;
 import com.itwill.hotdog.domain.Review;
 import com.itwill.hotdog.sql.ReviewSQL;
 
@@ -19,9 +19,18 @@ public class ReviewRepository {
 	private DataSource dataSource;
 	
 	
-	public ReviewRepository() throws Exception {
-		  dataSource=DataSourceFactory.getDataSource();
-	}
+public ReviewRepository() throws Exception{
+	Properties properties = new Properties();
+	properties.load(this.getClass().getResourceAsStream("/jdbc.properties"));
+	/*** Apache DataSource 	***/
+	BasicDataSource basicDataSource = new BasicDataSource();
+	basicDataSource.setDriverClassName(properties.getProperty("driverClassName"));
+	basicDataSource.setUrl(properties.getProperty("url"));
+	basicDataSource.setUsername(properties.getProperty("username"));
+	basicDataSource.setPassword(properties.getProperty("password"));
+	dataSource = basicDataSource;
+
+}
 
 
 /*새로운 리뷰 작성*/
@@ -39,9 +48,8 @@ public int createReview(Review review) throws Exception {
 		int result = pstmt.executeUpdate();
 		return result;
 		
-	} finally {
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+	}finally {
+		con.close();
 	}
 	
 }
@@ -75,9 +83,18 @@ public int createReply(Review review) throws Exception{
 		
 		count = pstmt.executeUpdate();
 		
-	} finally {
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+	}finally {
+		try {
+			if(pstmt != null)
+				pstmt.close();
+		}catch (Exception ex) {
+
+		}try {
+			if(con != null)
+				con.close();
+		}catch (Exception ex) {
+		}
+		
 	}
 	
 	return count;
@@ -85,7 +102,7 @@ public int createReply(Review review) throws Exception{
 
 /* 리뷰 리스트를 반환(게시물시작번호,게시물끝번호)*/
 public ArrayList<Review> findReviewList(int start, int last) throws Exception{
-	System.out.println("" + start + " ~ " + last);
+
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -113,17 +130,69 @@ public ArrayList<Review> findReviewList(int start, int last) throws Exception{
 			reviews.add(review);
 		}
 		
-	} finally {
-		if(rs!=null) rs.close();
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+	}finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (Exception ex) {
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (Exception ex) {
+			}
 	}
 	
+	
+return reviews;
+}
+
+/* 해당 상품 리뷰리스트*/
+public ArrayList<Review> findReviewist(int p_no) throws Exception{
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;// 조회 결과에 접근하는 참조 변수
+	// 데이터베이스의 데이터를 읽어서 저장할 객체 컬렉션
+	ArrayList<Review> reviews = new ArrayList<Review>();
+	try {
+		con = dataSource.getConnection();
+
+		pstmt = con.prepareStatement(ReviewSQL.REVIEW_SELECT_BY_P_NO);
+		pstmt.setInt(1, p_no);
+		rs=pstmt.executeQuery();
+		
+		while (rs.next()) {
+			Review review = new Review();
+			review.setR_no(rs.getInt("r_no"));
+			review.setR_date(rs.getDate("r_date"));
+			review.setR_comment(rs.getString("r_comment"));
+			review.setR_grade(rs.getInt("r_grade"));
+			review.setR_groupNo(rs.getInt("r_groupNo"));
+			review.setR_step(rs.getInt("r_step"));
+			review.setR_depth(rs.getInt("r_depth"));
+			review.setU_id(rs.getString("u_id"));
+			review.setP_no(rs.getInt("p_no"));
+			
+			reviews.add(review);
+		}
+	} finally {
+		// 6. 연결닫기
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (Exception ex) {
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (Exception ex) {
+			}
+	}
 	return reviews;
 }
 
-/* 해당 상품 리뷰리스트 */
-public ArrayList<Review> findReviewPno(int p_no) throws Exception{
+/* 해당 상품 리뷰리스트 (시작/끝)*/
+public ArrayList<Review> findReviewList(int start, int last,int p_no) throws Exception{
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -133,6 +202,8 @@ public ArrayList<Review> findReviewPno(int p_no) throws Exception{
 		con = dataSource.getConnection();
 		pstmt = con.prepareStatement(ReviewSQL.REVIEW_SELECT_BY_PNO);
 		pstmt.setInt(1, p_no);
+		pstmt.setInt(2, start);
+		pstmt.setInt(3, last);
 		rs = pstmt.executeQuery();
 		
 		while (rs.next()) {
@@ -150,14 +221,23 @@ public ArrayList<Review> findReviewPno(int p_no) throws Exception{
 			reviews.add(review);
 		}
 		
-	} finally {
-		if(rs!=null) rs.close();
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+	}finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (Exception ex) {
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (Exception ex) {
+			}
 	}
 	
-	return reviews;
+	
+return reviews;
 }
+
 
 /* 해당 아이디 리뷰리스트 */
 public ArrayList<Review> findReviewId(String u_id) throws Exception{
@@ -188,16 +268,24 @@ public ArrayList<Review> findReviewId(String u_id) throws Exception{
 		}
 		
 	}finally {
-		if(rs!=null) rs.close();
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (Exception ex) {
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (Exception ex) {
+			}
 	}
+	
 	
 	return reviews;
 }
-
 /* 해당 그룹넘버 리뷰리스트 */
-public ArrayList<Review> findReviewGno(int r_gropno) throws Exception{
+public ArrayList<Review> findReviewGno(int start, int last,int r_groupNo) throws Exception{
+
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -206,7 +294,9 @@ public ArrayList<Review> findReviewGno(int r_gropno) throws Exception{
 	try {
 		con = dataSource.getConnection();
 		pstmt = con.prepareStatement(ReviewSQL.REVIEW_SELECT_BY_GNO);
-		pstmt.setInt(1, r_gropno);
+		pstmt.setInt(1, r_groupNo);
+		pstmt.setInt(2, start);
+		pstmt.setInt(3, last);
 		rs = pstmt.executeQuery();
 		
 		while (rs.next()) {
@@ -224,15 +314,76 @@ public ArrayList<Review> findReviewGno(int r_gropno) throws Exception{
 			reviews.add(review);
 		}
 		
-	} finally {
-		if(rs!=null) rs.close();
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+	}finally {
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (Exception ex) {
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (Exception ex) {
+			}
 	}
 	
 	return reviews;
 }
+/*
+ * 답변게시물 존재여부확인메쏘드
+ */
+public boolean countReply(Review review) throws SQLException {
 
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	Boolean isExist = false;
+	int cnt = 0;
+	try {
+		con = dataSource.getConnection();
+		StringBuffer sql = new StringBuffer(300);
+		sql.append("SELECT ");
+		sql.append("count(*) cnt ");
+		sql.append("FROM review ");
+		sql.append("WHERE r_groupno = ? ");
+		sql.append("AND r_depth >= ? ");
+		sql.append("AND r_step >= ? ");
+		sql.append("ORDER BY r_step,r_depth ASC");
+
+		pstmt = con.prepareStatement(sql.toString());
+		pstmt.setInt(1, review.getR_groupNo());
+		pstmt.setInt(2, review.getR_depth());
+		pstmt.setInt(3, review.getR_step());
+
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			cnt = rs.getInt("cnt");
+		}
+		if (cnt > 1) {
+			isExist = true;
+		}
+	} catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		try {
+			if (rs != null)
+				rs.close();
+		} catch (Exception ex) {
+		}
+		try {
+			if (pstmt != null)
+				pstmt.close();
+		} catch (Exception ex) {
+		}
+		try {
+			if (con != null)
+				con.close();
+		} catch (Exception ex) {
+		}
+	}
+	return isExist;
+
+}
 /*리뷰 삭제*/
 public int removeReview(int r_no) throws Exception{
 	
@@ -247,14 +398,24 @@ public int removeReview(int r_no) throws Exception{
 		count = pstmt.executeUpdate();
 
 	} finally {
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+		try {
+			if (pstmt != null)
+				pstmt.close();
+		} catch (Exception ex) {
+		}
+		try {
+			if (con != null)
+				con.close();
+		} catch (Exception ex) {
+		}
 	}
 	return count;
+
 }
 
+
 /*리뷰 수정*/
-public int updateReview(Review review) throws Exception {
+public int updateReview(Review review) throws Exception{
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	int count = 0;
@@ -266,9 +427,20 @@ public int updateReview(Review review) throws Exception {
 		pstmt.setInt(3, review.getR_no());
 		count = pstmt.executeUpdate();
 		
-	} finally {
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+	}finally {
+		try{
+			if(pstmt != null)
+				pstmt.close();
+			
+		}catch (Exception ex) {
+			// TODO: handle exception
+		}
+		try {
+			if(con!=null)
+				con.close();
+		}catch (Exception ex) {
+			// TODO: handle exception
+		}
 	}
 	
 	return count;
@@ -299,10 +471,22 @@ public Review findReviewNo(int r_no) throws Exception{
 			
 		}
 		
-	} finally {
-		if(rs!=null) rs.close();
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+	}finally {
+		try {
+			if (rs != null)
+				rs.close();
+		} catch (Exception ex) {
+		}
+		try {
+			if (pstmt != null)
+				pstmt.close();
+		} catch (Exception ex) {
+		}
+		try {
+			if (con != null)
+				con.close();
+		} catch (Exception ex) {
+		}	
 	}
 	
 	return review;
@@ -321,10 +505,56 @@ public int getReviewCount() throws Exception{
 		if(rs.next())
 			count= rs.getInt(1);
 		
-	} finally {
-		if(rs!=null) rs.close();
-		if(pstmt!=null) pstmt.close();
-		if(con!=null) con.close();
+	}finally {
+		try {
+			if (rs != null)
+				rs.close();
+		} catch (Exception ex) {
+		}
+		try {
+			if (pstmt != null)
+				pstmt.close();
+		} catch (Exception ex) {
+		}
+		try {
+			if (con != null)
+				con.close();
+		} catch (Exception ex) {
+		}
+	}
+	return count;
+}
+
+/* 상품별 리뷰 총 건수를 조회, 반환*/
+public int getReviewCountPno(int p_no) throws Exception{
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	int count = 0;
+	try {
+		con=dataSource.getConnection();
+		pstmt = con.prepareStatement(ReviewSQL.REVIEW_COUNT_PNO);
+		pstmt.setInt(1, p_no);
+		rs = pstmt.executeQuery();
+		if(rs.next())
+			count= rs.getInt(1);
+		
+	}finally {
+		try {
+			if (rs != null)
+				rs.close();
+		} catch (Exception ex) {
+		}
+		try {
+			if (pstmt != null)
+				pstmt.close();
+		} catch (Exception ex) {
+		}
+		try {
+			if (con != null)
+				con.close();
+		} catch (Exception ex) {
+		}
 	}
 	return count;
 }
