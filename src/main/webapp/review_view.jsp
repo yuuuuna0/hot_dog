@@ -30,8 +30,12 @@
 		return;
 		
 }
+	
 	UserInfo userInfo = new UserInfo();
 	String sUserId=(String)session.getAttribute("sUserId");
+	
+	boolean isLogin = false;
+	if(session.getAttribute("sUserId")!=null) isLogin = true;
 	
 %>    
 <!DOCTYPE html>
@@ -50,29 +54,38 @@
 	}
 	
 	function reviewReplyCreate() {
-
+		if(<%=!isLogin%>) {
+			alert('로그인 하세요');
+			location.href = 'user_login_form.jsp';
+			return;
+		}
 		if (f.recomment.value === "" || f.recomment.value === null) {
 			alert("내용을 입력하세요.");
 			f.recomment.focus();
 			return false;
 		}
-		
-		if(f.rewriter.value ==""){
-			alert("로그인 하세요.");
-			location.href = 'user_login_form.jsp';
-		}
 
 		f.action = "review_reply_write_action.jsp";
 		f.method="POST";
 		f.submit();
-		}	
+	}	
 	
 	function reviewUpdate() {
+		if(<%=!isLogin%>) {
+			alert('로그인 하세요');
+			location.href = 'user_login_form.jsp';
+			return;
+		}
 		document.f.action = "review_modify.jsp";
 		document.f.submit();
 	}
 	
 	function reviewRemove() {
+		if(<%=!isLogin%>) {
+			alert('로그인 하세요');
+			location.href = 'user_login_form.jsp';
+			return;
+		}
 		if (confirm("정말 삭제하시겠습니까?")) {
 			document.f.action = "review_remove_action.jsp";
 			document.f.submit();
