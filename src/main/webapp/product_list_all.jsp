@@ -73,8 +73,7 @@ function add_cart_popup_window(f){
 							<table style="padding-left: 10px" border=0 cellpadding=0
 								cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>쇼핑몰 -
-											상품리스트</b></td>
+									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>상품리스트</b></td>
 								</tr>
 								<%for(Categories category : categoriesList) {%>
 								<tr>

@@ -81,11 +81,11 @@ function add_cart_popup_window(f){
 							<table style="padding-left: 10px" border=0 cellpadding=0
 								cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>상품리스트</b></td>
+									<td bgcolor="f4f4f4" height="22">
+									<span>&nbsp;&nbsp;<b>상품리스트</b></span>
+									<span>&nbsp;&nbsp;>>&nbsp;&nbsp;<b><%=category.getCt_name() %></b></span>
+									</td>
 								</tr>
-								<tr>
-									<td bgcolor="f7f7f7" height="20"><b>
-										<%=         category.getCt_name() %></b>
 								
 							</table>
 
