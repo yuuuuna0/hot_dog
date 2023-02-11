@@ -103,7 +103,7 @@
 							</table> <!-- 
 							<form name="f" method="post">
 							-->
-							<table style="margin-left: 10px" border=0 width=80% height=376
+							<table style="margin-left: 0px" border=0 width=80% height=376
 								align=center bgcolor="ffffff">
 								<tr valign=bottom>
 									<td width=30% align=center class=t1><font size=2
