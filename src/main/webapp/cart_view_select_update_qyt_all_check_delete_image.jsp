@@ -173,7 +173,7 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 										<td width=60 height=25 align="center" bgcolor="E6ECDE"
 											class=t1><input type="checkbox" id="all_select_checkbox" checked="checked" onchange="cart_item_all_select(event);cart_item_select_count();"></td>
 										<td width=180 height=25 align="center" bgcolor="E6ECDE"
-											class=t1><font></font></td>
+											class=t1><font>이미지</font></td>
 										<td width=100 height=25 align="center" bgcolor="E6ECDE"
 											class=t1><font>상품명</font></td>
 										<td width=112 height=25 align="center" bgcolor="E6ECDE"
