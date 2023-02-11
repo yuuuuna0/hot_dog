@@ -57,9 +57,9 @@ function add_cart_popup_window(f){
 	
 	
 }
-function searchByKeyword() {
-	document.ff.action ='product_search_action.jsp';
-	document.ff.method='POST';
+function searchByKeyword(keyword) {
+	document.ff.action ='product_search_list.jsp?keyword='+keyword;
+	document.ff.method='GET';
 	document.ff.submit();
 }
 </script> 
@@ -137,7 +137,7 @@ function searchByKeyword() {
 								   <!--상품 끝 -->
 								   <%}%>
 								   <!--검색 -->
-								   <form name="ff" align="right" method="POST" style:"margin-right: 70px;">
+								   <form name="ff" align="right" style:"margin-right: 70px;">
 								   
 								   <!-- 수정확인해보기 
 										<select data-trigger="" name="searchType" style="width:60px;height:30px">
@@ -146,7 +146,7 @@ function searchByKeyword() {
 										</select>
 										-->
 											<input id="search" type="text" name="keyword" placeholder="검색어를 입력하세요" style="width:200px;height:25px;"> 
-											<input type="button" value="검색" onclick="searchByKeyword();">
+											<input type="button" value="검색" onclick="searchByKeyword(document.ff.keyword.placeholder);">
 									</form>
 									<!--검색 끝 -->
 							</table>
