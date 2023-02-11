@@ -110,6 +110,7 @@ form > table tr td{
 		u_point-=v_point;
 		var result_price=tot_price-v_point
 		document.getElementById("result_price").innerHTML=result_price;
+		document.orders_create_form.new_u_point.value=u_point;
 		document.orders_create_form.o_usedPoint.value=v_point;
 	}
 	//배송지 선택하기 띄우기
@@ -134,6 +135,7 @@ form > table tr td{
 		<input type="hidden" name="p_qty" value="<%=p_qtyStr%>"/>
 		<input type="hidden" name="o_usedPoint" value=""/>
 		<input type="hidden" name="pm_no" value=""/>
+		<input type="hidden" name="new_u_point" value=""/>
 		
 		<%-- <input type="hidden" name="addPoint" value="<%=addPoint%>"/> --%>
 		<%for (String cart_item_noStr : cart_item_noStr_array) {
