@@ -81,8 +81,7 @@ function add_cart_popup_window(f){
 							<table style="padding-left: 10px" border=0 cellpadding=0
 								cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>쇼핑몰 -
-											상품리스트</b></td>
+									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>상품리스트</b></td>
 								</tr>
 								<tr>
 									<td bgcolor="f7f7f7" height="20"><b>
@@ -96,7 +95,7 @@ function add_cart_popup_window(f){
 									
 									
 									
-									<tr>
+									
 									<%
 									int product_size=productList.size();
 									int product_column_size=4;
@@ -121,8 +120,7 @@ function add_cart_popup_window(f){
 												<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
 												<input type="hidden" name="cart_qty" value="1">
 												<img src='image/cart20.png' style="cursor:pointer;" onclick="add_cart_popup_window(this.parentElement);" align="top"/>
-											</form><br> <font
-											color="#FF0000">가격:<%=new DecimalFormat("#,###").format(product.getP_price()) %>원
+											</form><br> <font color="#FF0000">가격:<%=new DecimalFormat("#,###").format(product.getP_price()) %>원
 										</font></td>
 										<%if(i%product_column_size==3){%>
 									</tr>
@@ -132,17 +130,6 @@ function add_cart_popup_window(f){
 								   <!--상품 끝 -->
 								   
 								<%} %>
-									
-								   
-									
-									
-									</tr>
-										
-									
-								
-										
-									
-								   <!--상품 끝 -->
 								   	
 								</table>
 							</div> <br /></td>
