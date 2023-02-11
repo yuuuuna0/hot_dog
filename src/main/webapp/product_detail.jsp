@@ -5,13 +5,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-/********게시판*********/
-String pageno = "1";
-if (pageno == null || pageno.equals("")) {
-	pageno="1";
-}
-pageno= request.getParameter("pageno");
-/*********************/
+	/********게시판*********/
+	String pageno = "1";
+	if (pageno == null || pageno.equals("")) {
+		pageno="1";
+	}
+	pageno= request.getParameter("pageno");
+	/*********************/
+
 	String p_noStr = request.getParameter("p_no");
 	if (p_noStr == null || p_noStr.equals("")) {
 		response.sendRedirect("product_list.jsp");
@@ -20,6 +21,10 @@ pageno= request.getParameter("pageno");
 	
 	ProductService productService = new ProductService();
 	Product product = productService.productDetail(Integer.parseInt(p_noStr));
+	
+	//조회수 1 증가
+	product.setP_click(product.getP_click()+1);
+	productService.updateClickNo(product.getP_no());
 
 	boolean isLogin = false;
 	if(session.getAttribute("sUserId")!=null) isLogin = true;
@@ -125,18 +130,21 @@ pageno= request.getParameter("pageno");
 							<table style="margin-left: 0px" border=0 width=80% height=376
 								align=center bgcolor="ffffff">
 								<tr valign=bottom>
-									<td width=30% align=center class=t1><font size=2
+									<td width=10% align=center class=t1><font size=2
+										color=#0000FF><b>조회수</b></font></td>
+									<td width=20% align=center class=t1><font size=2
 										color=#0000FF><b>주문량</b></font></td>
-									<td width=40% align=center class=t1><font size=2
-										color=#0000FF><b>상품 이름</b></font></td>
 									<td width=30% align=center class=t1><font size=2
+										color=#0000FF><b>상품 이름</b></font></td>
+									<td width=40% align=center class=t1><font size=2
 										color=#0000FF><b>소개</b></font></td>
 								</tr>
 								<tr width=100%>
-									<td colspan=3 height=5><hr color=#556b2f></td>
+									<td colspan=4 height=5><hr color=#556b2f></td>
 								</tr>
 								<tr width=100%>
-									<td width=30% height=200 align=center class=t1>
+									<td width=10% height=200 align=center class=t1><%=product.getP_click()%></td>
+									<td width=20% height=200 align=center class=t1>
 										<form name="add_cart_form" method="post" onsubmit="return add_cart();" action="cart_add_action.jsp">
 											<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
 											수량 :
@@ -162,11 +170,11 @@ pageno= request.getParameter("pageno");
 												--%>
 										</form>
 									</td>
-									<td width=40% height=200 align=center><img border=0
+									<td width=30% height=200 align=center><img border=0
 										src='image/<%=product.getP_img()%>' 
 										width=120 height=200></td>
 
-									<td width=30% height=200 class=t1>
+									<td width=40% height=200 class=t1>
 										<ol type="disc">
 											<li><b>상품 이름 : <%=product.getP_name()%>&nbsp;&nbsp;&nbsp;
 											</b></li>
@@ -177,7 +185,7 @@ pageno= request.getParameter("pageno");
 									</td>
 								</tr>
 								<tr>
-									<td colSpan=3 height=21><hr color=#556b2f></td>
+									<td colSpan=4 height=21><hr color=#556b2f></td>
 								</tr>
 							</table> <!-- 
 							</form>
@@ -187,10 +195,10 @@ pageno= request.getParameter("pageno");
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
 									<td align=center>
-										<input type="button" value="바로주문하기[주문폼]" onClick="order_create_form();"> &nbsp; 
-										<input type="button" value="장바구니담기" onClick="add_cart_popup_window(document.add_cart_form);">&nbsp;
-										<input type="button" value="상품리스트보기" onClick="productList();">&nbsp;
-										<input type="button" value="상품후기보기" onClick="reviewList();">
+										<input style="color:grey" type="button" value="바로주문하기[주문폼]" onClick="order_create_form();"> &nbsp; 
+										<input style="color:grey" type="button" value="장바구니담기" onClick="add_cart_popup_window(document.add_cart_form);">&nbsp;
+										<input style="color:grey" type="button" value="상품리스트보기" onClick="productList();">&nbsp;
+										<input style="color:grey" type="button" value="상품후기보기" onClick="reviewList();">
 									</td>
 								</tr>
 							</table></td>

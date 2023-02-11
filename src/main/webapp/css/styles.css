@@ -8,24 +8,33 @@
 
 html, body {
 	margin: 0;
-	padding: 0
+	padding: 0;
 }
 
 body {
 	font: 76% arial, sans-serif;
 	font-family: 'S-CoreDream-3Light';
-	text-align: center
+	text-align: center;
 }
 
 p {
-	margin: 0 10px 10px
+	margin: 0 10px 10px;
+	color:grey;
 }
 
 a {
 	padding: 5px;
 	text-decoration: none;
-	color: #4a4a4a;
+	color:grey!important;
 }
+
+b {
+	color:grey;
+}
+li {
+	color:grey!important;
+}
+
 div#header {
 	background-color: #F3F2ED;
 	background: #fff url('../image/nav_bg01.png');

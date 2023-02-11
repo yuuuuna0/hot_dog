@@ -54,5 +54,11 @@ public class ProductService {
 	public List<Categories> getCategoryListOnly() throws Exception {
 		return productRepository.findAllCategoriesOnly();
 	}
+	
+	/*
+	 * product_detail.jsp에서 사용 - 조회수 증가
+	 */
+	public int updateClickNo(int p_no) throws Exception {
+		return productRepository.updateByProductNo(p_no);
+	}
 }
-
