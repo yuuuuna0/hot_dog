@@ -1,6 +1,3 @@
 /**
  * 
  */
-function test(){
-	alert('test');
-}

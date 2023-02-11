@@ -5,31 +5,23 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 <%
-
-String keyword =null;
-keyword = request.getParameter("keyword");
-ProductService productService = new ProductService();
-
-List<Product> productList=new ArrayList<Product>();
-
-//List<Product> productList = productService.productList();
-
-if(keyword != null){
-	productList=productService.productFindByName(keyword);
-}else{
-	productList=productService.productList();
-}
-
-
-boolean isLogin = false;
-if (session.getAttribute("sUserId") != null) {
-	isLogin = true;
-}
+	String keyword = request.getParameter("keyword");
 	
-
-
+	ProductService productService = new ProductService();
+	
+	List<Product> productList = new ArrayList<Product>();
+	
+	//List<Product> productList = productService.productList();
+	
+	if(keyword!=null){
+		productList = productService.productFindByName(keyword);
+	} else {
+		productList = productService.productList();
+	}
+	
+	boolean isLogin = false;
+	if(session.getAttribute("sUserId")!=null) isLogin = true;
 %>
 <!DOCTYPE html>
 <html>
@@ -39,29 +31,28 @@ if (session.getAttribute("sUserId") != null) {
 <link rel=stylesheet href="css/styles.css" type="text/css">
 <link rel=stylesheet href="css/shop.css" type="text/css">
 <script type="text/javascript">
-function add_cart_popup_window(f){
-	if (<%=!isLogin%>) {
-		alert('로그인 하세요');
-		location.href = 'user_login_form.jsp';
-	} else {
-		var left = Math.ceil(( window.screen.width)/5);
-		var top = Math.ceil(( window.screen.height)/3); 
-		console.log(left);
-		console.log(top);
-		var cartWin = window.open("about:blank","cartForm","width=260,height=130,top="+top+",left="+left+",location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
-		f.action = 'cart_add_action_popup_window.jsp';
-		f.target = 'cartForm';
-		f.method = 'POST';
-		f.submit();
+	function add_cart_popup_window(f){
+		if(<%=!isLogin%>) {
+			alert('로그인 하세요');
+			location.href = 'user_login_form.jsp';
+		} else {
+			var left = Math.ceil(( window.screen.width)/5);
+			var top = Math.ceil(( window.screen.height)/3); 
+			console.log(left);
+			console.log(top);
+			var cartWin = window.open("about:blank","cartForm","width=260,height=130,top="+top+",left="+left+",location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
+			f.action = 'cart_add_action_popup_window.jsp';
+			f.target = 'cartForm';
+			f.method = 'POST';
+			f.submit();
+		}
 	}
 	
-	
-}
-function searchByKeyword(keyword) {
-	document.ff.action ='product_search_list.jsp?keyword='+keyword;
-	document.ff.method='GET';
-	document.ff.submit();
-}
+	function searchByKeyword(keyword) {
+		document.ff.action ='product_search_list.jsp?keyword='+keyword;
+		document.ff.method='GET';
+		document.ff.submit();
+	}
 </script> 
 <style type="text/css" media="screen">
 </style>

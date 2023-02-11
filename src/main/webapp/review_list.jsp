@@ -51,6 +51,8 @@ if(pageno==null||pageno.equals("")){
 	ProductService productService=new ProductService();
 	Product product=productService.productDetail(p_no);	
 	
+	boolean isLogin = false;
+	if(session.getAttribute("sUserId")!=null) isLogin = true;
 %>
 
 <!DOCTYPE html>
@@ -63,6 +65,11 @@ if(pageno==null||pageno.equals("")){
 <script type="text/javascript">
 
 	function reviewCreate() {
+		if(<%=!isLogin%>) {
+			alert('로그인 하세요');
+			location.href = 'user_login_form.jsp';
+			return;
+		}
 		location.href = "review_write.jsp?p_no="+<%=p_no%>;
 	}
 </script>
