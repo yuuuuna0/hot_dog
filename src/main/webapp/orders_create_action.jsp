@@ -85,6 +85,7 @@
 		
 	}
 	
-	
-	response.sendRedirect("hotdog_main.jsp");
+	response.setHeader("Refresh", "0; URL=hotdog_main.jsp"); 
+	return;
+	//response.sendRedirect("hotdog_main.jsp");
 %>
