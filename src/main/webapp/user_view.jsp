@@ -90,11 +90,19 @@
 											<%=user.getU_phone()%>
 										</td>
 									</tr>
+									<tr>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">포인트
+											</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10">
+											<%=userService.findUser(sUserId).getU_point()%>
+										</td>
+									</tr>
 								</table>
 							</form> <br />
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
 									<td align=center>
+									<input type="button" value="주문내역" onClick="location.href='orders_list_orderitem.jsp'">&nbsp; 
 									<input type="button" value="내정보수정" onClick="userModify()">&nbsp; 
 									<input type="button" value="탈퇴" onClick="userRemove()">&nbsp;
 									</td>
