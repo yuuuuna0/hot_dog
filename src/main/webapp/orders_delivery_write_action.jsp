@@ -7,12 +7,12 @@
  <%@include file="login_check.jspf" %>
 <%
    if(request.getMethod().equalsIgnoreCase("get")){
-      response.sendRedirect("delivery_write_form.jsp");
+      response.sendRedirect("orders_delivery_write_form.jsp");
       return;
    }
 
-   String deliveryName = request.getParameter("deliveryName");
-   String deliveryAddress = request.getParameter("deliveryAddress");
+   String deliveryName = (String)request.getParameter("deliveryName");
+   String deliveryAddress = (String)request.getParameter("deliveryAddress");
    Delivery newDelivery=null;
    try {
       newDelivery = new Delivery(0,deliveryName,deliveryAddress,sUserId);

@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.itwill.hotdog.domain.UserInfo"%>
 <%@page import="com.itwill.hotdog.service.UserInfoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -94,7 +95,7 @@
 										<td width=100 align=center bgcolor="E6ECDE" height="22">포인트
 											</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10">
-											<%=userService.findUser(sUserId).getU_point()%>
+											<%=new DecimalFormat("#,###").format(userService.findUser(sUserId).getU_point()) %>
 										</td>
 									</tr>
 								</table>
