@@ -47,24 +47,20 @@
 <script type="text/javascript">
 	//배송지 추가하기
 	function addDelivery(){
-		var deliveryName=document.delivery_f.deliveryName.value;
-		var deliveryAddress=document.delivery_f.deliveryAddress.value;
+		var deliveryName=document.newDelivery_f.deliveryName.value;
+		var deliveryAddress=document.newDelivery_f.deliveryAddress.value;
 		if(deliveryName==null || deliveryName==""){
 			alert("배송지명을 입력하십시요.");
-			delivery_f.deliveryName.focus();
+			newDelivery_f.deliveryName.focus();
 			return false;
 		}else if(deliveryAddress==null || deliveryAddress==""){
 			alert("주소를 입력하십시요.");
-			delivery_f.deliveryName.focus();
-			return false;
-		} else if(<%=isDuplicate%>){
-			alert("중복되는 배송지명입니다.");
-			delivery_f.deliveryName.focus();
+			newDelivery_f.deliveryName.focus();
 			return false;
 		}else{
-			delivery_f.action = "orders_delivery_write_action.jsp";
-			delivery_f.method = "POST";
-			delivery_f.submit();
+			newDelivery_f.action = "orders_delivery_write_action.jsp";
+			newDelivery_f.method = "POST";
+			newDelivery_f.submit();
 			window.close();
 		}
 	}
@@ -76,7 +72,7 @@
 		<br> <b><font size="3" color="gray"><%=sUser.getU_name() %>님의 배송지 추가</font></b>
 		<hr size="0.5" style="margin: 0 0 0 0"  >
 		<div id="deliveryList" style="margin-top: 10px">
-			<form name="delivery_f">
+			<form name="newDelivery_f">
 			<table align=center width=80% border="0" cellpadding="0" cellspacing="1" bgcolor="E6ECDE">
 				<tr>
 					<td width=300 height=25 align=center bgcolor="E6ECDE" class=t1>배송지 이름</td>
