@@ -24,8 +24,8 @@
 	String p_noStr = request.getParameter("p_no");
 	String p_qtyStr = request.getParameter("p_qty");
 	String p_priceStr = request.getParameter("p_price");
-	int o_usedPoint = 0;
-	int addPoint = 0;
+	//int o_usedPoint = 0;
+	//int addPoint = 0;
 	String[] cart_item_noStr_array = request.getParameterValues("cart_item_no");
 	
 	
@@ -86,6 +86,7 @@ form > table tr td{
 			return false;
 		}
 		document.getElementByName
+		document.orders_create_form.add_point.value=document.orders_detail_f.add_point.value
 		document.orders_create_form.method = 'POST';
 		document.orders_create_form.action = 'orders_create_action.jsp';
 		document.orders_create_form.submit();
@@ -110,7 +111,7 @@ form > table tr td{
 		u_point-=v_point;
 		var result_price=tot_price-v_point
 		document.getElementById("result_price").innerHTML=result_price;
-		document.orders_create_form.new_u_point.value=u_point;
+		//document.orders_create_form.new_u_point.value=u_point;
 		document.orders_create_form.o_usedPoint.value=v_point;
 	}
 	//배송지 선택하기 띄우기
@@ -134,7 +135,7 @@ form > table tr td{
 		<input type="hidden" name="p_qty" value="<%=p_qtyStr%>"/>
 		<input type="hidden" name="o_usedPoint" value=""/>
 		<input type="hidden" name="pm_no" value=""/>
-		<input type="hidden" name="new_u_point" value=""/>
+		<input type="hidden" name="add_point" value=""/>
 		
 		<%-- <input type="hidden" name="addPoint" value="<%=addPoint%>"/> --%>
 		<%for (String cart_item_noStr : cart_item_noStr_array) {
@@ -190,7 +191,7 @@ form > table tr td{
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_id()%></td>
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_name()%></td>
 										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_phone()%></td>
-										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_point() %></td>
+										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=new DecimalFormat("#,###").format(sUser.getU_point()) %></td>
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
 											<input type="text" readonly name="address" value=""/>
 											<input type="button" value="선택하기" onclick="orders_choose_delivery();"/>
@@ -212,6 +213,7 @@ form > table tr td{
 									</tr>
 									<%
 									int tot_price = 0;
+									int add_point=0;
 									for (Cart cart : cartItemList) {
 										tot_price += cart.getC_qty() * cart.getProduct().getP_price();
 									%>
@@ -227,12 +229,13 @@ form > table tr td{
 											<%=new DecimalFormat("#,###").format(cart.getC_qty() * cart.getProduct().getP_price())%>
 										</td>
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
-											<input type="hidden" name="addPoint" value="">
 											<%=new DecimalFormat("#,###").format((cart.getC_qty() * cart.getProduct().getP_price())*0.05)%>
 										</td>
+										<%add_point+= (int)(cart.getC_qty() * cart.getProduct().getP_price()*0.05);%>
 									</tr>
 									<!-- cart item end -->
 									<%}%>
+									<input type="hidden" name="add_point" value="<%=add_point%>"/>
 									<tr>
 										<td width=640 colspan=3 height=26 bgcolor="ffffff" class=t1>
 											<p align=right style="padding-top: 10px">

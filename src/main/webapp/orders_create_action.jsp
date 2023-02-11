@@ -27,7 +27,7 @@
 	//String p_priceStr = request.getParameter("p_price");
 	String o_usedPointStr = request.getParameter("o_usedPoint");
 	String pm_noStr = request.getParameter("pm_no");
-	String new_u_pointStr=request.getParameter("new_u_point");
+	String add_pointStr=request.getParameter("add_point");
 	String[] cart_item_noStr_array = request.getParameterValues("cart_item_no");
 	
 	OrdersService ordersService=new OrdersService();
@@ -41,8 +41,9 @@
 	OrderItem orderItem=null;
 	Orders newOrders=null;
 	
-	//기존포인트 - 사용포인트 반영한 값을 user에 넣어줌
-	userInfoService.updatPoint(sUserId, Integer.parseInt(new_u_pointStr));
+	//기존포인트 - (사용포인트+적립포인트) 반영한 값을 user에 넣어줌
+	int new_u_point=sUser.getU_point()+Integer.parseInt(add_pointStr)-Integer.parseInt(o_usedPointStr);
+	userInfoService.updatPoint(sUserId, new_u_point);
 	
 	
 	//상품에서 직접 주문시 필요한 값을 Orders객체에 넣어서 전달해야 한다.
