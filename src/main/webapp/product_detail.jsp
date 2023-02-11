@@ -5,13 +5,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-/********게시판*********/
-String pageno = "1";
-if (pageno == null || pageno.equals("")) {
-	pageno="1";
-}
-pageno= request.getParameter("pageno");
-/*********************/
+	/********게시판*********/
+	String pageno = "1";
+	if (pageno == null || pageno.equals("")) {
+		pageno="1";
+	}
+	pageno= request.getParameter("pageno");
+	/*********************/
+
 	String p_noStr = request.getParameter("p_no");
 	if (p_noStr == null || p_noStr.equals("")) {
 		response.sendRedirect("product_list.jsp");
@@ -20,6 +21,10 @@ pageno= request.getParameter("pageno");
 	
 	ProductService productService = new ProductService();
 	Product product = productService.productDetail(Integer.parseInt(p_noStr));
+	
+	//조회수 1 증가
+	product.setP_click(product.getP_click()+1);
+	productService.updateClickNo(product.getP_no());
 
 	boolean isLogin = false;
 	if(session.getAttribute("sUserId")!=null) isLogin = true;

@@ -212,4 +212,26 @@ public class ProductRepository {
 		}
 		return categoriesList;
 	}
+	
+	/*
+	 * 조회수 증가
+	 */
+	public int updateByProductNo(int p_no) throws Exception {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int rowCount = 0;
+		
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(ProductSQL.PRODUCT_UPDATE_BY_P_NO);
+			pstmt.setInt(1, p_no);
+			rowCount = pstmt.executeUpdate();
+		} finally {
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
+		}
+		
+		return rowCount;
+	}
 }
