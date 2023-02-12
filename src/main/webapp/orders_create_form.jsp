@@ -197,9 +197,11 @@ form > table tr td{
 										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_name()%></td>
 										<td width=166 height=26 align=center bgcolor="ffffff" class=t1><%=sUser.getU_phone()%></td>
 										<td width=50 height=26 align=center bgcolor="ffffff" class=t1><%=new DecimalFormat("#,###").format(userInfoService.findUser(sUserId).getU_point()) %></td>
-										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
+										<td width=150 height=26 align=center bgcolor="ffffff" style="padding-top:10px;padding-bottom:10px;">
 											<input type="text" readonly name="address" value=""/>
-											<input type="button" value="선택하기" onclick="orders_delivery_choose();"/>
+										<br/>
+										<br/>
+										<input type="button" value="선택하기" onclick="orders_delivery_choose();"/>
 										</td>
 									</tr>
 								</table>
@@ -249,7 +251,7 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
+										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="center">
 											<span id="tot_price"><%=new DecimalFormat("#,###").format(tot_price)%>원</span>
 										</td>
 									</tr>
@@ -260,8 +262,8 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td width=100 colspan=2 height=26 bgcolor="ffffff" align="left" class=t1>
-											&nbsp;&nbsp;<input type="text" name="use_point" id="use_point" value=0 />
+										<td width=100 colspan=2 height=26 bgcolor="ffffff" align="center" class=t1>
+											&nbsp;&nbsp;<input type="text" size=12 name="use_point" id="use_point" value=0 />
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<input type="button" value="사용하기" onclick="changePoint(<%=tot_price%>);"/>
 										</td>
@@ -273,7 +275,7 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
+										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="center">
 											<span id="result_price"><%=new DecimalFormat("#,###").format(tot_price) %></span>
 											<span>원</span>
 										</td>
@@ -285,9 +287,8 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="text" readonly id="add_point" value="<%=new DecimalFormat("#,###").format(tot_price*5/100) %>">
-											<span>원</span>
+										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="center">
+											<%=new DecimalFormat("#,###").format(tot_price*5/100) %> 원
 										</td>
 									</tr>
 									<tr>
@@ -297,8 +298,8 @@ form > table tr td{
 												</font>
 											</p>
 										</td>
-										<td colspan=2>
-										<select data-trigger="" name="paymentType" style="width:150px;height:30px" onchange="selectPayment();">
+										<td colspan=2 bgcolor="ffffff">
+										<select data-trigger="" name="paymentType" style="width:100px;height:20px" onchange="selectPayment();">
 											<option value="">결제수단</option>
 										<%for(Payment payment:paymentService.findAll()){ %>
 											<option  value="<%=payment.getPm_no() %>"><%=payment.getPm_name() %></option>
@@ -324,6 +325,7 @@ form > table tr td{
 			<!-- include_content.jsp end-->
 			<!-- content end -->
 		</div>
+		<br/>
 		<!--wrapper end-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
