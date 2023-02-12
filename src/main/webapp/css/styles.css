@@ -133,6 +133,11 @@ div#content {
 	
 }
 
+div#reviewContent {
+	width: 700px;
+	margin: 0 auto;
+}
+
 div#footer {
 	clear: left;
 	width: 100%;
