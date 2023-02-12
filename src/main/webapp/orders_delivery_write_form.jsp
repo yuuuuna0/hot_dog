@@ -84,8 +84,6 @@
 					<td width=300 height=25 align=center bgcolor="ffffff" class=t1  style="font-size: 9pt">
 						<input type="text" name="deliveryAddress" value=""/><%=deliveryAddress %></td>
 						<%isDuplicate=deliveryService.isDuplicateDeliveryName(sUserId,deliveryName); %>
-					<td width=300 height=25 align=center bgcolor="ffffff" class=t1  style="font-size: 9pt">
-					
 				</tr>
 			</table>
 			</form>
