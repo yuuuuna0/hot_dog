@@ -107,8 +107,8 @@
 								<tr>
 									<td align=center>
 									<input type="button" value="주문내역" onClick="location.href='orders_list_orderitem.jsp'">&nbsp; 
-									<input type="button" value="내정보수정" onClick="userModify()">&nbsp; 
-									<input type="button" value="탈퇴" onClick="userRemove()">&nbsp;
+									<input type="button" value="회원정보수정" onClick="userModify()">&nbsp; 
+									<input type="button" value="회원탈퇴" onClick="userRemove()">&nbsp;
 									</td>
 								</tr>
 							</table>

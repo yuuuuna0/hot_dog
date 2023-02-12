@@ -21,6 +21,12 @@
  
 <script type="text/javascript">
 	function userModifyAction() {
+		if(document.f.u_password.value != document.f.u_password2.value) {
+			alert("비밀번호와 비밀번호확인은 일치해야 합니다.");
+			f.u_password.focus();
+			f.u_password.select();
+			return false;
+		}
 		document.f.action = "user_modify_action.jsp";
 		document.f.method='POST';
 		document.f.submit();
