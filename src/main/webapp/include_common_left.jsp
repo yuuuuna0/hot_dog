@@ -18,11 +18,11 @@
 		location.href = 'user_login_form.jsp';
 	}
 </script>
-<p>
-	<strong>메 뉴</strong>
-</p>
 <div>
+<strong>
 <ul>
+	<li><a href="hotdog_main.jsp">메인</a></li>
+	<br/>
 	<%
 		if(sUserId==null){
 	%>
@@ -52,4 +52,5 @@
 		<br/>
 		
 </ul>
+</strong>
 </div>
