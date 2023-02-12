@@ -281,6 +281,18 @@ form > table tr td{
 									<tr>
 										<td width=640 colspan=3 height=26 bgcolor="ffffff" class=t1>
 											<p align=right style="padding-top: 10px">
+												<font color=#FF0000>적립포인트 : 
+												</font>
+											</p>
+										</td>
+										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" readonly id="add_point" value="<%=new DecimalFormat("#,###").format(tot_price*5/100) %>">
+											<span>원</span>
+										</td>
+									</tr>
+									<tr>
+										<td width=640 colspan=3 height=26 bgcolor="ffffff" class=t1>
+											<p align=right style="padding-top: 10px">
 												<font color=#FF0000>결제수단 : 
 												</font>
 											</p>
