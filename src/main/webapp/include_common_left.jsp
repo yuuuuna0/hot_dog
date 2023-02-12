@@ -21,6 +21,7 @@
 <p>
 	<strong>메 뉴</strong>
 </p>
+<div>
 <ul>
 	<%
 		if(sUserId==null){
@@ -52,3 +53,4 @@
 		<br/>
 		
 </ul>
+</div>

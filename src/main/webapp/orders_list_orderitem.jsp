@@ -64,8 +64,10 @@ List<Orders> ordersList=ordersService.findDetailAll(sUserId);
 							<table style="padding-left: 10px" border=0 cellpadding=0
 								cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>쇼핑몰 -
-											주문 목록</b></td>
+									<td bgcolor="f4f4f4" height="22">
+									<span>&nbsp;&nbsp;<b>'<%=sUser.getU_id() %>' 님</span>
+									<span>&nbsp;&nbsp;>>&nbsp;&nbsp;<b>주문목록</b></span>
+									</td>
 								</tr>
 							</table> <!--form-->
 							<form name="f" method="post">
@@ -151,6 +153,7 @@ List<Orders> ordersList=ordersService.findDetailAll(sUserId);
 									
 								</tr>
 							</table></td>
+							<br/>
 					</tr>
 				</table>
 			</div>
@@ -158,6 +161,7 @@ List<Orders> ordersList=ordersService.findDetailAll(sUserId);
 			<!-- content end -->
 		</div>
 		<!--wrapper end-->
+		<br/>
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
 			<jsp:include page="include_common_bottom.jsp" />
