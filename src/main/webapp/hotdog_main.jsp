@@ -35,7 +35,7 @@
 			<!-- include_content.jsp start-->
 			<div id="content">
 			</br>
-			<a href="user_login_form.jsp"><img width="540px" height="350px" src="image/hotdog_main.jpg" border="0" style="cursor:pointer;"></a><br />	
+			<a href="user_login_form.jsp"><img width="540px" height="350px" src="image/광고1.jpg" border="0" style="cursor:pointer;"></a><br />	
 				<!--  
 					<param name="movie" value="image/FI_main.swf">
 					<param name="play" value="true">
