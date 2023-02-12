@@ -43,6 +43,9 @@ td{
 input{
 	color:grey!important;
 }
+select{
+	color:grey!important;
+}
 div#header {
 	background-color: #F3F2ED;
 	background: #fff url('../image/nav_bg01.png');
