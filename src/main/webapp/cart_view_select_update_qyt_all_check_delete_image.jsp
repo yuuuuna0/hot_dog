@@ -277,7 +277,7 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 										class=m1>계속 구경하기</a>&nbsp;&nbsp; <%
 										 if (cartList.size() >= 1) {
 										 %> <a href="javascript:cart_view_form_select_submit();" class=m1>
-										 	총 <span style="font-weight: bold;" id="cart_item_select_count"></span>개 주문하기[주문폼]
+										 	총 <span style="font-weight: bold;" id="cart_item_select_count"></span>개 주문하기
 										 	</a>&nbsp;&nbsp;
 											<a href="javascript:cart_delete();" class=m1>장바구니 비우기</a>&nbsp;&nbsp;
 											<%

@@ -177,7 +177,7 @@ form > table tr td{
 								cellspacing=0>
 								<tr>
 									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>쇼핑몰 -
-											주문/결제폼</b></td>
+											주문/결제</b></td>
 								</tr>
 							</table> <!--form-->
 							<form name='orders_detail_f'>
