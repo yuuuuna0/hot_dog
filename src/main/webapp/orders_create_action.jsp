@@ -42,7 +42,7 @@
 	Orders newOrders=null;
 	
 	//기존포인트 - (사용포인트+적립포인트) 반영한 값을 user에 넣어줌
-	int new_u_point=sUser.getU_point()+Integer.parseInt(add_pointStr)-Integer.parseInt(o_usedPointStr);
+	int new_u_point=userInfoService.findUser(sUserId).getU_point()+Integer.parseInt(add_pointStr)-Integer.parseInt(o_usedPointStr);
 	userInfoService.updatPoint(sUserId, new_u_point);
 
 	
