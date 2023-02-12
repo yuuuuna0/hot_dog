@@ -64,8 +64,10 @@
 							<table style="padding-left: 10px" border=0 cellpadding=0
 								cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>내정보 관리
-											- 내정보보기</b></td>
+									<td bgcolor="f4f4f4" height="22">
+									<span>&nbsp;&nbsp;<b>'<%=sUser.getU_id() %>' 님</span>
+									<span>&nbsp;&nbsp;>>&nbsp;&nbsp;<b>내정보 보기</b></span>
+									</td>
 								</tr>
 							</table> <!-- view Form  -->
 							<form name="f" method="post">

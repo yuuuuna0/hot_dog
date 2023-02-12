@@ -60,8 +60,10 @@
 							<table style="padding-left: 10px" border=0 cellpadding=0
 								cellspacing=0>
 								<tr>
-									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>내정보 관리
-											- 내정보수정</b></td>
+									<td bgcolor="f4f4f4" height="22">
+									<span>&nbsp;&nbsp;<b>'<%=sUser.getU_id() %>' 님</span>
+									<span>&nbsp;&nbsp;>>&nbsp;&nbsp;<b>내정보 수정</b></span>
+									</td>
 								</tr>
 							</table> <!-- update Form  -->
 							<form name="f" method="post">
@@ -104,8 +106,10 @@
 
 							<table width=590 border=0 cellpadding=0 cellspacing=0>
 								<tr>
-									<td align=center><input type="button" value="내정보수정"
-										onClick="userModifyAction();"> &nbsp;</td>
+									<td align=center>
+										<input type="button" value="수정완료" onClick="userModifyAction();"> &nbsp;
+										<input type="button" value="취소" onclick="location.href('user_view.jsp')">
+									<td>
 								</tr>
 							</table>
 

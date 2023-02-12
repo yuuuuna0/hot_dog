@@ -80,8 +80,12 @@ List<Orders> ordersList=ordersService.findDetailAll(sUserId);
 									<tr>
 										<td colspan="6" height=24 align=left bgcolor="E6ECDE" class=t1 >
 											<span
-											style="font-size: 10pt; font-style: bold;">&nbsp;<%=orders.getO_date()%></span>
-											<span style="font-size: 8pt">주문번호 <%=orders.getO_no()%></span> <a href='orders_detail.jsp?o_no=<%=orders.getO_no()%>' style="font-size: 6pt">상세보기</a>
+											style="font-size: 10pt; font-style: bold;">&nbsp;&nbsp;<%=orders.getO_date()%></span>
+											<span style="font-size: 8pt">&nbsp;&nbsp;주문번호 <%=orders.getO_no()%></span> 
+											<span >
+											<a href='orders_detail.jsp?o_no=<%=orders.getO_no()%>' style="font-size: 6pt">상세보기
+											</a>
+											</span float="right">
 										</td>
 										</td>
 									</tr>
