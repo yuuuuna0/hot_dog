@@ -34,17 +34,18 @@
 			<!-- content start -->
 			<!-- include_content.jsp start-->
 			<div id="content">
-				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-					codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
-					width="540px" height="350px">
+			</br>
+			<a href="user_login_form.jsp"><img width="540px" height="350px" src="image/hotdog_main.jpg" border="0" style="cursor:pointer;"></a><br />	
+				<!--  
 					<param name="movie" value="image/FI_main.swf">
 					<param name="play" value="true">
 					<param name="loop" value="true">
 					<param name="quality" value="high">
-					<embed src="image/enter.png" scale="exactfit" play="true"
+					<embed src="image/hotdog_main2.jpg" scale="exactfit" play="true"
 						loop="true" quality="high" style="margin: 10px;"
 						pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
 						width="540px" height="350px"></embed>
+				-->
 				</object>
 			</div>
 			<!-- include_content.jsp end-->
