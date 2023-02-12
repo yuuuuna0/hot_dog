@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.itwill.hotdog.domain.ReviewListPageMakerDto"%>
 <%@page import="com.itwill.hotdog.service.ReviewService"%>
 <%@page import="com.itwill.hotdog.domain.Product"%>
@@ -178,7 +179,7 @@
 										<ol type="disc">
 											<li><b>상품 이름 : <%=product.getP_name()%>&nbsp;&nbsp;&nbsp;
 											</b></li>
-											<li><font color=#FF0000>가격 : <%=product.getP_price()%>&nbsp;&nbsp;&nbsp;
+											<li><font color=#FF0000>가격 : <%=new DecimalFormat("#,##0").format(product.getP_price())%> 원&nbsp;&nbsp;&nbsp;
 											</font></li>
 											<li><font color=#0000FF><%=product.getP_desc()%></font></li>
 										</ol>
