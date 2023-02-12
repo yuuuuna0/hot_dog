@@ -101,9 +101,9 @@ form > table tr td{
 									<caption style="text-align: left;">주문제품목록</caption>
 									<tr style="border: 0.1px solid">
 										<td width=290 height=25 align=center bgcolor="E6ECDE" class=t1>강아지 이름</td>
-										<td width=112 height=25 align=center bgcolor="E6ECDE" class=t1>수 량</td>
-										<td width=166 height=25  align=center bgcolor="E6ECDE" class=t1>가 격</td>
-										<td width=50 height=25  align=center bgcolor="E6ECDE" class=t1>비 고</td>
+										<td width=70 height=25 align=center bgcolor="E6ECDE" class=t1>수 량</td>
+										<td width=120 height=25  align=center bgcolor="E6ECDE" class=t1>가 격</td>
+										<td width=70 height=25  align=center bgcolor="E6ECDE" class=t1>비고</td>
 									</tr>
 									
 									<!-- order item start -->
@@ -134,6 +134,33 @@ form > table tr td{
 										
 											<p align=right style="padding-top: 10px">
 												<font color=#FF0000>총 주문 금액 : <%=new DecimalFormat("#,###").format(tot_price)%> 원
+												</font>
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td width=640 colspan=4 height=26  bgcolor="ffffff" class=t1>
+										
+											<p align=right style="padding-top: 10px">
+												<font color=#FF0000>사용 포인트 : <%=new DecimalFormat("#,###").format(orders.getO_usedPoint())%>
+												</font>
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td width=640 colspan=4 height=26  bgcolor="ffffff" class=t1>
+										
+											<p align=right style="padding-top: 10px">
+												<font color=#FF0000>결제 금액 : <%=new DecimalFormat("#,###").format((tot_price-orders.getO_usedPoint()))%> 원
+												</font>
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td width=640 colspan=4 height=26  bgcolor="ffffff" class=t1>
+										
+											<p align=right style="padding-top: 10px">
+												<font color=#FF0000>적립 포인트 : <%=new DecimalFormat("#,###").format(tot_price*0.05)%> 원
 												</font>
 											</p>
 										</td>
