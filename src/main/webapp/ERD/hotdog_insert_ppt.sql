@@ -1,0 +1,4 @@
+insert into review(r_no, r_date, r_comment, r_grade, r_groupno, r_step, r_depth, u_id, p_no) values(REVIEW_R_NO_SEQ.nextval, sysdate, '나쁘지 않아요', 7, REVIEW_R_NO_SEQ.currval, 1, 0, 'sy9', 4);
+insert into review(r_no, r_date, r_comment, r_grade, r_groupno, r_step, r_depth, u_id, p_no) values(REVIEW_R_NO_SEQ.nextval, sysdate, '나쁘지 않아요', 7, REVIEW_R_NO_SEQ.currval, 1, 0, 'sy9', 4);
+insert into review(r_no, r_date, r_comment, r_grade, r_groupno, r_step, r_depth, u_id, p_no) values(REVIEW_R_NO_SEQ.nextval, sysdate, '나쁘지 않아요', 7, REVIEW_R_NO_SEQ.currval, 1, 0, 'sy9', 4);
+insert into review(r_no, r_date, r_comment, r_grade, r_groupno, r_step, r_depth, u_id, p_no) values(REVIEW_R_NO_SEQ.nextval, sysdate, '나쁘지 않아요', 7, REVIEW_R_NO_SEQ.currval, 1, 0, 'sy9', 4);
