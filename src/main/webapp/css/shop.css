@@ -98,3 +98,7 @@ td {
     line-height: 15px;
     vertical-align: top;
 }
+
+#searchForm {
+	margin-left: 35px;
+}
