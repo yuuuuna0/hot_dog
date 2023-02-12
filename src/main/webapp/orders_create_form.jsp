@@ -271,7 +271,7 @@ form > table tr td{
 									<tr>
 										<td width=640 colspan=3 height=26 bgcolor="ffffff" class=t1>
 											<p align=right style="padding-top: 10px">
-												<font color=#FF0000>최종 금액 : 
+												<font color=#FF0000>최종 결제 금액 : 
 												</font>
 											</p>
 										</td>

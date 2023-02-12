@@ -142,7 +142,7 @@ form > table tr td{
 										<td width=640 colspan=4 height=26  bgcolor="ffffff" class=t1>
 										
 											<p align=right style="padding-top: 10px">
-												<font color=#FF0000>사용 포인트 : <%=new DecimalFormat("#,###").format(orders.getO_usedPoint())%>
+												<font color=#FF0000>사용 포인트 : <%=new DecimalFormat("#,###").format(orders.getO_usedPoint())%> 원
 												</font>
 											</p>
 										</td>
@@ -151,7 +151,7 @@ form > table tr td{
 										<td width=640 colspan=4 height=26  bgcolor="ffffff" class=t1>
 										
 											<p align=right style="padding-top: 10px">
-												<font color=#FF0000>결제 금액 : <%=new DecimalFormat("#,###").format((tot_price-orders.getO_usedPoint()))%> 원
+												<font color=#FF0000>최종 결제 금액 : <%=new DecimalFormat("#,###").format((tot_price-orders.getO_usedPoint()))%> 원
 												</font>
 											</p>
 										</td>
