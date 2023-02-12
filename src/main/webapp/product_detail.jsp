@@ -134,9 +134,9 @@
 									<td width=10% align=center class=t1><font size=2
 										color=#0000FF><b>조회수</b></font></td>
 									<td width=20% align=center class=t1><font size=2
-										color=#0000FF><b>주문량</b></font></td>
+										color=#0000FF><b>수량</b></font></td>
 									<td width=30% align=center class=t1><font size=2
-										color=#0000FF><b>상품 이름</b></font></td>
+										color=#0000FF><b>상품이미지</b></font></td>
 									<td width=40% align=center class=t1><font size=2
 										color=#0000FF><b>소개</b></font></td>
 								</tr>

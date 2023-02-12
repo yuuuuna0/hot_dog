@@ -212,8 +212,8 @@ form > table tr td{
 									cellspacing="1" bgcolor="BBBBBB">
 									<caption style="text-align: left;">주문제품목록</caption>
 									<tr style="border: 0.1px solid">
-										<td width=290 height=25 bgcolor="E6ECDE" align=center class=t1>제품이미지</td>
-										<td width=290 height=25 bgcolor="E6ECDE" align=center class=t1>제품명</td>
+										<td width=290 height=25 bgcolor="E6ECDE" align=center class=t1>상품이미지</td>
+										<td width=290 height=25 bgcolor="E6ECDE" align=center class=t1>상품명</td>
 										<td width=112 height=25 bgcolor="E6ECDE" align=center class=t1>수량</td>
 										<td width=120 height=25 bgcolor="E6ECDE" align=center class=t1>가격</td>
 										<td width=150 height=25 bgcolor="E6ECDE" align=center class=t1>적립포인트</td>
@@ -252,7 +252,7 @@ form > table tr td{
 											</p>
 										</td>
 										<td width=100 colspan=2 bgcolor="ffffff" style="padding-left: 10px" align="center">
-											<span id="tot_price"><%=new DecimalFormat("#,###").format(tot_price)%>원</span>
+											<span id="tot_price"><%=new DecimalFormat("#,###").format(tot_price)%> 원</span>
 										</td>
 									</tr>
 									<tr>
