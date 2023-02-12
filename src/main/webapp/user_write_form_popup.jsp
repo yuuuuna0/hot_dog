@@ -19,32 +19,32 @@
 <script type="text/javascript">
 	function userCreate() {
 		if (document.f.userId.value == "") {
-			alert("사용자 아이디를 입력하십시요.");
+			alert("사용자 아이디를 입력하세요.");
 			document.f.userId.focus();
 			return false;
 		}
 		if (document.f.password.value == "") {
-			alert("비밀번호를 입력하십시요.");
+			alert("비밀번호를 입력하세요.");
 			document.f.password.focus();
 			return false;
 		}
 		if (document.f.password2.value == "") {
-			alert("비밀번호확인을 입력하십시요.");
+			alert("비밀번호확인을 입력하세요.");
 			f.password2.focus();
 			return false;
 		}
 		if (document.f.name.value == "") {
-			alert("이름을 입력하십시요.");
+			alert("이름을 입력하세요.");
 			f.name.focus();
 			return false;
 		}
-		if (document.f.email.value == "") {
-			alert("이메일 주소를 입력하십시요.");
-			f.email.focus();
+		if (document.f.phone.value == "") {
+			alert("전화번호를 입력하세요.");
+			f.phone.focus();
 			return false;
 		}
 		if (document.f.password.value != f.password2.value) {
-			alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+			alert("비밀번호와 비밀번호확인은 일치해야 합니다.");
 			f.password.focus();
 			f.password.select();
 			return false;
@@ -54,10 +54,6 @@
 		document.f.submit();
 	}
 
-	function userList() {
-		f.action = "user_list.jsp";
-		f.submit();
-	}
 	/*
 	아이디중복체크
 	*/
@@ -66,9 +62,6 @@
 		var top = Math.ceil(( window.screen.height)/5); 
 		let idCheckWindow = window.open("user_id_check_form.jsp","checkForm","width=430,height=200,top="+top+",left="+left+",resizable = no,location=no, directories=no, status=no, menubar=no, scrollbars=no,copyhistory=no");
 	}
-	
-	
-	
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
@@ -141,10 +134,9 @@
 										</td>
 									</tr>
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일
-											주소</td>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">전화번호</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="text" style="width: 150px" name="email"
+											<input type="text" style="width: 150px" name="phone"
 											value="">
 										</td>
 									</tr>
@@ -155,7 +147,7 @@
 								<tr>
 									<td align=center>
 									<input type="button" value="회원 가입" onclick="userCreate();"> &nbsp; 
-									<input type="button" value="목록" onClick="userList()">
+									<input type="button" value="취소" onClick="location.href='hotdog_main.jsp'">
 									</td>
 								</tr>
 							</table>

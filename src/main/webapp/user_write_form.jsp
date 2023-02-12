@@ -1,6 +1,9 @@
 <%@page import="com.itwill.hotdog.domain.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%--
+사용하지 않음: user_write_form_popup.jsp 사용
+--%>
 <%
 	UserInfo fuser=(UserInfo)request.getAttribute("fuser");
 	if(fuser==null){

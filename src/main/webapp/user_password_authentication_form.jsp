@@ -23,6 +23,7 @@
 	function passwordAuthentication(password) {
 		if(<%=user.getU_password()%>!=password) {
 			alert('비밀번호를 확인해주세요.')
+			f.u_password.focus();
 			return;
 		}
 		if(<%=requestType.equals("modify")%>) userModify();
