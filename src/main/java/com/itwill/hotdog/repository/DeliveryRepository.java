@@ -26,6 +26,7 @@ public class DeliveryRepository {
 	public int insert(Delivery delivery) throws Exception{
 		Connection con=null;
 		PreparedStatement pstmt=null;
+		int rowCount = 0;
 		try {
 			con=dataSource.getConnection();
 			con.setAutoCommit(false);
@@ -33,7 +34,7 @@ public class DeliveryRepository {
 			pstmt.setString(1, delivery.getD_name());
 			pstmt.setString(2, delivery.getD_address());
 			pstmt.setString(3, delivery.getU_id());
-			pstmt.executeUpdate();
+			rowCount = pstmt.executeUpdate();
 			con.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -42,7 +43,7 @@ public class DeliveryRepository {
 			if(pstmt!=null) pstmt.close();
 			if(con!=null) con.close();
 		}
-		return 0;
+		return rowCount;
 	}
 	//2. 한 회원의 배송지 전체 삭제
 	public int deletAllByUser(String sUserId) throws Exception {

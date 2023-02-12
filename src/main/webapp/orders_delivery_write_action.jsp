@@ -11,22 +11,19 @@
       return;
    }
 
-   String deliveryName = (String)request.getParameter("deliveryName");
-   String deliveryAddress = (String)request.getParameter("deliveryAddress");
+   String deliveryName = request.getParameter("deliveryName");
+   String deliveryAddress = request.getParameter("deliveryAddress");
    Delivery newDelivery=null;
-   try {
-      newDelivery = new Delivery(0,deliveryName,deliveryAddress,sUserId);
-      DeliveryService deliveryService = new DeliveryService();
-      int result = deliveryService.create(newDelivery);
-      if(result == 1){
-         // 배송지입력 성공
-         response.sendRedirect("orders_delivery_choose.jsp");
-      } 
-   } catch (Exception e) {
-      e.printStackTrace();
-      response.sendRedirect("orders_delivery_write_form.jsp");
+   
+   newDelivery = new Delivery(0, deliveryName, deliveryAddress, sUserId);
+   DeliveryService deliveryService = new DeliveryService();
+   int result = deliveryService.create(newDelivery);
+   if(result == 1) {
+      //배송지입력 성공
+      response.sendRedirect("orders_delivery_choose.jsp");
    }
-   
-   
-   
+   if(result == 0) {
+	  //배송지입력 실패
+	  response.sendRedirect("orders_delivery_write_form.jsp");
+   }
 %>

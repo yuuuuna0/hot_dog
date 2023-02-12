@@ -46,23 +46,27 @@
 
 <script type="text/javascript">
 	//배송지 추가하기
-	function addDelivery(){
-		var deliveryName=document.newDelivery_f.deliveryName.value;
-		var deliveryAddress=document.newDelivery_f.deliveryAddress.value;
-		if(deliveryName==null || deliveryName==""){
+	function addDelivery(deliveryName, deliveryAddress){
+		if(deliveryName==""){
 			alert("배송지명을 입력하십시요.");
 			newDelivery_f.deliveryName.focus();
 			return false;
-		}else if(deliveryAddress==null || deliveryAddress==""){
+		}
+		if(deliveryAddress==""){
 			alert("주소를 입력하십시요.");
+			newDelivery_f.deliveryAddress.focus();
+			return false;
+		}
+		<%--
+		if(<%=isDuplicate%>) {
+			alert("이미 존재하는 배송지 이름입니다.");
 			newDelivery_f.deliveryName.focus();
 			return false;
-		}else{
-			newDelivery_f.action = "orders_delivery_write_action.jsp";
-			newDelivery_f.method = "POST";
-			newDelivery_f.submit();
-			window.close();
 		}
+		--%>
+		newDelivery_f.action = "orders_delivery_write_action.jsp";
+		newDelivery_f.method = "POST";
+		newDelivery_f.submit();
 	}
 </script>
 
@@ -80,17 +84,17 @@
 				</tr>
 				<tr>
 					<td width=500 height=25 align=center bgcolor="ffffff" class=t1 style="font-size: 9pt">
-						<input type="text" name="deliveryName" value=""/><%=deliveryName %></td>
+						<input type="text" name="deliveryName" value=""/></td>
 					<td width=300 height=25 align=center bgcolor="ffffff" class=t1  style="font-size: 9pt">
-						<input type="text" name="deliveryAddress" value=""/><%=deliveryAddress %></td>
-						<%isDuplicate=deliveryService.isDuplicateDeliveryName(sUserId,deliveryName); %>
+						<input type="text" name="deliveryAddress" value=""/></td>
+						<%--isDuplicate=deliveryService.isDuplicateDeliveryName(sUserId, deliveryName);--%>
 				</tr>
 			</table>
 			</form>
 		</div>
 		<br/>
 		<div>
-			<input type="button" value="추가"  style="font-size: 7pt" onclick="addDelivery();"/>
+			<input type="button" value="추가"  style="font-size: 7pt" onclick="addDelivery(document.newDelivery_f.deliveryName.value, document.newDelivery_f.deliveryAddress.value);"/>
 			<input type="button" value="취소" style="font-size: 7pt" onclick="window.close();"/> 
 		</div>
 	</div>
