@@ -238,11 +238,10 @@ form > table tr td{
 										<td width=150 height=26 align=center bgcolor="ffffff" class=t1>
 											<%=new DecimalFormat("#,###").format((cart.getC_qty() * cart.getProduct().getP_price())*0.05)%>
 										</td>
-										<%add_point+= (int)(cart.getC_qty() * cart.getProduct().getP_price()*0.05);%>
 									</tr>
 									<!-- cart item end -->
 									<%}%>
-									<input type="hidden" name="add_point" value="<%=add_point%>"/>
+									<input type="hidden" name="add_point" value="<%=tot_price*5/100%>"/>
 									<tr>
 										<td width=640 colspan=3 height=26 bgcolor="ffffff" class=t1>
 											<p align=right style="padding-top: 10px">
