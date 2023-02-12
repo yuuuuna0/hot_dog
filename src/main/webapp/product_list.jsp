@@ -111,17 +111,18 @@ function add_cart_popup_window(f){
 									%>
 									<tr>
 									<%} %>
-										<td align="center" width="25%"  bgcolor="ffffff"><a
-											href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="65px"
-												src="image/<%=product.getP_img() %>" border="0"></a><br />
-												
-											<br /> <b><%=product.getP_name() %></b>
+										<td align="center" width="25%"  bgcolor="ffffff">
+										<a href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="65px" src="image/<%=product.getP_img() %>" border="0"></a><br />
+											<br /> <font size="0.5"><b><%=product.getP_name() %></b></font>
+											<br/>
+											<font color="#FF0000">가격: <%=new DecimalFormat("#,###").format(product.getP_price()) %>원</font>
+											<br/>
 											<form style="display: inline;">
 												<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
 												<input type="hidden" name="cart_qty" value="1">
 												<img src='image/cart20.png' style="cursor:pointer;" onclick="add_cart_popup_window(this.parentElement);" align="top"/>
-											</form><br> <font color="#FF0000">가격:<%=new DecimalFormat("#,###").format(product.getP_price()) %>원
-										</font></td>
+											</form>
+										</td>
 										<%if(i%product_column_size==3){%>
 									</tr>
 									<%} %>	

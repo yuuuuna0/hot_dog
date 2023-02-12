@@ -116,7 +116,7 @@
 										<a href="product_detail.jsp?p_no=<%=product.getP_no()%>"><img width="88px" height="65px" src="image/<%=product.getP_img()%>" border="0"></a><br />	
 											<br /> <font size="0.5"><b><%=product.getP_name()%></b></font>
 											<br/>
-											<font color="#FF0000"><%=new DecimalFormat("#,##0").format(product.getP_price())%>원</font>
+											<font color="#FF0000">가격: <%=new DecimalFormat("#,##0").format(product.getP_price())%>원</font>
 											<br/>
 											<form style="display: inline;">
 												<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
