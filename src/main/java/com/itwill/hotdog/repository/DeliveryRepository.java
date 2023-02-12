@@ -161,7 +161,7 @@ public class DeliveryRepository {
 		boolean isExisted = false;
 		try {
 			con = dataSource.getConnection();
-			pstmt=con.prepareStatement(DeliverySQL.DELIVERY_SELECT_ALL_BY_U_ID);
+			pstmt=con.prepareStatement(DeliverySQL.DELIVERY_SELECT_BY_ID_DNAME);
 			pstmt.setString(1, sUserId);
 			pstmt.setString(2, d_name);
 			rs=pstmt.executeQuery();
