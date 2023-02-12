@@ -89,7 +89,7 @@
 								<tr>
 									<td bgcolor="f4f4f4" height="22">
 									<span>&nbsp;&nbsp;<b>상품리스트</b></span>
-									<span>&nbsp;&nbsp;>>&nbsp;&nbsp;<b>전체상풍</b></span>
+									<span>&nbsp;&nbsp;>>&nbsp;&nbsp;<b>전체상품</b></span>
 									</td>
 								</tr>
 							</table>
