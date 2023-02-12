@@ -96,10 +96,6 @@
 </head>
 <body>
 	<form name="orders_delivery_choose_form" style="margin:0">
-	<%for (String d_noStr : d_noStr_array) {
-		%>
-		<input type="hidden" name="d_no" value="<%=d_noStr%>">
-	  <%}%>
 	</form>
 	<div id="wrap">
 		<br> <b><font size="3" color="gray"><%=sUser.getU_name() %>님의 배송지 선택</font></b>
@@ -136,8 +132,6 @@
 		<div>
 			<input id="addDelivery" type="button" value="추가"  style="font-size: 7pt" 
 			onclick="window.open('orders_delivery_write_form.jsp','checkForm','width=500','height=400')">
-			<input id="deleteDelivery" type="button" value="선택삭제"  style="font-size: 7pt" 
-			onclick="delete_checked_delivery();">
 			<input id="cancle" type="button" value="취소" style="font-size: 7pt" onclick="window.close();"> 
 		</div>
 	</div>
