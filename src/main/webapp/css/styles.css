@@ -34,13 +34,24 @@ b {
 li {
 	color:grey!important;
 }
-
+font{
+	color: grey;
+}
+td{
+	color:grey!important;
+}
+input{
+	color:grey!important;
+}
+select{
+	color:grey!important;
+}
 div#header {
 	background-color: #F3F2ED;
 	background: #fff url('../image/nav_bg01.png');
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: 100%
+	background-size: 100%;
 }
 div#header h1 {
 	height: 80px;
@@ -61,12 +72,12 @@ div#content p {
 }
 
 div#navigation {
-	background: rgb(254, 209, 141)
+	background: rgb(254, 209, 141);
 }
 
 div#navigation {
-	margin-top: 10px;;
-	margin-bottom: 10px
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 div#navigation ul {
@@ -81,7 +92,7 @@ div#navigation li {
 
 div#navigation p {
 	margin-top: 20px;
-	margin-left: 15px
+	margin-left: 15px;
 }
 /*
 div#extra{background:#CCC8B3;}
@@ -92,12 +103,12 @@ div#footer {
 
 div#footer p {
 	margin: 0;
-	padding: 5px 10px
+	padding: 5px 10px;
 }
 
 div#container {
 	width: 700px;
-	margin: 0 auto
+	margin: 0 auto;
 }
 /*
 div#navigation{float:left;width:150px;height:350px;margin-left:-700px}
@@ -108,21 +119,26 @@ div#navigation {
 	height: 350px;
 }
 /*
-div#wrapper{float:left;width:100%}
+div#wrapper{float:left;width:100%;}
 */
 div#wrapper {
 	margin-left: 0px;
-	width: 100%
+	width: 100%;
 }
 
 div#content {
-	margin: 0 0 0 150px
+	margin: 0 0 0 150px;
 	
 
 	
+}
+
+div#reviewContent {
+	width: 700px;
+	margin: 0 auto;
 }
 
 div#footer {
 	clear: left;
-	width: 100%
+	width: 100%;
 }

@@ -94,7 +94,7 @@ if(pageno==null||pageno.equals("")){
 		<div id="wrapper">
 			<!-- content start -->
 			<!-- include_content.jsp start-->
-	<div id = "content">
+	<div id = "reviewContent">
 	<table border=0 cellpadding=0 cellspacing=0>
 	<tr bgcolor="#FFFFFF">
 		<td height = "20" class="t1" align="right" valign="bottom">

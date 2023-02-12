@@ -25,7 +25,6 @@
 		document.f.method='POST';
 		document.f.submit();
 	}
-
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
@@ -78,14 +77,14 @@
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
-											align="left"><input type="password" style="width: 150px"
+											align="left"><input type="text" style="width: 150px"
 											name="u_password" value="<%=user.getU_password()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호
 											확인</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
-											align="left"><input type="password" style="width: 150px"
+											align="left"><input type="text" style="width: 150px"
 											name="u_password2" value="<%=user.getU_password()%>"></td>
 									</tr>
 									<tr>
@@ -108,7 +107,7 @@
 								<tr>
 									<td align=center>
 										<input type="button" value="수정완료" onClick="userModifyAction();"> &nbsp;
-										<input type="button" value="취소" onclick="location.href('user_view.jsp')">
+										<input type="button" value="취소" onClick="location.href='user_view.jsp';">
 									<td>
 								</tr>
 							</table>
