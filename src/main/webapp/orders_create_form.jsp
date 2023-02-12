@@ -224,7 +224,9 @@ form > table tr td{
 									%>
 									<!-- cart item start -->
 									<tr>
-										<td width=112 height=26 align=center bgcolor="ffffff" class=t1><%=cart.getProduct().getP_img()%></td>
+										<td width=112 height=26 align=center bgcolor="ffffff" class=t1>
+										<img width="88px" height="65px" src="image/<%=cart.getProduct().getP_img()%>" border="0">
+										</td>
 										<td width=290 height=26 align=center bgcolor="ffffff" class=t1>
 											<a
 											href='product_detail.jsp?p_no=<%=cart.getProduct().getP_no()%>'><%=cart.getProduct().getP_name()%></a>
