@@ -145,9 +145,7 @@
 		</div>
 		<br/>
 		<div>
-			<input id="addDelivery" type="button" value="추가"  style="font-size: 7pt" 
-			onclick="window.open('orders_delivery_write_form.jsp', 'checkForm', 'width=500, height=400')">
-			<input id="remove" type="button" value="삭제" style="font-size: 7pt" onclick="delivery_delete_item_action(delivery_detail_form);">
+			<input id="addDelivery" type="button" value="추가"  style="font-size: 7pt" onclick="window.open('orders_delivery_write_form.jsp', 'checkForm', 'width=500, height=400')">
 			<input id="cancle" type="button" value="취소" style="font-size: 7pt" onclick="window.close();"> 
 		</div>
 	</div>

@@ -95,7 +95,7 @@
 		<br/>
 		<div>
 			<input type="button" value="추가"  style="font-size: 7pt" onclick="addDelivery(document.newDelivery_f.deliveryName.value, document.newDelivery_f.deliveryAddress.value);"/>
-			<input type="button" value="취소" style="font-size: 7pt" onclick="window.close();"/> 
+			<input type="button" value="취소" style="font-size: 7pt" onclick="location.href='orders_delivery_choose.jsp';"/> 
 		</div>
 	</div>
 </body>
