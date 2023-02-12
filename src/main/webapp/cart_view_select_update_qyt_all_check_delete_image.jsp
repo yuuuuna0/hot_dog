@@ -161,7 +161,7 @@ List<Cart> cartList = cartService.getCartListByUserId(sUserId);
 							<table style="padding-left: 10px" border=0 cellpadding=0
 								cellspacing=0>
 								<tr>
-									<td height="22">
+									<td bgcolor="f4f4f4" height="22">
 									<span>&nbsp;&nbsp;<b>'<%=sUser.getU_id() %>'&nbsp;님의</b></span>
 									<span>&nbsp;<b>장바구니</b></span>
 									</td>
