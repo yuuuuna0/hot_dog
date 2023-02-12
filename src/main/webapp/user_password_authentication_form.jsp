@@ -8,6 +8,8 @@
 	UserInfoService userService=new UserInfoService();
 	UserInfo user = userService.findUser(sUserId);
 	System.out.println(user);
+	
+	String requestType = request.getParameter("requestType");
 %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,18 +20,27 @@
 <link rel=stylesheet href="css/shop.css" type="text/css">
  
 <script type="text/javascript">
+	function passwordAuthentication(password) {
+		if(<%=user.getU_password()%>!=password) {
+			alert('비밀번호를 확인해주세요.')
+			return;
+		}
+		if(<%=requestType.equals("modify")%>) userModify();
+		if(<%=requestType.equals("remove")%>) userRemove();
+	}
+	
 	function userModify() {
-		document.f.requestType.value = "modify";
-		document.f.action = "user_password_authentication_form.jsp";
+		document.f.action = "user_modify_form.jsp";
 		document.f.method = "POST";
 		document.f.submit();
 	}
 	
 	function userRemove() {
-		document.f.requestType.value = "remove";
-		document.f.action = "user_password_authentication_form.jsp";
-		document.f.method = "POST";
-		document.f.submit();
+		if (confirm("정말 삭제하시겠습니까?")) {
+			document.f.action = "user_remove_action.jsp";
+			document.f.method='POST';
+			document.f.submit();
+		}
 	}
 </script>
 </head>
@@ -66,39 +77,17 @@
 								<tr>
 									<td bgcolor="f4f4f4" height="22">
 									<span>&nbsp;&nbsp;<b>'<%=sUser.getU_id() %>' 님</span>
-									<span>&nbsp;&nbsp;>>&nbsp;&nbsp;<b>내정보 보기</b></span>
+									<span>&nbsp;&nbsp;>>&nbsp;&nbsp;<b>비밀번호 확인</b></span>
 									</td>
 								</tr>
 							</table> <!-- view Form  -->
 							<form name="f" method="post">
-								<input type="hidden" name="requestType" value="">
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
-											아이디</td>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호 확인</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10">
-											<%=user.getU_id()%>
-										</td>
-									</tr>
-									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10">
-											<%=user.getU_name()%>
-										</td>
-									</tr>
-									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">휴대폰
-											</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10">
-											<%=user.getU_phone()%>
-										</td>
-									</tr>
-									<tr>
-										<td width=100 align=center bgcolor="E6ECDE" height="22">포인트
-											</td>
-										<td width=490 bgcolor="ffffff" style="padding-left: 10">
-											<%=new DecimalFormat("#,###").format(userService.findUser(sUserId).getU_point()) %>
+											<input type="password" name="u_password" value="">
 										</td>
 									</tr>
 								</table>
@@ -106,9 +95,8 @@
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
 									<td align=center>
-									<input type="button" value="주문내역" onClick="location.href='orders_list_orderitem.jsp'">&nbsp; 
-									<input type="button" value="내정보수정" onClick="userModify()">&nbsp; 
-									<input type="button" value="탈퇴" onClick="userRemove()">&nbsp;
+									<input type="button" value="확인" onClick="passwordAuthentication(document.f.u_password.value)">&nbsp;
+									<input type="button" value="취소" onClick="location.href='user_view.jsp';"> 
 									</td>
 								</tr>
 							</table>
