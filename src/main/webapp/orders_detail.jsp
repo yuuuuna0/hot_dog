@@ -100,7 +100,7 @@ form > table tr td{
 								<table align=center  width=80% border="0" cellpadding="0" cellspacing="1"  bgcolor="BBBBBB" >
 									<caption style="text-align: left;">주문제품목록</caption>
 									<tr style="border: 0.1px solid">
-										<td width=290 height=25 align=center bgcolor="E6ECDE" class=t1>강아지 이름</td>
+										<td width=290 height=25 align=center bgcolor="E6ECDE" class=t1>제품명</td>
 										<td width=70 height=25 align=center bgcolor="E6ECDE" class=t1>수 량</td>
 										<td width=120 height=25  align=center bgcolor="E6ECDE" class=t1>가 격</td>
 										<td width=70 height=25  align=center bgcolor="E6ECDE" class=t1>비고</td>
