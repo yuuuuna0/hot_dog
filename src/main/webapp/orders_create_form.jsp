@@ -86,7 +86,6 @@ form > table tr td{
 			return false;
 		}
 		document.getElementByName
-		document.orders_create_form.add_point.value=document.orders_detail_f.add_point.value
 		document.orders_create_form.method = 'POST';
 		document.orders_create_form.action = 'orders_create_action.jsp';
 		document.orders_create_form.submit();
@@ -113,6 +112,7 @@ form > table tr td{
 		document.getElementById("result_price").innerHTML=priceToString(result_price);
 		//document.orders_create_form.new_u_point.value=u_point;
 		document.orders_create_form.o_usedPoint.value=v_point;
+		document.orders_create_form.add_point.value=tot_price*5/100;
 	}
 	
 	function priceToString(price) {
