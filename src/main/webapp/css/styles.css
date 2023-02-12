@@ -34,7 +34,15 @@ b {
 li {
 	color:grey!important;
 }
-
+font{
+	color: grey;
+}
+td{
+	color:grey!important;
+}
+input{
+	color:grey!important;
+}
 div#header {
 	background-color: #F3F2ED;
 	background: #fff url('../image/nav_bg01.png');
