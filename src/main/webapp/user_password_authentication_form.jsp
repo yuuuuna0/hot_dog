@@ -30,6 +30,10 @@
 		if(<%=requestType.equals("remove")%>) userRemove();
 	}
 	
+	function searchByEnterKey(password) {
+		if(event.keyCode==13) passwordAuthentication(password);
+	}
+	
 	function userModify() {
 		document.f.action = "user_modify_form.jsp";
 		document.f.method = "POST";
@@ -96,7 +100,7 @@
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
 									<td align=center>
-									<input type="button" value="확인" onClick="passwordAuthentication(document.f.u_password.value)">&nbsp;
+									<input type="button" value="확인" onClick="passwordAuthentication(document.f.u_password.value)" onkeypress="searchByEnterKey(document.f.u_password.value)">&nbsp;
 									<input type="button" value="취소" onClick="location.href='user_view.jsp';"> 
 									</td>
 								</tr>
