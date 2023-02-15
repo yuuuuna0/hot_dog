@@ -19,6 +19,9 @@ public class UserLoginFormController implements Controller {
 		if(fuser==null){
 			fuser=new UserInfo("","","","",0);
 		}
+		request.setAttribute("msg1", msg1);
+		request.setAttribute("msg2", msg2);
+		request.setAttribute("fuser", fuser);
 		forwardPath="forward:/WEB-INT/views/user_login_form.jsp";
 		return forwardPath;
 	}

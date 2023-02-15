@@ -1,15 +1,8 @@
+<%@page import="com.itwill.hotdog.domain.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-/********************case1[redirected]*************/
-String msg1 = request.getParameter("msg1");
-String msg2 = request.getParameter("msg2");
-if (msg1 == null)
-	msg1 = "";
-if (msg2 == null)
-	msg2 = "";
-/**********************************************/
 /********************case2[forwared]*************
 String msg1=(String)request.getAttribute("msg1");
 if(msg1==null)msg1="";
@@ -20,6 +13,9 @@ if(fuser==null){
 	fuser=new User("","","","");
 }
 ************************************************/
+String msg1=(String)request.getAttribute("msg1");
+String msg2=(String)request.getAttribute("msg2");
+UserInfo fuser=(UserInfo)request.getAttribute("fuser");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,27 +26,7 @@ if(fuser==null){
 <link rel=stylesheet href="css/shop.css" type="text/css">
 <link rel=stylesheet href="css/user.css" type="text/css">
  
-<script type="text/javascript">
-	function userCreate() {
-		f.action = "user_write_form.jsp";
-		f.submit();
-	}
-
-	function login() {
-		if (f.userId.value == "") {
-			alert("사용자 아이디를 입력하십시요.");
-			f.userId.focus();
-			return false;
-		}
-		if (f.password.value == "") {
-			alert("비밀번호를 입력하십시요.");
-			f.password.focus();
-			return false;
-		}
-
-		f.action = "user_login_action.jsp";
-		f.submit();
-	}
+<script type="text/javascript" src="js/user.js">
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
