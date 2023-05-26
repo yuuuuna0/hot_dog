@@ -1,0 +1,11 @@
+<%@page import="com.itwill.hotdog.domain.UserInfo"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String sUserId=(String)session.getAttribute("sUserId");
+	UserInfo sUser=(UserInfo)session.getAttribute("sUser");
+	if(sUserId==null){
+		response.sendRedirect("hotdog_main.jsp");
+		return;
+	}
+%>  
