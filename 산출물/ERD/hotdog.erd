@@ -108,8 +108,8 @@
                         <constraint>
                           <height>-1</height>
                           <width>-1</width>
-                          <x>965</x>
-                          <y>475</y>
+                          <x>649</x>
+                          <y>652</y>
                         </constraint>
                         <sourceConnections/>
                         <targetConnections>
