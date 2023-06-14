@@ -41,8 +41,8 @@
 		<li></li>
 		
 		<li><a href="cart_view_select_update_qyt_all_check_delete_image.jsp">장바구니[cart]<span class="w3-badge w3-badge-menu w3-green cart_item_count"><%=cart_item_count%></span></a></li>
-		<li><a href="orders_list_orderitem.jsp">주문목록</a></li>
 		<li><a href=""></a></li>
+		<li><a href="orders_list_orderitem.jsp">주문목록</a></li>
 		
 	<%} %>
 		<li><a href="product_search_list.jsp">상품리스트</a></li>
